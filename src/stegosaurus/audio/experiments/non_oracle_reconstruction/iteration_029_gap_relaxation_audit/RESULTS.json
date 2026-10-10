@@ -1,0 +1,46 @@
+﻿{
+  "attack": "trailing_crop_025s",
+  "cover_seed": 7600,
+  "decoder_received_oracle_map": false,
+  "gaps": [
+    0.24,
+    0.22,
+    0.2,
+    0.18,
+    0.16,
+    0.14
+  ],
+  "goal": "post-hoc bounded local-pilot gap calibration for one prior trailing abstention",
+  "rows": [
+    {
+      "hypothesis_count": 1,
+      "measurement": null,
+      "pilot_gap_threshold": 0.24
+    },
+    {
+      "hypothesis_count": 1,
+      "measurement": null,
+      "pilot_gap_threshold": 0.22
+    },
+    {
+      "hypothesis_count": 1,
+      "measurement": null,
+      "pilot_gap_threshold": 0.2
+    },
+    {
+      "hypothesis_count": 1,
+      "measurement": null,
+      "pilot_gap_threshold": 0.18
+    },
+    {
+      "hypothesis_count": 1,
+      "measurement": null,
+      "pilot_gap_threshold": 0.16
+    },
+    {
+      "hypothesis_count": 1,
+      "measurement": null,
+      "pilot_gap_threshold": 0.14
+    }
+  ]
+}

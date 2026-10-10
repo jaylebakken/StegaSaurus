@@ -1,0 +1,366 @@
+﻿{
+  "carrier_band_hz": [
+    500.0,
+    3800.0
+  ],
+  "decoder_received_oracle_map": false,
+  "exact_recoveries": 8,
+  "execution_failures": 0,
+  "fixture": "ten fresh seeded 30-second music-like cover variants and virtual timeline offsets",
+  "frozen_policy": {
+    "absolute_pilot_threshold": 0.0,
+    "name": "absolute_0.000_gap_0.240",
+    "pilot_gap_threshold": 0.24
+  },
+  "mapping_mode": "blind_non_oracle_held_out_gap_policy_validation",
+  "maximum_rs_cost": 14,
+  "median_byte_erasures": 1.0,
+  "median_carrier_erasures": 1.0,
+  "median_embedding_snr_db": 37.939148472517005,
+  "median_known_bit_errors": 7.0,
+  "median_rs_cost": 10.5,
+  "median_selected_map_accuracy": 0.9950434591264166,
+  "median_selection_erasure_rate": 0.18478260869565216,
+  "median_unknown_byte_errors": 5.0,
+  "parity_symbols": 12,
+  "policy_selection": {
+    "calibration_cover_seeds": [
+      6100,
+      6101,
+      6102,
+      6103,
+      6104,
+      6105,
+      6106,
+      6107,
+      6108,
+      6109
+    ],
+    "calibration_source": "iteration_007_pilot_score_telemetry",
+    "replayed_absolute_thresholds": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4
+    ],
+    "replayed_gap_thresholds": [
+      0.08,
+      0.12,
+      0.16,
+      0.24,
+      0.32,
+      0.48,
+      0.64,
+      0.8,
+      1.0
+    ],
+    "selection_rule": "maximum exact recovery, then minimum median RS cost"
+  },
+  "profile": {
+    "minimum_payload_pairs": 6,
+    "minimum_pilot_margin": 0.01,
+    "minimum_pilot_pairs": 3,
+    "name": "small_pilot_4_payload_12",
+    "pilot_pair_count": 4
+  },
+  "relative_difference": 0.95,
+  "repetition": 4,
+  "trial_count": 10,
+  "trials": [
+    {
+      "cover_seed": 6300,
+      "embedding_snr_db": 38.51421811058606,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.998641304347826,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.9934426229508196,
+        "selection_erasure_rate": 0.17119565217391305
+      },
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 6,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 8,
+        "recovered": true,
+        "rs_error_cost": 12,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 6
+      },
+      "trial_index": 0,
+      "unwatermarked_control_token_match": false,
+      "virtual_timeline_offset_seconds": 11337.0,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "cover_seed": 6301,
+      "embedding_snr_db": 38.34485376933688,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9918478260869565,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.9966442953020134,
+        "selection_erasure_rate": 0.19021739130434784
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": null,
+        "corrected_bytes": 4,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 4,
+        "recovered": true,
+        "rs_error_cost": 6,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 2
+      },
+      "trial_index": 1,
+      "unwatermarked_control_token_match": false,
+      "virtual_timeline_offset_seconds": 11450.0,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "cover_seed": 6302,
+      "embedding_snr_db": 37.66062639892603,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9918478260869565,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.9983277591973244,
+        "selection_erasure_rate": 0.1875
+      },
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 2,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 4,
+        "recovered": true,
+        "rs_error_cost": 4,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 2
+      },
+      "trial_index": 2,
+      "unwatermarked_control_token_match": false,
+      "virtual_timeline_offset_seconds": 11563.0,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "cover_seed": 6303,
+      "embedding_snr_db": 38.08896745738544,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9959239130434783,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.9932773109243698,
+        "selection_erasure_rate": 0.19157608695652173
+      },
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": null,
+        "corrected_bytes": 6,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 7,
+        "recovered": true,
+        "rs_error_cost": 11,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 5
+      },
+      "trial_index": 3,
+      "unwatermarked_control_token_match": false,
+      "virtual_timeline_offset_seconds": 11676.0,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "cover_seed": 6304,
+      "embedding_snr_db": 37.834946460607796,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9959239130434783,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.9918166939443536,
+        "selection_erasure_rate": 0.16983695652173914
+      },
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 5,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 8,
+        "recovered": true,
+        "rs_error_cost": 10,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 5
+      },
+      "trial_index": 4,
+      "unwatermarked_control_token_match": false,
+      "virtual_timeline_offset_seconds": 11789.0,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "cover_seed": 6305,
+      "embedding_snr_db": 38.208662643742514,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9972826086956522,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.996661101836394,
+        "selection_erasure_rate": 0.18614130434782608
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 8,
+        "recovered": false,
+        "rs_error_cost": 14,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 6
+      },
+      "trial_index": 5,
+      "unwatermarked_control_token_match": false,
+      "virtual_timeline_offset_seconds": 11902.0,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "cover_seed": 6306,
+      "embedding_snr_db": 37.864861699591565,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9972826086956522,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.9983361064891847,
+        "selection_erasure_rate": 0.18342391304347827
+      },
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 7,
+        "recovered": false,
+        "rs_error_cost": 13,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 6
+      },
+      "trial_index": 6,
+      "unwatermarked_control_token_match": false,
+      "virtual_timeline_offset_seconds": 12015.0,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "cover_seed": 6307,
+      "embedding_snr_db": 36.16472982788206,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.998641304347826,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.9983844911147012,
+        "selection_erasure_rate": 0.15896739130434784
+      },
+      "measurement": {
+        "byte_erasures": 3,
+        "carrier_erasures": 3,
+        "channel_error": null,
+        "corrected_bytes": 6,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 5,
+        "recovered": true,
+        "rs_error_cost": 9,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 3
+      },
+      "trial_index": 7,
+      "unwatermarked_control_token_match": false,
+      "virtual_timeline_offset_seconds": 12128.0,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "cover_seed": 6308,
+      "embedding_snr_db": 38.013435245442444,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9972826086956522,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.9916247906197655,
+        "selection_erasure_rate": 0.18885869565217392
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 4,
+        "channel_error": null,
+        "corrected_bytes": 6,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 7,
+        "recovered": true,
+        "rs_error_cost": 10,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 4
+      },
+      "trial_index": 8,
+      "unwatermarked_control_token_match": false,
+      "virtual_timeline_offset_seconds": 12241.0,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "cover_seed": 6309,
+      "embedding_snr_db": 36.680022518046435,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9945652173913043,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.9901315789473685,
+        "selection_erasure_rate": 0.17391304347826086
+      },
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 6,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 6,
+        "recovered": true,
+        "rs_error_cost": 12,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 6
+      },
+      "trial_index": 9,
+      "unwatermarked_control_token_match": false,
+      "virtual_timeline_offset_seconds": 12354.0,
+      "wrong_secret_control_token_match": false
+    }
+  ],
+  "unwatermarked_control_false_accepts": 0,
+  "validation_cover_seeds": [
+    6300,
+    6301,
+    6302,
+    6303,
+    6304,
+    6305,
+    6306,
+    6307,
+    6308,
+    6309
+  ],
+  "wrong_secret_control_false_accepts": 0
+}

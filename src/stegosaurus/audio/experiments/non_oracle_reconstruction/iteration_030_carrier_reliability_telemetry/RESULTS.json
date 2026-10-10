@@ -1,0 +1,3365 @@
+﻿{
+  "cases": [
+    {
+      "carrier_count": 184,
+      "carriers": [
+        {
+          "bit_correct": true,
+          "carrier_index": 0,
+          "combined_score": 0.04022256021261958,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 1,
+          "combined_score": 0.26766808840124223,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 2,
+          "combined_score": -0.04493335383856024,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 3,
+          "combined_score": 0.10569620580979765,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 4,
+          "combined_score": -0.3591744808082993,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 5,
+          "combined_score": 0.07378591033011946,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 6,
+          "combined_score": 0.2692262008821052,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 7,
+          "combined_score": -0.3831890862158557,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 8,
+          "combined_score": -0.28961382516943535,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 9,
+          "combined_score": 0.2992435304821434,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 10,
+          "combined_score": -0.3230634066790795,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 11,
+          "combined_score": -0.22151288491425344,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 12,
+          "combined_score": -0.1820929871218195,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 13,
+          "combined_score": -0.1771513166298911,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 14,
+          "combined_score": -0.04690592074951047,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 15,
+          "combined_score": 0.10168092189069293,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 16,
+          "combined_score": -0.09687004881992373,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 17,
+          "combined_score": -0.21248927015895078,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 18,
+          "combined_score": -0.05736531736060114,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 19,
+          "combined_score": 0.3701639026410217,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 20,
+          "combined_score": 0.2616402549694445,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 21,
+          "combined_score": 0.04251710935998386,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 22,
+          "combined_score": 0.355989578203352,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 23,
+          "combined_score": 0.07489619383768392,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 24,
+          "combined_score": 0.28115416398399734,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 25,
+          "combined_score": -0.2755361901888367,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 26,
+          "combined_score": -0.6176861507395544,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 27,
+          "combined_score": -0.2556893132684583,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 28,
+          "combined_score": -0.18392161055584091,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 29,
+          "combined_score": 0.37905982947988537,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 30,
+          "combined_score": 0.22816392515822415,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 31,
+          "combined_score": 0.19579623532713877,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 32,
+          "combined_score": -0.048892054866725654,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 33,
+          "combined_score": 0.031276400322380264,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 34,
+          "combined_score": 0.3177309919655084,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 35,
+          "combined_score": 0.3354584104201295,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 36,
+          "combined_score": -0.10995744982676288,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 37,
+          "combined_score": 0.08903840716523514,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 38,
+          "combined_score": 0.022856566360862116,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 39,
+          "combined_score": -0.32593812367276903,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 40,
+          "combined_score": 0.47683569248727004,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 41,
+          "combined_score": 0.14868558989164102,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 42,
+          "combined_score": 0.132330405947799,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 43,
+          "combined_score": -0.0016162982983231754,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 44,
+          "combined_score": 0.11015365102815422,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 45,
+          "combined_score": 0.014407638697624493,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 46,
+          "combined_score": 0.06508426126271964,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 47,
+          "combined_score": null,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 48,
+          "combined_score": 0.06517169526082808,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 49,
+          "combined_score": 0.0704331925576897,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 50,
+          "combined_score": 0.2004955905010527,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 51,
+          "combined_score": 0.1480558572653316,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 52,
+          "combined_score": 0.33244131519546083,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 53,
+          "combined_score": -0.021481024446536767,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 54,
+          "combined_score": 0.16448564207388294,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 55,
+          "combined_score": -0.23855644231717832,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 56,
+          "combined_score": -0.28656449692730307,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 57,
+          "combined_score": -0.1648422538383789,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 58,
+          "combined_score": 0.22241148558100152,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 59,
+          "combined_score": 0.12315622345553828,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 60,
+          "combined_score": -0.27330577799759304,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 61,
+          "combined_score": 0.12480741320549976,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 62,
+          "combined_score": -0.1448109459985085,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 63,
+          "combined_score": -0.11018585356774326,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 64,
+          "combined_score": 0.4205675894681679,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 65,
+          "combined_score": -0.28130943386900487,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 66,
+          "combined_score": null,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 67,
+          "combined_score": -0.41175051551867115,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 68,
+          "combined_score": -0.05152556737999636,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 69,
+          "combined_score": null,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 70,
+          "combined_score": -0.08211309130041727,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 71,
+          "combined_score": 0.29017862005197975,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 72,
+          "combined_score": 0.2522498962044959,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 73,
+          "combined_score": -0.08728430661892571,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 74,
+          "combined_score": -0.1843021461558708,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 75,
+          "combined_score": -0.07138131952043773,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 76,
+          "combined_score": null,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 77,
+          "combined_score": 0.1881098398519391,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 78,
+          "combined_score": 0.06159439652925293,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 79,
+          "combined_score": null,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 80,
+          "combined_score": -0.27533432189969315,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 81,
+          "combined_score": 0.33166557531346763,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 82,
+          "combined_score": -0.29142466592778743,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 83,
+          "combined_score": 0.10952376673294001,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 84,
+          "combined_score": -0.18121428947432933,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 85,
+          "combined_score": 0.28835076860792713,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 86,
+          "combined_score": 0.18675023589136944,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 87,
+          "combined_score": -0.13496577742831317,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 88,
+          "combined_score": 0.2669421545979272,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 89,
+          "combined_score": null,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 90,
+          "combined_score": 0.18843629958413116,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 91,
+          "combined_score": 0.08644871463153103,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 92,
+          "combined_score": 0.3878529401102533,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 93,
+          "combined_score": null,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 94,
+          "combined_score": null,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 95,
+          "combined_score": 0.053259341680011306,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 96,
+          "combined_score": -0.4302112536111059,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 97,
+          "combined_score": 0.0899335373266808,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 98,
+          "combined_score": -0.16303285922526561,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 99,
+          "combined_score": -0.03217080448135587,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 100,
+          "combined_score": -0.15755998149187708,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 101,
+          "combined_score": 0.08630384456806016,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 102,
+          "combined_score": 0.10454026531806986,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 103,
+          "combined_score": 0.19674794761962533,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 104,
+          "combined_score": 0.06226626973562985,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 105,
+          "combined_score": -0.002578736901231521,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 106,
+          "combined_score": 0.1931960026851706,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 107,
+          "combined_score": null,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 108,
+          "combined_score": 0.10051455272958532,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 109,
+          "combined_score": -0.012950235954148154,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 110,
+          "combined_score": 0.2751437495719369,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 111,
+          "combined_score": 0.09783266440907269,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 112,
+          "combined_score": 0.05263445013994684,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 113,
+          "combined_score": 0.5477594932177917,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 114,
+          "combined_score": -0.06901177096043437,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 115,
+          "combined_score": -0.09764223233260094,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 116,
+          "combined_score": -0.21812900639310587,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 117,
+          "combined_score": -0.05858886896946604,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 118,
+          "combined_score": -0.092480583451419,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 119,
+          "combined_score": -0.10098651560321012,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 120,
+          "combined_score": 0.37332520694964133,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 121,
+          "combined_score": -0.19276941777541096,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 122,
+          "combined_score": -0.05473669053049109,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 123,
+          "combined_score": -0.2611707388127005,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 124,
+          "combined_score": 0.3101402825382877,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 125,
+          "combined_score": 0.19351870984439115,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 126,
+          "combined_score": -0.07094704373331466,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 127,
+          "combined_score": 0.06654258766372015,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 128,
+          "combined_score": -0.23996744863227717,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 129,
+          "combined_score": 0.14415803271470637,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 130,
+          "combined_score": -0.2616787246828123,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 131,
+          "combined_score": -0.2852316313652831,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 132,
+          "combined_score": 0.25956997879570864,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 133,
+          "combined_score": -0.07080721891495019,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 134,
+          "combined_score": 0.23271693334611038,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 135,
+          "combined_score": 0.11655260770139052,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 136,
+          "combined_score": -0.11345921195007716,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 137,
+          "combined_score": 0.524828657894838,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 138,
+          "combined_score": -0.142443051533478,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 139,
+          "combined_score": 0.1086498908047396,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 140,
+          "combined_score": -0.19444933272824788,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 141,
+          "combined_score": 0.08524560202974975,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 142,
+          "combined_score": -0.15115859356739633,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 143,
+          "combined_score": 0.2563087954927485,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 144,
+          "combined_score": -0.08817455370844893,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 145,
+          "combined_score": -0.10134579263969996,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 146,
+          "combined_score": -0.20598950380739087,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 147,
+          "combined_score": 0.10463911253205298,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 148,
+          "combined_score": 0.11230348696059077,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 149,
+          "combined_score": -0.20820093939338605,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 150,
+          "combined_score": -0.07163954930713089,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 151,
+          "combined_score": 0.16189451249872508,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 152,
+          "combined_score": 0.36828703283328906,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 153,
+          "combined_score": 0.14096777500492005,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 154,
+          "combined_score": -0.38601297678098656,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 155,
+          "combined_score": null,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 156,
+          "combined_score": 0.23124738286574117,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 157,
+          "combined_score": -0.43956307187607363,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 158,
+          "combined_score": 0.0028228415131839927,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 159,
+          "combined_score": -0.08385877514125413,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 160,
+          "combined_score": -0.34992354613982457,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 161,
+          "combined_score": -0.2548253516426638,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 162,
+          "combined_score": 0.2000598809741871,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 163,
+          "combined_score": 0.11691304483387191,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 164,
+          "combined_score": -0.5073288493163993,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 165,
+          "combined_score": 0.010988163019603066,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 166,
+          "combined_score": 0.05834584990757012,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 167,
+          "combined_score": 0.16249537777318754,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 168,
+          "combined_score": 0.0650711343828891,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 169,
+          "combined_score": 0.13894726037058608,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 170,
+          "combined_score": -0.1735167000146368,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 171,
+          "combined_score": -0.26363264609587217,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 172,
+          "combined_score": 0.13107084283344783,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 173,
+          "combined_score": 0.15681961506609754,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 174,
+          "combined_score": null,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": null,
+          "selected_replica_count": 0
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 175,
+          "combined_score": -0.21872168407690531,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 176,
+          "combined_score": 0.04126279812358025,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 177,
+          "combined_score": -0.21071337944673768,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 178,
+          "combined_score": 0.3269857751871169,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 179,
+          "combined_score": -0.5166101483805242,
+          "expected_bit": 1,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 180,
+          "combined_score": 0.06333995516830096,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 181,
+          "combined_score": -0.4356525412938283,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 182,
+          "combined_score": -0.1190126059975451,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 183,
+          "combined_score": -0.24169015661080118,
+          "expected_bit": 0,
+          "map_correct_replica_count": 0,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        }
+      ],
+      "cover_seed": 7600,
+      "groups": {
+        "map_disputed": {
+          "carrier_count": 184,
+          "carrier_erasures": 14,
+          "median_absolute_combined_score": 0.16448564207388294,
+          "median_map_correct_replicas": 0.0,
+          "median_selected_replicas": 2.0,
+          "observed_bit_count": 170,
+          "observed_bit_errors": 82
+        }
+      },
+      "map_correct_rate": 0.0,
+      "recovered_payload": false
+    },
+    {
+      "carrier_count": 184,
+      "carriers": [
+        {
+          "bit_correct": true,
+          "carrier_index": 0,
+          "combined_score": 0.2257029661668348,
+          "expected_bit": 1,
+          "map_correct_replica_count": 1,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 1,
+          "combined_score": -0.3571458135423167,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 2,
+          "combined_score": 0.3527451037350389,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 3,
+          "combined_score": 0.4464322332448919,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 4,
+          "combined_score": -0.37655150096501283,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 5,
+          "combined_score": -0.36808744600817567,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 6,
+          "combined_score": 0.1744829492407886,
+          "expected_bit": 1,
+          "map_correct_replica_count": 2,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 7,
+          "combined_score": -0.35340252642463227,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 8,
+          "combined_score": -0.1399427113571031,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 9,
+          "combined_score": 0.30581524153183165,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 10,
+          "combined_score": 0.14333620357263663,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 11,
+          "combined_score": 0.5862450136782483,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 12,
+          "combined_score": -0.35154700763127444,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 13,
+          "combined_score": -0.6066293456877696,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 14,
+          "combined_score": -0.06100642536221688,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 15,
+          "combined_score": 0.38201818429514645,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 16,
+          "combined_score": 0.440909307745702,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 17,
+          "combined_score": -0.2038589936141074,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 18,
+          "combined_score": 0.336329788640764,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 19,
+          "combined_score": 0.2758877932374732,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 20,
+          "combined_score": -0.49042987032580765,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 21,
+          "combined_score": 0.2994527104722368,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 22,
+          "combined_score": -0.036732107944891734,
+          "expected_bit": 1,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 23,
+          "combined_score": -0.3590928630816465,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 24,
+          "combined_score": -0.3390628008680582,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 25,
+          "combined_score": -0.28124243624701734,
+          "expected_bit": 1,
+          "map_correct_replica_count": 1,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 26,
+          "combined_score": -0.2020122228679917,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 27,
+          "combined_score": 0.2902169214783744,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 28,
+          "combined_score": 0.4926571113131384,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 29,
+          "combined_score": -0.20544701738508714,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 30,
+          "combined_score": -0.30095719117483766,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 31,
+          "combined_score": -0.16829533468955238,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 32,
+          "combined_score": -0.5353266339915922,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 33,
+          "combined_score": 0.4064156853259815,
+          "expected_bit": 1,
+          "map_correct_replica_count": 2,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 34,
+          "combined_score": -0.1798789558617857,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 35,
+          "combined_score": 0.3271963592985478,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 36,
+          "combined_score": -0.8975921480657937,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 37,
+          "combined_score": 0.39910475203358964,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 38,
+          "combined_score": -0.3390852874128005,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 39,
+          "combined_score": -0.28073994186667445,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 40,
+          "combined_score": 0.297102052412919,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 41,
+          "combined_score": -0.28335123976576077,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 42,
+          "combined_score": -0.5390223201236723,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 43,
+          "combined_score": -0.2900865434871731,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 44,
+          "combined_score": -0.1620638335427022,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 45,
+          "combined_score": 0.25166629690767023,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 46,
+          "combined_score": -0.2847683183985265,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 47,
+          "combined_score": -0.19408465200129904,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 48,
+          "combined_score": 0.24816563415530588,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 49,
+          "combined_score": 0.06749318434373278,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 50,
+          "combined_score": -0.4190924447316832,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 51,
+          "combined_score": -0.32308583332580637,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 52,
+          "combined_score": -0.4423501835413492,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 53,
+          "combined_score": 0.45149182053340475,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 54,
+          "combined_score": -0.23019069818716423,
+          "expected_bit": 0,
+          "map_correct_replica_count": 1,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 55,
+          "combined_score": -0.4963036329329792,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 56,
+          "combined_score": -0.3256602088965426,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 57,
+          "combined_score": -0.2635514499065847,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 58,
+          "combined_score": 0.35816377043789743,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 59,
+          "combined_score": 0.31511539280405726,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 60,
+          "combined_score": 0.45302697676852255,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 61,
+          "combined_score": 0.3647995037123853,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 62,
+          "combined_score": 0.21476806165493412,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 63,
+          "combined_score": 0.44452772200547386,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 64,
+          "combined_score": 0.13943478504428633,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 65,
+          "combined_score": 0.4776545205272146,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 66,
+          "combined_score": -0.2963556227972029,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 67,
+          "combined_score": -0.11113559644630222,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 68,
+          "combined_score": 0.44333724316488987,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 69,
+          "combined_score": -0.3739563870477195,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 70,
+          "combined_score": 0.3730293835743653,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 71,
+          "combined_score": 0.33405682074596305,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 72,
+          "combined_score": 0.20822140948992385,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 73,
+          "combined_score": -0.3855507602894877,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 74,
+          "combined_score": 0.23868500139319665,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 75,
+          "combined_score": 0.40718959227721324,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 76,
+          "combined_score": -0.18712981891405153,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 77,
+          "combined_score": -0.38881987286057956,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 78,
+          "combined_score": 0.5727108089350292,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 79,
+          "combined_score": -0.3214737978675971,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 80,
+          "combined_score": 0.05990143038510292,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 81,
+          "combined_score": -0.3702801877563809,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 82,
+          "combined_score": -0.3200061115221751,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 83,
+          "combined_score": -0.1694196533859136,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 84,
+          "combined_score": -0.1960505373973471,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 85,
+          "combined_score": -0.3226436276470762,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 86,
+          "combined_score": -0.5930454171432487,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 87,
+          "combined_score": 0.31194201769205343,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 88,
+          "combined_score": 0.43313706310025896,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 89,
+          "combined_score": 0.31065660745647733,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 90,
+          "combined_score": -0.3466426789989527,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 91,
+          "combined_score": 0.10481226630611754,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 92,
+          "combined_score": 0.6365073703462287,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 93,
+          "combined_score": 0.17077566613582074,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 94,
+          "combined_score": 0.5226424689383458,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 95,
+          "combined_score": -0.43879709900848446,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 96,
+          "combined_score": 0.37583773704425677,
+          "expected_bit": 1,
+          "map_correct_replica_count": 2,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 97,
+          "combined_score": -0.397658112464568,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 98,
+          "combined_score": 0.251238046005653,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 99,
+          "combined_score": -0.22407727287840964,
+          "expected_bit": 0,
+          "map_correct_replica_count": 1,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 100,
+          "combined_score": -0.02527521204917975,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 101,
+          "combined_score": -0.7131829200336299,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 102,
+          "combined_score": -0.31283611839869646,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 103,
+          "combined_score": -0.463671175368101,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 104,
+          "combined_score": 0.4016503757605866,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 105,
+          "combined_score": 0.40832965019275547,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 106,
+          "combined_score": -0.23751666309446146,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 107,
+          "combined_score": -0.5907656380513865,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 108,
+          "combined_score": 0.3219918221324498,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 109,
+          "combined_score": -0.31559463027094475,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 110,
+          "combined_score": -0.30388158594865766,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 111,
+          "combined_score": 0.23074309715603103,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 112,
+          "combined_score": -0.42642758693087923,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 113,
+          "combined_score": 0.18647891750915613,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 114,
+          "combined_score": -0.2759309456218911,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 115,
+          "combined_score": 0.3170368820810392,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 116,
+          "combined_score": 0.4114915663900864,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 117,
+          "combined_score": -0.1815944742818849,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 118,
+          "combined_score": 0.3242108445842327,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 119,
+          "combined_score": 0.33812880704757636,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 120,
+          "combined_score": -0.2966715828617096,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 121,
+          "combined_score": -0.3368160689111878,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 122,
+          "combined_score": -0.19238763428285757,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 123,
+          "combined_score": -0.251301029693282,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 124,
+          "combined_score": 0.1609141283650792,
+          "expected_bit": 1,
+          "map_correct_replica_count": 2,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 125,
+          "combined_score": -0.1454097321576352,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 126,
+          "combined_score": -0.38878550496587294,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 127,
+          "combined_score": 0.3643720494360889,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 128,
+          "combined_score": -0.3153708326673117,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 129,
+          "combined_score": -0.3264328971092918,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 130,
+          "combined_score": -0.4883525915859237,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 131,
+          "combined_score": -0.16194914865138912,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 132,
+          "combined_score": 0.5074300210759696,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 133,
+          "combined_score": -0.2390673339650838,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 134,
+          "combined_score": 0.2867426114353716,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 135,
+          "combined_score": 0.17948774796739222,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 136,
+          "combined_score": -0.560570269451138,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 137,
+          "combined_score": -0.3309175756320871,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 138,
+          "combined_score": -0.42724990335949514,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 139,
+          "combined_score": 0.25821061371405035,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 140,
+          "combined_score": -0.283098978366115,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 141,
+          "combined_score": -0.27838419010943244,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 142,
+          "combined_score": 0.3994437240517268,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 143,
+          "combined_score": 0.33693901546234656,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 144,
+          "combined_score": 0.39650209843329276,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 145,
+          "combined_score": -0.48528645906107065,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 146,
+          "combined_score": 0.19487914208139434,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 147,
+          "combined_score": 0.48119458614804467,
+          "expected_bit": 1,
+          "map_correct_replica_count": 2,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 148,
+          "combined_score": -0.24643197340042478,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 149,
+          "combined_score": -0.2787300424431053,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 150,
+          "combined_score": 0.6197919651085202,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 151,
+          "combined_score": -0.21212489500448173,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 152,
+          "combined_score": 0.05830001143382186,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 153,
+          "combined_score": -0.22953596120450012,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 154,
+          "combined_score": 0.25718550608703294,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 155,
+          "combined_score": -0.21269741821999205,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 156,
+          "combined_score": -0.19890756919243738,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 157,
+          "combined_score": -0.4640307442577017,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 158,
+          "combined_score": -0.296200464621469,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 159,
+          "combined_score": -0.4495001058195234,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 160,
+          "combined_score": -0.2128654124275249,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 161,
+          "combined_score": -0.538569757000879,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 162,
+          "combined_score": 0.30996586850466334,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 163,
+          "combined_score": -0.14025146113791293,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 164,
+          "combined_score": -0.4460536907024369,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 165,
+          "combined_score": 0.3962084361008262,
+          "expected_bit": 1,
+          "map_correct_replica_count": 2,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": null,
+          "carrier_index": 166,
+          "combined_score": 0.0007412036890667586,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": null,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 167,
+          "combined_score": 0.6894778382153925,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 168,
+          "combined_score": -0.35052019633072073,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 169,
+          "combined_score": -0.4499937067838767,
+          "expected_bit": 0,
+          "map_correct_replica_count": 1,
+          "observed_bit": 0,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 170,
+          "combined_score": -0.04044562219697158,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 171,
+          "combined_score": -0.3338602665630174,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 172,
+          "combined_score": 0.4161462106361367,
+          "expected_bit": 1,
+          "map_correct_replica_count": 4,
+          "observed_bit": 1,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 173,
+          "combined_score": -0.27698727360731257,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 174,
+          "combined_score": 0.3414210507813454,
+          "expected_bit": 1,
+          "map_correct_replica_count": 3,
+          "observed_bit": 1,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 175,
+          "combined_score": 0.24855877043088134,
+          "expected_bit": 1,
+          "map_correct_replica_count": 2,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 176,
+          "combined_score": -0.45405026930811865,
+          "expected_bit": 0,
+          "map_correct_replica_count": 4,
+          "observed_bit": 0,
+          "selected_replica_count": 4
+        },
+        {
+          "bit_correct": false,
+          "carrier_index": 177,
+          "combined_score": 0.29007828271030883,
+          "expected_bit": 0,
+          "map_correct_replica_count": 1,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 178,
+          "combined_score": 0.2099785254840785,
+          "expected_bit": 1,
+          "map_correct_replica_count": 2,
+          "observed_bit": 1,
+          "selected_replica_count": 2
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 179,
+          "combined_score": 0.2854811853225231,
+          "expected_bit": 1,
+          "map_correct_replica_count": 1,
+          "observed_bit": 1,
+          "selected_replica_count": 1
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 180,
+          "combined_score": -0.34547314022290176,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 181,
+          "combined_score": -0.21257602087157457,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 182,
+          "combined_score": -0.20789903624372885,
+          "expected_bit": 0,
+          "map_correct_replica_count": 3,
+          "observed_bit": 0,
+          "selected_replica_count": 3
+        },
+        {
+          "bit_correct": true,
+          "carrier_index": 183,
+          "combined_score": -0.35647722240911484,
+          "expected_bit": 0,
+          "map_correct_replica_count": 2,
+          "observed_bit": 0,
+          "selected_replica_count": 2
+        }
+      ],
+      "cover_seed": 7601,
+      "groups": {
+        "fully_map_correct": {
+          "carrier_count": 180,
+          "carrier_erasures": 1,
+          "median_absolute_combined_score": 0.31852149680160713,
+          "median_map_correct_replicas": 3.0,
+          "median_selected_replicas": 3.0,
+          "observed_bit_count": 179,
+          "observed_bit_errors": 5
+        },
+        "map_disputed": {
+          "carrier_count": 4,
+          "carrier_erasures": 0,
+          "median_absolute_combined_score": 0.3625519664741347,
+          "median_map_correct_replicas": 2.0,
+          "median_selected_replicas": 3.0,
+          "observed_bit_count": 4,
+          "observed_bit_errors": 0
+        }
+      },
+      "map_correct_rate": 0.9932318104906938,
+      "recovered_payload": true
+    }
+  ],
+  "decoder_received_oracle_map": false,
+  "goal": "separate blind local-map reliability from payload-score reliability before changing carrier strength or redundancy"
+}

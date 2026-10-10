@@ -1,0 +1,614 @@
+﻿{
+  "carrier_band_hz": [
+    500.0,
+    3800.0
+  ],
+  "decoder_received_oracle_map": false,
+  "fixture": "ten seeded 30-second music-like cover variants and virtual timeline offsets",
+  "mapping_mode": "non_oracle_local_selection_pilot",
+  "parity_symbols": 12,
+  "profiles": [
+    {
+      "minimum_payload_pairs": 6,
+      "minimum_pilot_margin": 0.01,
+      "minimum_pilot_pairs": 3,
+      "name": "small_pilot_4_payload_12",
+      "pilot_pair_count": 4
+    },
+    {
+      "minimum_payload_pairs": 4,
+      "minimum_pilot_margin": 0.01,
+      "minimum_pilot_pairs": 6,
+      "name": "balanced_pilot_8_payload_8",
+      "pilot_pair_count": 8
+    }
+  ],
+  "relative_difference": 0.95,
+  "repetition": 4,
+  "summaries": [
+    {
+      "exact_recoveries": 0,
+      "execution_failures": 0,
+      "maximum_rs_cost": 38,
+      "median_carrier_erasures": 3.0,
+      "median_embedding_snr_db": 41.71735345182026,
+      "median_known_bit_errors": 42.0,
+      "median_oracle_candidate_coverage": 0.9932065217391305,
+      "median_rs_cost": 33.0,
+      "median_selected_map_accuracy": 0.6128391884121465,
+      "median_selection_erasure_rate": 0.17866847826086957,
+      "minimum_payload_pairs": 6,
+      "minimum_pilot_margin": 0.01,
+      "minimum_pilot_pairs": 3,
+      "payload_pair_count": 12,
+      "pilot_pair_count": 4,
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_count": 10,
+      "unwatermarked_control_false_accepts": 0,
+      "wrong_secret_control_false_accepts": 0
+    },
+    {
+      "exact_recoveries": 0,
+      "execution_failures": 0,
+      "maximum_rs_cost": 36,
+      "median_carrier_erasures": 2.0,
+      "median_embedding_snr_db": 41.604775270455846,
+      "median_known_bit_errors": 40.5,
+      "median_oracle_candidate_coverage": 0.9945652173913043,
+      "median_rs_cost": 33.0,
+      "median_selected_map_accuracy": 0.6623369638983715,
+      "median_selection_erasure_rate": 0.16168478260869565,
+      "minimum_payload_pairs": 4,
+      "minimum_pilot_margin": 0.01,
+      "minimum_pilot_pairs": 6,
+      "payload_pair_count": 8,
+      "pilot_pair_count": 8,
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_count": 10,
+      "unwatermarked_control_false_accepts": 0,
+      "wrong_secret_control_false_accepts": 0
+    }
+  ],
+  "trials": [
+    {
+      "embedding_snr_db": 46.61080635228667,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9932065217391305,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.5859247135842881,
+        "selection_erasure_rate": 0.16983695652173914
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 4,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 48,
+        "recovered": false,
+        "rs_error_cost": 38,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 18
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 0,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 45.99465106027733,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9932065217391305,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.5967479674796748,
+        "selection_erasure_rate": 0.1644021739130435
+      },
+      "measurement": {
+        "byte_erasures": 4,
+        "carrier_erasures": 4,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 50,
+        "recovered": false,
+        "rs_error_cost": 34,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 15
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 1,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 41.458801816851135,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9918478260869565,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6101694915254238,
+        "selection_erasure_rate": 0.1983695652173913
+      },
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 3,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 47,
+        "recovered": false,
+        "rs_error_cost": 31,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 15
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 2,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 42.52555243741937,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9959239130434783,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.5867768595041323,
+        "selection_erasure_rate": 0.17798913043478262
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 57,
+        "recovered": false,
+        "rs_error_cost": 38,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 18
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 3,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 41.56236219490442,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9932065217391305,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.5958188153310104,
+        "selection_erasure_rate": 0.22010869565217392
+      },
+      "measurement": {
+        "byte_erasures": 3,
+        "carrier_erasures": 4,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 41,
+        "recovered": false,
+        "rs_error_cost": 33,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 15
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 4,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 42.45328523918545,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9864130434782609,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6225165562913907,
+        "selection_erasure_rate": 0.1793478260869565
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 38,
+        "recovered": false,
+        "rs_error_cost": 32,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 15
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 5,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 39.64998714612981,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9972826086956522,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6554621848739496,
+        "selection_erasure_rate": 0.19157608695652173
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 29,
+        "recovered": false,
+        "rs_error_cost": 32,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 15
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 6,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 41.872344708736094,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9877717391304348,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6155088852988692,
+        "selection_erasure_rate": 0.15896739130434784
+      },
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 3,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 39,
+        "recovered": false,
+        "rs_error_cost": 31,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 15
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 7,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 39.295454992270976,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9932065217391305,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.626465661641541,
+        "selection_erasure_rate": 0.18885869565217392
+      },
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 43,
+        "recovered": false,
+        "rs_error_cost": 37,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 18
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 8,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 39.00447807257126,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9972826086956522,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6217105263157895,
+        "selection_erasure_rate": 0.17391304347826086
+      },
+      "measurement": {
+        "byte_erasures": 3,
+        "carrier_erasures": 3,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 37,
+        "recovered": false,
+        "rs_error_cost": 33,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 15
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 9,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 46.687042171381414,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9945652173913043,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6557377049180327,
+        "selection_erasure_rate": 0.17119565217391305
+      },
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 45,
+        "recovered": false,
+        "rs_error_cost": 35,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 17
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 0,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 46.375761447743386,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9932065217391305,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6834415584415584,
+        "selection_erasure_rate": 0.16304347826086957
+      },
+      "measurement": {
+        "byte_erasures": 5,
+        "carrier_erasures": 5,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 49,
+        "recovered": false,
+        "rs_error_cost": 33,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 14
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 1,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 41.387672355201474,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9945652173913043,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6298076923076923,
+        "selection_erasure_rate": 0.15217391304347827
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 40,
+        "recovered": false,
+        "rs_error_cost": 30,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 14
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 2,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 42.49560062427031,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9945652173913043,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.667741935483871,
+        "selection_erasure_rate": 0.15760869565217392
+      },
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 36,
+        "recovered": false,
+        "rs_error_cost": 30,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 15
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 3,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 41.42551228282337,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9972826086956522,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6456310679611651,
+        "selection_erasure_rate": 0.16032608695652173
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 42,
+        "recovered": false,
+        "rs_error_cost": 34,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 16
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 4,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 42.50015089615617,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9904891304347826,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6851549755301795,
+        "selection_erasure_rate": 0.1671195652173913
+      },
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 1,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 40,
+        "recovered": false,
+        "rs_error_cost": 34,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 17
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 5,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 39.59307707389805,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9959239130434783,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6590538336052202,
+        "selection_erasure_rate": 0.1671195652173913
+      },
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 34,
+        "recovered": false,
+        "rs_error_cost": 27,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 13
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 6,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 41.78403825808833,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9918478260869565,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6831210191082803,
+        "selection_erasure_rate": 0.14673913043478262
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 41,
+        "recovered": false,
+        "rs_error_cost": 30,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 14
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 7,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 39.305961105960314,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.9945652173913043,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6656200941915228,
+        "selection_erasure_rate": 0.13451086956521738
+      },
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 40,
+        "recovered": false,
+        "rs_error_cost": 36,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 17
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 8,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    },
+    {
+      "embedding_snr_db": 38.980909266392494,
+      "error": null,
+      "map_metrics": {
+        "oracle_candidate_coverage": 0.998641304347826,
+        "physical_carrier_positions": 736,
+        "selected_map_accuracy": 0.6427406199021207,
+        "selection_erasure_rate": 0.1671195652173913
+      },
+      "measurement": {
+        "byte_erasures": 3,
+        "carrier_erasures": 3,
+        "channel_error": "codeword could not be corrected",
+        "corrected_bytes": 0,
+        "decoder_returned_payload": false,
+        "known_bit_errors": 41,
+        "recovered": false,
+        "rs_error_cost": 33,
+        "rs_parity_budget": 12,
+        "token_matches_input": false,
+        "unknown_byte_errors": 15
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 9,
+      "unwatermarked_control_token_match": false,
+      "wrong_secret_control_token_match": false
+    }
+  ]
+}

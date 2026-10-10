@@ -1,0 +1,449 @@
+﻿{
+  "calibration_objective": "maximize min(signed_payload_margin, signed_pilot_margin)",
+  "carrier_band_hz": [
+    500.0,
+    3800.0
+  ],
+  "decoder_received_oracle_map": true,
+  "fixture": "ten seeded 30-second music-like cover variants and virtual timeline offsets",
+  "mapping_mode": "retained_encoder_frame_map_payload_upper_bound",
+  "parity_symbols": 12,
+  "profiles": [
+    {
+      "minimum_payload_pairs": 6,
+      "minimum_pilot_margin": 0.01,
+      "minimum_pilot_pairs": 3,
+      "name": "small_pilot_4_payload_12",
+      "pilot_pair_count": 4
+    },
+    {
+      "minimum_payload_pairs": 4,
+      "minimum_pilot_margin": 0.01,
+      "minimum_pilot_pairs": 6,
+      "name": "balanced_pilot_8_payload_8",
+      "pilot_pair_count": 8
+    }
+  ],
+  "relative_difference": 0.95,
+  "repetition": 4,
+  "summaries": [
+    {
+      "exact_recoveries": 10,
+      "execution_failures": 0,
+      "maximum_rs_cost": 10,
+      "median_byte_erasures": 0.0,
+      "median_carrier_erasures": 0.0,
+      "median_embedding_snr_db": 41.63271571901265,
+      "median_known_bit_errors": 4.0,
+      "median_rs_cost": 6.5,
+      "median_unknown_byte_errors": 3.0,
+      "minimum_payload_pairs": 6,
+      "minimum_pilot_margin": 0.01,
+      "minimum_pilot_pairs": 3,
+      "payload_pair_count": 12,
+      "pilot_pair_count": 4,
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_count": 10
+    },
+    {
+      "exact_recoveries": 10,
+      "execution_failures": 0,
+      "maximum_rs_cost": 8,
+      "median_byte_erasures": 1.0,
+      "median_carrier_erasures": 1.0,
+      "median_embedding_snr_db": 41.763384090844774,
+      "median_known_bit_errors": 3.5,
+      "median_rs_cost": 4.5,
+      "median_unknown_byte_errors": 2.0,
+      "minimum_payload_pairs": 4,
+      "minimum_pilot_margin": 0.01,
+      "minimum_pilot_pairs": 6,
+      "payload_pair_count": 8,
+      "pilot_pair_count": 8,
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_count": 10
+    }
+  ],
+  "trials": [
+    {
+      "embedding_snr_db": 46.731110658594545,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": null,
+        "corrected_bytes": 5,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 5,
+        "recovered": true,
+        "rs_error_cost": 9,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 4
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 0
+    },
+    {
+      "embedding_snr_db": 45.84444620941292,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": null,
+        "corrected_bytes": 4,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 6,
+        "recovered": true,
+        "rs_error_cost": 7,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 3
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 1
+    },
+    {
+      "embedding_snr_db": 41.38964204657425,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 4,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 5,
+        "recovered": true,
+        "rs_error_cost": 8,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 4
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 2
+    },
+    {
+      "embedding_snr_db": 42.585592855208326,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 3,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 7,
+        "recovered": true,
+        "rs_error_cost": 6,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 3
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 3
+    },
+    {
+      "embedding_snr_db": 41.41842853812376,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 5,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 7,
+        "recovered": true,
+        "rs_error_cost": 10,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 5
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 4
+    },
+    {
+      "embedding_snr_db": 42.453616141418436,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": null,
+        "corrected_bytes": 2,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 1,
+        "recovered": true,
+        "rs_error_cost": 3,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 1
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 5
+    },
+    {
+      "embedding_snr_db": 39.68770169263435,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 0,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 0,
+        "recovered": true,
+        "rs_error_cost": 0,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 0
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 6
+    },
+    {
+      "embedding_snr_db": 41.84700289990154,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 1,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 2,
+        "recovered": true,
+        "rs_error_cost": 2,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 1
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 7
+    },
+    {
+      "embedding_snr_db": 39.251768170538654,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": null,
+        "corrected_bytes": 5,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 3,
+        "recovered": true,
+        "rs_error_cost": 8,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 3
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 8
+    },
+    {
+      "embedding_snr_db": 38.989165264548596,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 2,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 3,
+        "recovered": true,
+        "rs_error_cost": 4,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 2
+      },
+      "profile_name": "small_pilot_4_payload_12",
+      "trial_index": 9
+    },
+    {
+      "embedding_snr_db": 46.720908184291744,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 0,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 0,
+        "recovered": true,
+        "rs_error_cost": 0,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 0
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 0
+    },
+    {
+      "embedding_snr_db": 46.316006859598886,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 2,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 4,
+        "recovered": true,
+        "rs_error_cost": 4,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 2
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 1
+    },
+    {
+      "embedding_snr_db": 41.35183395404979,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 2,
+        "channel_error": null,
+        "corrected_bytes": 4,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 4,
+        "recovered": true,
+        "rs_error_cost": 7,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 3
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 2
+    },
+    {
+      "embedding_snr_db": 42.67431950764741,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": null,
+        "corrected_bytes": 4,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 3,
+        "recovered": true,
+        "rs_error_cost": 7,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 3
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 3
+    },
+    {
+      "embedding_snr_db": 41.4967732549769,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": null,
+        "corrected_bytes": 5,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 5,
+        "recovered": true,
+        "rs_error_cost": 8,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 3
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 4
+    },
+    {
+      "embedding_snr_db": 42.49795275942781,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 2,
+        "carrier_erasures": 2,
+        "channel_error": null,
+        "corrected_bytes": 3,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 3,
+        "recovered": true,
+        "rs_error_cost": 4,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 1
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 5
+    },
+    {
+      "embedding_snr_db": 39.617930442062985,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 0,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 1,
+        "recovered": true,
+        "rs_error_cost": 0,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 0
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 6
+    },
+    {
+      "embedding_snr_db": 42.02999492671265,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": null,
+        "corrected_bytes": 3,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 4,
+        "recovered": true,
+        "rs_error_cost": 5,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 2
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 7
+    },
+    {
+      "embedding_snr_db": 39.32346325887069,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 1,
+        "carrier_erasures": 1,
+        "channel_error": null,
+        "corrected_bytes": 2,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 1,
+        "recovered": true,
+        "rs_error_cost": 3,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 1
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 8
+    },
+    {
+      "embedding_snr_db": 39.052984424333026,
+      "error": null,
+      "measurement": {
+        "byte_erasures": 0,
+        "carrier_erasures": 0,
+        "channel_error": null,
+        "corrected_bytes": 3,
+        "decoder_returned_payload": true,
+        "known_bit_errors": 6,
+        "recovered": true,
+        "rs_error_cost": 6,
+        "rs_parity_budget": 12,
+        "token_matches_input": true,
+        "unknown_byte_errors": 3
+      },
+      "profile_name": "balanced_pilot_8_payload_8",
+      "trial_index": 9
+    }
+  ]
+}

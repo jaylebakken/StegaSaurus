@@ -1,0 +1,5 @@
+# Ignore local Python build and test artifacts; source remains under src/.
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
