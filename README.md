@@ -7,6 +7,7 @@ Stegosaurus is a local experimental audio-watermarking prototype. It embeds a se
 - **Encoding:** supported experimentally through a spectral STFT pilot.
 - **Detection:** supported as `verified`, `inconclusive`, or `absent` with synchronization-offset correction.
 - **Attribution:** v1 supports claimed-handle verification: it embeds a 4-byte opaque registry handle with 16 Reed--Solomon parity symbols, then verifies that specific claim using a registry-retained private carrier map.
+- **Blind-recovery policy:** the reusable decision layer now supports bounded `accepted`, `rejected`, and `abstained` outcomes for future blind decoders. It does not reconstruct carrier maps or discover unknown handles.
 - **Non-oracle research:** iteration 032 reconstructs a bounded duration-derived leading/trailing crop-mode bank without a retained map and recovers all 20 named fresh synthetic `250 ms` crop trials within its RS budget. It remains an experiment, not a v1 capability or general robustness claim.
 - **Scope:** generated or licensed non-sensitive audio only. This project does not claim imperceptibility, universal robustness, or resistance to arbitrary resynthesis.
 
@@ -34,6 +35,11 @@ experimental non-oracle crop decoder
   -> expected WAV geometry plus received length loss
   -> trailing offset 0 and leading offsets around missing_samples / STFT hop
   -> separate local candidate maps, RS recovery, and bounded result selection
+
+blind recovery decision policy
+  -> staged decoder vote plus unwatermarked and wrong-secret controls
+  -> accept only unique low-burden successes with quiet controls
+  -> reject on control acceptance, otherwise abstain after bounded search
 ```
 
 The encoder derives one expected bit per frame from a shared secret, daily epoch, and candidate source-frame index. It distributes that bit over secret frequency-bin pairs using plus-or-minus spreading chips while preserving each pair's combined magnitude energy. The detector regenerates the same bit, pair, and chip assignments; low-confidence observations become erasures instead of guesses.
@@ -47,11 +53,13 @@ The production code is intentionally decomposed so an unfamiliar reader can foll
 3. Read `schema.py` for keyed statistical detection and opaque-token policy; `schema_models.py` holds only data records and `schema_engine.py` holds the policy logic.
 4. Read `transport.py` for attribution transport: sync framing, keyed interleaving, and Reed--Solomon recovery are separate modules.
 5. Read `attacks.py` and `benchmark.py` last: they define measured transformations and replayable test recipes, not a general robustness guarantee.
-6. Read `attribution.py` for the separate v1 claimed-handle verifier. It requires a registry-retained `AttributionRecord`; it does not discover an unknown handle from arbitrary audio.
+6. Read `attribution.py` for the claimed-handle attribution facades. `attribution_core/` holds records, registry handling, v1 retained-map verification, v2 repeated-block pooling, and the small blind-recovery decision layer.
 7. Read `experiments/non_oracle_reconstruction/iteration_032_edge_mode_coarse_bank/` only after the application path. It documents a bounded, measured no-map crop decoder and its explicit scope limits.
+8. Read `experiments/blind_recovery/iteration_001_geometry_dependency_audit/` for the separate track that measures how much original waveform geometry the decoder still needs before attribution recovery.
 
 The three rendered process maps, their application-code citations, and their scope boundaries are in `docs/process_diagrams.md`.
 The v1 attribution decision, experiment-derived profile, and explicit limits are in `docs/attribution_v1.md`.
+The v2 repeated-block attribution visuals are in `docs/attribution_v2_visuals.md`.
 
 ## Layout
 
@@ -79,16 +87,17 @@ Stegosaurus/
       |- transport.py              # facade for attribution transport
       |- transport_*.py            # models, framing, interleaving, channel steps
       |- attacks.py                # facade for named evaluation transformations
-      |- attack_*.py               # codec, PCM, entropy-model, and profile steps
+      |- attack_core/              # codec, PCM, entropy-model, and profile steps
       |- benchmark.py              # one-result-per-attack benchmark runner
-      |- attribution.py            # v1 claimed-handle attribution facade
-      |- attribution_*.py          # v1 records, registry, replicas, encoder, decoder
+      |- attribution.py            # claimed-handle attribution facade
+      |- attribution_core/         # records, registry, v1 replicas, v2 blocks, blind policy
       |- demo_samples.py            # deterministic local covers for manual attribution testing
       |- demo_controller.py         # UI-independent local registry, transforms, and verification flow
       |- demo_app.py                # optional green Tkinter manual attribution lab
       |- experiments/
       |  |- transport_optimization/      # completed oracle-aligned iterations 001-011 and 013
-      |  `- non_oracle_reconstruction/   # fresh numbering, beginning at iteration 001
+      |  |- non_oracle_reconstruction/   # fresh numbering, beginning at iteration 001
+      |  `- blind_recovery/              # fresh numbering for reducing original-geometry assumptions
       `- tests/
          |- application/             # current encoder, detector, schema, and benchmark APIs
          `- experiment_regressions/  # archived research-iteration reproducibility checks
@@ -166,6 +175,11 @@ The watermark master secret derives spectral pairs, local pilots, and the transp
 
 The experimental edge-mode decoder additionally assumes the expected original sample rate and sample count are available as authenticated claim/profile geometry. It uses received-length loss only to construct its bounded one-edge timing hypotheses; it does not receive the retained carrier-frame map or expected handle when selecting a hypothesis.
 
+The blind-recovery decision policy is application code, but it is only a policy
+wrapper: it accepts a staged decoder vote when RS burden is low and controls are
+quiet, rejects on control acceptance, and otherwise abstains. The current audio
+reconstruction that feeds those votes remains experimental.
+
 The Tkinter lab is a local display and manual-testing surface for that same claimed-handle flow. “Issue Calibrated Handle” retries opaque handles until its clean local claim verifies; “Encode Supplied Handle” intentionally exposes an exploratory fixed-handle path and reports its clean result. Its toggles apply named, fixed-parameter transformations to the displayed audio. They are test inputs, not a robustness claim.
 
 ## Evaluation Boundaries
@@ -205,6 +219,17 @@ Iteration 030 separates those two reliability hypotheses on one failed/recovered
 Iteration 031 localizes that map failure further: the failed replay uses coarse offset `+15` and generates every candidate frame `15` frames away from the encoder map, so the true frame is absent from all candidate pairs. The next bounded study should improve coarse-hypothesis coverage before changing local payload scoring.
 
 Iteration 032 tests that correction directly with a duration-derived one-edge mode bank: offset `0` for the trailing-crop hypothesis and offsets `15`/`16` for the leading-crop hypothesis. On ten new synthetic covers under the named `250 ms` crops, it recovers `10/10` trailing and `10/10` leading cases; every selected result has post-hoc RS cost at most `16`, and no unwatermarked or wrong-secret control selects a result. This is bounded smoke evidence for those declared transforms only, not a general robustness claim.
+
+The `blind_recovery` track then restarts the question from the product side:
+how much geometry must a verifier know? Iteration 001 shows exact source
+duration matters; iteration 002 recovers named `250 ms` edge crops with a
+synchronized duration bank; iteration 003 restores controls and shows broader
+banks can stay quiet but expose seed-level signal weakness; iteration 004 turns
+the bank into a staged controller; iteration 005 wires that behavior to the
+application `BlindRecoveryDecisionPolicy`. On the measured scenarios it accepts
+the known-good clean and leading-crop cases, keeps controls quiet, and safely
+abstains on the weak clean probe. This is a bounded claimed-plan prototype, not
+unknown-handle discovery or a broad robustness claim.
 
 The next evaluation should use a licensed varied speech corpus, unwatermarked controls, pre-registered false-positive and true-positive rates, objective quality metrics, and blinded listening. Arbitrary sample-offset edits, crop/insertion/deletion, and time-scale drift need stronger synchronization before they can be claimed as supported.
 

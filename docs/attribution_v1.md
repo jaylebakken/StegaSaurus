@@ -10,7 +10,7 @@ a verifier checks the claimed handle against received PCM with that retained map
 ## Experimental Basis
 
 - `iteration_004_four_frame_soft_combine` establishes the four-replica
-  score-combining carrier pattern used by `attribution_repetition.py`.
+  score-combining carrier pattern used by `attribution_core/repetition.py`.
 - `iteration_020_sixteen_parity_registry_handle` selects the fixed 4-byte handle
   plus 16-parity allocation inside a 20-byte protected codeword. On its named
   synthetic bounded-crop fixture, it recovers 6/10 trailing and 7/10 leading
@@ -83,7 +83,7 @@ retained carrier-frame map.
 | Responsibility | Code |
 | --- | --- |
 | Public attribution API | `src/stegosaurus/audio/attribution.py` |
-| Fixed v1 profile and verification records | `src/stegosaurus/audio/attribution_models.py` |
-| Four-replica carrier embed and claim verification | `src/stegosaurus/audio/attribution_repetition.py` |
-| Directional encoder and decoder | `src/stegosaurus/audio/attribution_encoder.py`, `src/stegosaurus/audio/attribution_decoder.py` |
-| Local authenticated handle registry | `src/stegosaurus/audio/attribution_registry.py` |
+| Fixed v1 profile and verification records | `src/stegosaurus/audio/attribution_core/models.py` |
+| Four-replica carrier embed and claim verification | `src/stegosaurus/audio/attribution_core/repetition.py` |
+| Directional encoder and decoder | `src/stegosaurus/audio/attribution_core/encoder.py`, `src/stegosaurus/audio/attribution_core/decoder.py` |
+| Local authenticated handle registry | `src/stegosaurus/audio/attribution_core/registry.py` |

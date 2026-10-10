@@ -14,7 +14,7 @@ import hashlib
 import hmac
 import secrets
 
-from .attribution_models import AttributionRecord
+from .models import AttributionRecord
 
 
 @dataclass(frozen=True, slots=True)

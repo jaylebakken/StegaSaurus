@@ -1,27 +1,45 @@
-"""Expose the bounded v1 claimed-handle attribution prototype.
+"""Expose the bounded claimed-handle attribution prototypes.
 
-Use this API only with a registry that retains each ``AttributionRecord``. The
-current implementation verifies a supplied claim through a known carrier map;
-it does not discover unknown handles from arbitrary audio. See the module
-docstrings for explicit scope limits and named experimental evidence.
+Use these APIs only with a registry that retains attribution records. The v1
+surface verifies one retained carrier map. The v2 block surface repeats the
+same handle across fixed-duration blocks and pools retained block evidence. The
+public facade still does not claim unknown-handle discovery from arbitrary
+audio; blind localization remains a measured experiment path until promoted.
 """
 
-from .attribution_decoder import SpectralAttributionDecoder
-from .attribution_encoder import SpectralAttributionEncoder
-from .attribution_models import (
+from .attribution_core import (
     AttributionEmbedding,
     AttributionRecord,
     AttributionStatus,
     AttributionVerification,
+    BlindRecoveryDecision,
+    BlindRecoveryDecisionPolicy,
+    BlindRecoveryStatus,
+    BlindRecoveryVote,
+    BlockAttributionCodec,
+    BlockAttributionEmbedding,
+    BlockAttributionRecord,
+    BlockAttributionVerification,
+    InMemoryAttributionRegistry,
+    RegistryEntry,
     SpectralAttributionConfig,
+    SpectralAttributionDecoder,
+    SpectralAttributionEncoder,
 )
-from .attribution_registry import InMemoryAttributionRegistry, RegistryEntry
 
 __all__ = [
     "AttributionEmbedding",
     "AttributionRecord",
     "AttributionStatus",
     "AttributionVerification",
+    "BlockAttributionCodec",
+    "BlockAttributionEmbedding",
+    "BlockAttributionRecord",
+    "BlockAttributionVerification",
+    "BlindRecoveryDecision",
+    "BlindRecoveryDecisionPolicy",
+    "BlindRecoveryStatus",
+    "BlindRecoveryVote",
     "InMemoryAttributionRegistry",
     "RegistryEntry",
     "SpectralAttributionConfig",

@@ -15,9 +15,9 @@ from numbers import Integral
 
 import numpy as np
 
-from .attack_codec import mp3_round_trip
-from .attack_models import EntropicAttackConfig, EntropicAttackRecipe
-from .attack_signal import (
+from .codec import mp3_round_trip
+from .models import EntropicAttackConfig, EntropicAttackRecipe
+from .signal import (
     add_reverberation,
     add_white_noise,
     low_pass_filter,
@@ -26,7 +26,7 @@ from .attack_signal import (
     time_scale_audio,
     trim_audio,
 )
-from .pilot import PcmAudio
+from ..pilot import PcmAudio
 
 class EntropicAttackProfile:
     """Sample and apply replayable, bounded stochastic audio-processing attack chains."""

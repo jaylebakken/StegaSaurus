@@ -8,10 +8,10 @@ claimed handle in its authenticated registry, retrieves the record, then calls
 
 from __future__ import annotations
 
-from .attribution_models import AttributionRecord, AttributionVerification, SpectralAttributionConfig
-from .attribution_repetition import FourReplicaAttributionCodec
-from .pilot import PcmAudio, SpectralAudioPilot, SpectralPilotConfig
-from .schema import AudioWatermarkConfig
+from .models import AttributionRecord, AttributionVerification, SpectralAttributionConfig
+from .repetition import FourReplicaAttributionCodec
+from ..pilot import PcmAudio, SpectralAudioPilot, SpectralPilotConfig
+from ..schema import AudioWatermarkConfig
 
 
 class SpectralAttributionDecoder:

@@ -50,3 +50,18 @@ def test_registry_accepts_idempotent_local_supplied_handle_registration() -> Non
     assert registry.register(handle, b"local test") == entry
     with pytest.raises(ValueError, match="different provenance"):
         registry.register(handle, b"other provenance")
+
+
+def test_demo_controller_verifies_v2_block_claims() -> None:
+    """Exercise the manual lab's repeated-block attribution path without opening Tkinter."""
+
+    controller = AttributionDemoController()
+
+    embedding = controller.issue_and_encode_blocks("local v2 block test")
+    verification = controller.verify()
+
+    assert embedding.record.block_records
+    assert verification.recovered
+    assert verification.pooled_verification.claim_rs_cost <= 16
+    assert controller.state.attribution_mode == "v2_blocks"
+    assert controller.state.block_count == len(embedding.record.block_records)

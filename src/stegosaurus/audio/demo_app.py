@@ -1,10 +1,10 @@
-"""Render a compact green Tkinter lab for manual v1 attribution experiments.
+"""Render a compact green Tkinter lab for manual attribution experiments.
 
 The app is intentionally a display and control surface rather than a second
 watermark implementation. Its controller performs the documented process:
 
-    choose synthetic/WAV cover -> encode a claimed handle -> select transforms
-        -> verify the retained-map claim -> inspect status and waveform
+    choose synthetic/WAV cover -> encode a v1 claim or v2 repeated blocks
+        -> select transforms -> verify retained claim evidence
 
 The visible named transformations are manual test inputs. They do not make a
 robustness, imperceptibility, compression, or blind-discovery claim.
@@ -18,7 +18,7 @@ from tkinter import filedialog, ttk
 
 import numpy as np
 
-from .attribution import AttributionVerification
+from .attribution import AttributionVerification, BlockAttributionVerification
 from .demo_controller import AttributionDemoController, DISTORTION_NAMES
 from .pilot import write_pcm16_wav
 
@@ -75,8 +75,10 @@ class AttributionDemoApp:
         ttk.Entry(frame, textvariable=self._provenance).grid(row=2, column=1, columnspan=2, sticky="ew", padx=6, pady=(6, 0))
         controls = ttk.Frame(frame)
         controls.grid(row=3, column=0, columnspan=3, sticky="ew", pady=(12, 0))
-        ttk.Button(controls, text="Issue Calibrated Handle", command=self._issue).grid(row=0, column=0, padx=(0, 6))
-        ttk.Button(controls, text="Encode Supplied Handle", command=self._encode_supplied).grid(row=0, column=1, padx=6)
+        ttk.Button(controls, text="Issue V1 Handle", command=self._issue).grid(row=0, column=0, padx=(0, 6))
+        ttk.Button(controls, text="Encode V1 Supplied", command=self._encode_supplied).grid(row=0, column=1, padx=6)
+        ttk.Button(controls, text="Issue V2 Blocks", command=self._issue_blocks).grid(row=1, column=0, padx=(0, 6), pady=(6, 0))
+        ttk.Button(controls, text="Encode V2 Supplied", command=self._encode_supplied_blocks).grid(row=1, column=1, padx=6, pady=(6, 0))
         ttk.Button(controls, text="Verify Claim", command=self._verify).grid(row=0, column=2, padx=6)
         ttk.Button(controls, text="Save Current WAV", command=self._save_wav).grid(row=0, column=3, padx=6)
         distortions = ttk.LabelFrame(frame, text="Named Manual Transformations", padding=8)
@@ -120,6 +122,24 @@ class AttributionDemoApp:
             "Encoded supplied handle",
         )
 
+    def _issue_blocks(self) -> None:
+        """Run v2 repeated-block issuance and surface the issued opaque handle."""
+
+        def issue() -> object:
+            embedding = self._controller.issue_and_encode_blocks(self._provenance.get())
+            self._handle.set(embedding.record.handle.hex().upper())
+            return embedding
+
+        self._run_action(issue, "Issued v2 block handle")
+
+    def _encode_supplied_blocks(self) -> None:
+        """Encode the caller's hexadecimal handle into repeated v2 blocks."""
+
+        self._run_action(
+            lambda: self._controller.encode_supplied_handle_blocks(self._handle.get(), self._provenance.get()),
+            "Encoded supplied v2 blocks",
+        )
+
     def _apply_distortions(self) -> None:
         """Apply checked transformations from the clean base audio with their fixed parameters."""
 
@@ -160,6 +180,12 @@ class AttributionDemoApp:
         verification = result[-1] if isinstance(result, tuple) else result
         if isinstance(verification, AttributionVerification):
             return f"{label}: {verification.status.value}; RS cost {verification.claim_rs_cost}/16."
+        if isinstance(verification, BlockAttributionVerification):
+            pooled = verification.pooled_verification
+            return (
+                f"{label}: {verification.status.value}; pooled RS cost {pooled.claim_rs_cost}/16; "
+                f"block votes {verification.recovered_block_count}/{len(verification.block_verifications)}."
+            )
         return f"{label}."
 
     def _refresh(self) -> None:
@@ -171,7 +197,8 @@ class AttributionDemoApp:
         transforms = ", ".join(state.applied_distortions) or "none"
         self._details.set(
             f"Source: {state.source_name} | {state.current_audio.duration_seconds:.2f} s @ {state.current_audio.sample_rate} Hz | "
-            f"claim: {handle} | embedding SNR: {snr} | transforms: {transforms}"
+            f"claim: {handle} | mode: {state.attribution_mode} | blocks: {state.block_count} | "
+            f"embedding SNR: {snr} | transforms: {transforms}"
         )
         self._draw_waveform(state.current_audio.samples)
 

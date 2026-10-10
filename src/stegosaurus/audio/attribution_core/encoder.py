@@ -9,11 +9,11 @@ metadata and must not be published with the audio.
 
 from __future__ import annotations
 
-from .attribution_models import AttributionEmbedding, SpectralAttributionConfig
-from .attribution_repetition import FourReplicaAttributionCodec
-from .attribution_registry import InMemoryAttributionRegistry, RegistryEntry
-from .pilot import PcmAudio, SpectralAudioPilot, SpectralPilotConfig
-from .schema import AudioWatermarkConfig
+from .models import AttributionEmbedding, SpectralAttributionConfig
+from .repetition import FourReplicaAttributionCodec
+from .registry import InMemoryAttributionRegistry, RegistryEntry
+from ..pilot import PcmAudio, SpectralAudioPilot, SpectralPilotConfig
+from ..schema import AudioWatermarkConfig
 
 
 class SpectralAttributionEncoder:

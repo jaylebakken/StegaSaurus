@@ -1,11 +1,11 @@
 """Expose reproducible evaluation transformations in research reading order.
 
-Choose the narrowest component that matches the question:
+Choose the narrowest grouped implementation module when extending behavior:
 
-    `attack_signal`  - transparent PCM transformations such as noise or filters
-    `attack_codec`   - a named FFmpeg-backed MP3 round trip
-    `attack_models`  - declared entropy bounds and replayable recipe records
-    `attack_profile` - recipe sampling and ordered stochastic application
+    `attack_core.signal`  - transparent PCM transformations
+    `attack_core.codec`   - named external-tool round trips
+    `attack_core.models`  - declared entropy bounds and recipe records
+    `attack_core.profile` - recipe sampling and stochastic application
 
 Toy example:
     recipe = EntropicAttackProfile().sample(audio.sample_rate, seed=42)
@@ -16,10 +16,11 @@ tools. These utilities support measurement; they do not establish robustness
 beyond the evaluations that explicitly record their outcomes.
 """
 
-from .attack_codec import AudioToolUnavailable, mp3_round_trip
-from .attack_models import EntropicAttackConfig, EntropicAttackRecipe
-from .attack_profile import EntropicAttackProfile
-from .attack_signal import (
+from .attack_core import (
+    AudioToolUnavailable,
+    EntropicAttackConfig,
+    EntropicAttackProfile,
+    EntropicAttackRecipe,
     add_reverberation,
     add_white_noise,
     concatenate_audio,
@@ -28,6 +29,7 @@ from .attack_signal import (
     resample_audio,
     time_scale_audio,
     trim_audio,
+    mp3_round_trip,
 )
 
 __all__ = [

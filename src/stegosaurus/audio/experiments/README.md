@@ -11,3 +11,9 @@ iteration_NNN_short_name/
 ```
 
 `run.py` begins with its goal and the pipeline state that existed when the experiment was conducted. Do not overwrite a completed iteration to test a new idea; add the next numbered directory so prior measurements remain traceable. Regression and integration tests intentionally remain in `../tests/`.
+
+Current tracks:
+
+- `transport_optimization/`: oracle-aligned carrier, parity, and attack-measurement experiments.
+- `non_oracle_reconstruction/`: candidate-map reconstruction without retained encoder maps.
+- `blind_recovery/`: attribution recovery with progressively fewer original-geometry assumptions.

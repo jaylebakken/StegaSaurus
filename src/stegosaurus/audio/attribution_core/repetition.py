@@ -18,13 +18,13 @@ from collections.abc import Iterable
 
 import numpy as np
 
-from .attribution_models import (
+from .models import (
     AttributionEmbedding,
     AttributionRecord,
     AttributionStatus,
     AttributionVerification,
 )
-from .pilot import PcmAudio, SpectralAudioPilot
+from ..pilot import PcmAudio, SpectralAudioPilot
 
 
 class AttributionCapacityError(ValueError):

@@ -8,6 +8,9 @@ reconstruction research. Iteration 032 adds a measured, bounded non-oracle
 edge-crop experiment but does not change the v1 verifier. Render this file in a Mermaid-capable Markdown viewer;
 the text and code maps remain useful if no renderer is present.
 
+For the newer repeated-block attribution prototype, see
+`docs/attribution_v2_visuals.md`.
+
 ## 1. Encoding Scheme
 
 ```mermaid
@@ -77,10 +80,10 @@ flowchart LR
 
 | Diagram step | Application code |
 | --- | --- |
-| MP3 codec boundary | `src/stegosaurus/audio/attack_codec.py:24` |
-| Deterministic signal transforms | `src/stegosaurus/audio/attack_signal.py:22`, `src/stegosaurus/audio/attack_signal.py:52`, `src/stegosaurus/audio/attack_signal.py:65` |
-| Entropic configuration and recipes | `src/stegosaurus/audio/attack_models.py:22`, `src/stegosaurus/audio/attack_models.py:128` |
-| Sampling and replaying a profile | `src/stegosaurus/audio/attack_profile.py:31` |
+| MP3 codec boundary | `src/stegosaurus/audio/attack_core/codec.py` |
+| Deterministic signal transforms | `src/stegosaurus/audio/attack_core/signal.py` |
+| Entropic configuration and recipes | `src/stegosaurus/audio/attack_core/models.py` |
+| Sampling and replaying a profile | `src/stegosaurus/audio/attack_core/profile.py` |
 | Benchmark evidence records | `src/stegosaurus/audio/benchmark.py:67` |
 
 ## 3. Decoding Scheme
@@ -128,10 +131,10 @@ flowchart TD
 | Offset scan and pilot extraction | `src/stegosaurus/audio/pilot_workflow.py:81` |
 | Frame confidence and erasure decision | `src/stegosaurus/audio/pilot_frames.py:18` |
 | Statistical decision and correction | `src/stegosaurus/audio/schema_engine.py:87` |
-| V1 attribution encoder and decoder | `src/stegosaurus/audio/attribution_encoder.py:18`, `src/stegosaurus/audio/attribution_decoder.py:17` |
-| Retained claim record and diagnostics | `src/stegosaurus/audio/attribution_models.py:56` |
-| Local authenticated registry | `src/stegosaurus/audio/attribution_registry.py:25` |
-| Four-replica carrier map and combine | `src/stegosaurus/audio/attribution_repetition.py:29` |
+| V1 attribution encoder and decoder | `src/stegosaurus/audio/attribution_core/encoder.py`, `src/stegosaurus/audio/attribution_core/decoder.py` |
+| Retained claim record and diagnostics | `src/stegosaurus/audio/attribution_core/models.py` |
+| Local authenticated registry | `src/stegosaurus/audio/attribution_core/registry.py` |
+| Four-replica carrier map and combine | `src/stegosaurus/audio/attribution_core/repetition.py` |
 | Sync framing and interleaving transport | `src/stegosaurus/audio/transport_framing.py:20`, `src/stegosaurus/audio/transport_interleaving.py:17` |
 
 ## 4. Experimental Edge-Mode Non-Oracle Reconstruction

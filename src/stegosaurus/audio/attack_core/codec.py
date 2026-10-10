@@ -15,7 +15,7 @@ from pathlib import Path
 import subprocess
 from tempfile import TemporaryDirectory
 
-from .pilot import PcmAudio, read_pcm16_wav, write_pcm16_wav
+from ..pilot import PcmAudio, read_pcm16_wav, write_pcm16_wav
 
 class AudioToolUnavailable(RuntimeError):
     """Report a requested external audio transformation without its required tool."""

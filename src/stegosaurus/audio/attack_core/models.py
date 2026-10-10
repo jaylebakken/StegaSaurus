@@ -16,7 +16,7 @@ from numbers import Integral, Real
 
 import numpy as np
 
-from .attack_signal import _finite_float
+from .signal import _finite_float
 
 @dataclass(frozen=True, slots=True)
 class EntropicAttackConfig:

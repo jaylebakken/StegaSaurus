@@ -17,7 +17,7 @@ from numbers import Integral, Real
 import numpy as np
 from scipy import signal
 
-from .pilot import PcmAudio
+from ..pilot import PcmAudio
 
 def resample_audio(audio: PcmAudio, destination_sample_rate: int) -> PcmAudio:
     """Resample mono audio through integer-ratio polyphase filtering where possible."""

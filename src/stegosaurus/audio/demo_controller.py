@@ -3,39 +3,32 @@
 Tkinter only renders state; this controller owns the reproducible process map
 used by the buttons:
 
-    sample/WAV -> issue or register a claim -> encode -> named transforms
-        -> resolve retained record -> verify that one supplied claim
+    sample/WAV -> issue or register a claim -> encode v1 or v2 blocks
+        -> named transforms -> verify retained-record claim evidence
 
-It intentionally preserves the v1 boundary: verification needs a retained
-private carrier map and is not blind discovery. Named transforms are manual
-test cases, not assertions of robustness.
+It intentionally preserves the retained-record boundary: verification needs
+private carrier evidence retained during embedding and is not blind discovery.
+Named transforms are manual test cases, not assertions of robustness.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .attack_codec import mp3_round_trip
-from .attack_signal import add_white_noise, low_pass_filter, normalize_peak, resample_audio, trim_audio
 from .attribution import (
     AttributionEmbedding,
     AttributionVerification,
+    BlockAttributionCodec,
+    BlockAttributionEmbedding,
+    BlockAttributionRecord,
+    BlockAttributionVerification,
     InMemoryAttributionRegistry,
     SpectralAttributionDecoder,
     SpectralAttributionEncoder,
 )
 from .demo_samples import music_like_sample, speech_like_sample
+from .demo_transforms import DISTORTION_NAMES, apply_demo_distortion
 from .pilot import PcmAudio, read_pcm16_wav
-
-
-DISTORTION_NAMES = (
-    "Normalize peak (0.85)",
-    "White noise (30 dB)",
-    "Low-pass filter (4 kHz)",
-    "MP3 round trip (96 kbps)",
-    "Resample 12 kHz round trip",
-    "Leading crop (250 ms)",
-)
 
 
 @dataclass(frozen=True, slots=True)
@@ -46,6 +39,8 @@ class DemoState:
     source_audio: PcmAudio
     current_audio: PcmAudio
     active_handle: bytes | None
+    attribution_mode: str
+    block_count: int
     embedding_signal_to_noise_db: float | None
     applied_distortions: tuple[str, ...]
 
@@ -59,11 +54,14 @@ class AttributionDemoController:
         self._registry = InMemoryAttributionRegistry(b"stegosaurus-demo-registry-secret")
         self._encoder = SpectralAttributionEncoder(master_secret)
         self._decoder = SpectralAttributionDecoder(master_secret)
+        self._block_codec = BlockAttributionCodec(master_secret)
         self._source_name = "Music-like sample"
         self._source_audio = music_like_sample()
         self._current_audio = self._source_audio
         self._encoded_audio: PcmAudio | None = None
         self._active_handle: bytes | None = None
+        self._active_mode = "none"
+        self._active_block_record: BlockAttributionRecord | None = None
         self._embedding_signal_to_noise_db: float | None = None
         self._applied_distortions: tuple[str, ...] = ()
 
@@ -76,6 +74,8 @@ class AttributionDemoController:
             self._source_audio,
             self._current_audio,
             self._active_handle,
+            self._active_mode,
+            0 if self._active_block_record is None else len(self._active_block_record.block_records),
             self._embedding_signal_to_noise_db,
             self._applied_distortions,
         )
@@ -108,6 +108,21 @@ class AttributionDemoController:
         self._activate_embedding(entry.handle, embedding)
         return embedding
 
+    def issue_and_encode_blocks(self, provenance: str, maximum_attempts: int = 32) -> BlockAttributionEmbedding:
+        """Issue a local handle and embed it into repeated complete v2 blocks."""
+
+        if isinstance(maximum_attempts, bool) or not isinstance(maximum_attempts, int) or maximum_attempts < 1:
+            raise ValueError("maximum_attempts must be a positive integer")
+        provenance_bytes = _provenance_bytes(provenance)
+        for _ in range(maximum_attempts):
+            entry = self._registry.issue(provenance_bytes)
+            embedding = self._block_codec.embed(self._source_audio, entry.handle)
+            if self._block_codec.verify(embedding.audio, embedding.record).recovered:
+                self._activate_block_embedding(entry.handle, embedding)
+                return embedding
+            self._registry.discard(entry.handle)
+        raise RuntimeError("could not issue a handle that passes clean v2 block attribution calibration")
+
     def encode_supplied_handle(self, handle_hex: str, provenance: str) -> tuple[AttributionEmbedding, AttributionVerification]:
         """Register and embed a supplied handle, returning its immediate clean verification result."""
 
@@ -116,6 +131,19 @@ class AttributionDemoController:
         embedding = self._encoder.encode(self._source_audio, handle)
         self._registry.retain_record(embedding.record)
         self._activate_embedding(handle, embedding)
+        return embedding, self.verify()
+
+    def encode_supplied_handle_blocks(
+        self,
+        handle_hex: str,
+        provenance: str,
+    ) -> tuple[BlockAttributionEmbedding, BlockAttributionVerification]:
+        """Register and embed a supplied handle into v2 repeated blocks."""
+
+        handle = _parse_handle(handle_hex)
+        self._registry.register(handle, _provenance_bytes(provenance))
+        embedding = self._block_codec.embed(self._source_audio, handle)
+        self._activate_block_embedding(handle, embedding)
         return embedding, self.verify()
 
     def apply_distortions(self, selected_names: tuple[str, ...]) -> DemoState:
@@ -127,7 +155,7 @@ class AttributionDemoController:
         transformed = self._base_audio()
         for name in DISTORTION_NAMES:
             if name in selected_names:
-                transformed = _apply_distortion(transformed, name)
+                transformed = apply_demo_distortion(transformed, name)
         self._current_audio = transformed
         self._applied_distortions = tuple(name for name in DISTORTION_NAMES if name in selected_names)
         return self.state
@@ -139,11 +167,15 @@ class AttributionDemoController:
         self._applied_distortions = ()
         return self.state
 
-    def verify(self) -> AttributionVerification:
-        """Verify the active claimed handle through its local registry-retained private carrier map."""
+    def verify(self) -> AttributionVerification | BlockAttributionVerification:
+        """Verify the active claim through retained v1 or v2 block evidence."""
 
         if self._active_handle is None:
             raise ValueError("encode audio before verifying an attribution claim")
+        if self._active_mode == "v2_blocks":
+            if self._active_block_record is None:
+                raise RuntimeError("active handle has no retained v2 block verification record")
+            return self._block_codec.verify(self._current_audio, self._active_block_record)
         record = self._registry.record_for(self._active_handle)
         if record is None:
             raise RuntimeError("active handle has no retained private verification record")
@@ -157,6 +189,8 @@ class AttributionDemoController:
         self._current_audio = audio
         self._encoded_audio = None
         self._active_handle = None
+        self._active_mode = "none"
+        self._active_block_record = None
         self._embedding_signal_to_noise_db = None
         self._applied_distortions = ()
 
@@ -164,9 +198,22 @@ class AttributionDemoController:
         """Make a completed embedding the clean base audio for later manual transformations."""
 
         self._active_handle = handle
+        self._active_mode = "v1_retained_map"
+        self._active_block_record = None
         self._encoded_audio = embedding.audio
         self._current_audio = embedding.audio
         self._embedding_signal_to_noise_db = embedding.signal_to_noise_db
+        self._applied_distortions = ()
+
+    def _activate_block_embedding(self, handle: bytes, embedding: BlockAttributionEmbedding) -> None:
+        """Make a v2 repeated-block embedding the clean base audio for manual transformations."""
+
+        self._active_handle = handle
+        self._active_mode = "v2_blocks"
+        self._active_block_record = embedding.record
+        self._encoded_audio = embedding.audio
+        self._current_audio = embedding.audio
+        self._embedding_signal_to_noise_db = min(embedding.block_signal_to_noise_db)
         self._applied_distortions = ()
 
     def _base_audio(self) -> PcmAudio:
@@ -196,19 +243,3 @@ def _provenance_bytes(provenance: str) -> bytes:
     return normalized.encode("utf-8")
 
 
-def _apply_distortion(audio: PcmAudio, name: str) -> PcmAudio:
-    """Apply one visible manual-test transformation using fixed, replayable parameters."""
-
-    if name == "Normalize peak (0.85)":
-        return normalize_peak(audio, 0.85)
-    if name == "White noise (30 dB)":
-        return add_white_noise(audio, 30.0, seed=20261009)
-    if name == "Low-pass filter (4 kHz)":
-        return low_pass_filter(audio, 4000.0)
-    if name == "MP3 round trip (96 kbps)":
-        return mp3_round_trip(audio, 96)
-    if name == "Resample 12 kHz round trip":
-        return resample_audio(resample_audio(audio, 12000), audio.sample_rate)
-    if name == "Leading crop (250 ms)":
-        return trim_audio(audio, 0.25, audio.duration_seconds)
-    raise ValueError(f"unknown distortion: {name}")
