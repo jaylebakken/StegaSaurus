@@ -179,16 +179,16 @@ flowchart TD
 - Treat the v1 verifier as a claimed-handle prototype with a retained map. Keep the edge-mode no-map decoder experimental until broader independent validation covers waveform geometry errors, other edit models, and open-world controls.
 - Do not interpret any diagram as a claim of codec, DSP, perceptual, corpus, or adversarial robustness beyond documented experiments.
 
-## 5. V4 Known-Song Clean Leak Workflow
+## 5. V4 Known-Song Leak Workflow
 
 ```mermaid
 flowchart TD
     source["Registered source song"] --> fp["Cached source block fingerprints"]
     source --> exports["Recipient/export watermarked records"]
-    excerpt["Suspicious clean WAV excerpt"] --> localize["Source-audio crop localization"]
+    excerpt["Suspicious WAV excerpt"] --> localize["Source-audio crop localization"]
     fp --> localize
     localize --> candidates["Top crop-local candidate windows"]
-    candidates --> phase["Fine phase search around each candidate"]
+    candidates --> phase["Clean or robust phase search"]
     exports --> phase
     phase --> pool["Pool carrier evidence per export"]
     pool --> rank["Rank export records"]
@@ -202,12 +202,15 @@ flowchart TD
 
 **Interpretation**
 
-- This is the V4 clean-file product workflow, not unknown-song discovery.
+- This is the V4 known-song product workflow, not unknown-song discovery.
 - Source localization is shared once per selected song; only the top candidate
   windows fan out across recipient/export records.
-- The measured release boundary is clean suspicious WAV excerpts. Recorded
-  audio, normalization, lossy codec, platform processing, and resynthesis remain
-  experimental.
+- The clean 30-second profile is the fast default. The robust 15-second profile
+  is measured for the named compact baseline in iteration 041: cropped parent
+  and child excerpts, peak normalization, and the synthetic light recorded-proxy
+  transform.
+- Lossy codec, platform processing, arbitrary recorded audio, unknown-song
+  discovery, and resynthesis remain experimental.
 
 | Diagram step | Application code |
 | --- | --- |

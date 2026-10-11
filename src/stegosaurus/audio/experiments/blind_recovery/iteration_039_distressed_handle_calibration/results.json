@@ -1,0 +1,38 @@
+{
+  "child_first_trials": 2,
+  "goal": "test whether handle issuance can screen for distressed crop separability",
+  "maximum_child_gap": 0,
+  "recommendation": "handle choice alone did not separate the light recorded-proxy failure",
+  "trial_count": 2,
+  "trials": [
+    {
+      "accepted_unique_child": false,
+      "best_label": "child",
+      "best_rs_cost": 20,
+      "child_handle_hex": "d0000a53",
+      "parent_handle_hex": "d0000101",
+      "rs_gap": 0,
+      "second_label": "parent",
+      "second_rs_cost": 20,
+      "sibling_handle_hex": "d00005ac",
+      "status": "ambiguous_child_evidence",
+      "trial_index": 0,
+      "unrelated_handle_hex": "d0000f0f"
+    },
+    {
+      "accepted_unique_child": false,
+      "best_label": "child",
+      "best_rs_cost": 20,
+      "child_handle_hex": "d0010a53",
+      "parent_handle_hex": "d0010101",
+      "rs_gap": 0,
+      "second_label": "parent",
+      "second_rs_cost": 20,
+      "sibling_handle_hex": "d00105ac",
+      "status": "ambiguous_child_evidence",
+      "trial_index": 1,
+      "unrelated_handle_hex": "d0010f0f"
+    }
+  ],
+  "unique_child_recoveries": 0
+}

@@ -3,3 +3,7 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 .pytest_cache/
+
+# Ignore local sample/listening audio; these files can be large and user-specific.
+samples/**/*.wav
+samples/*.wav

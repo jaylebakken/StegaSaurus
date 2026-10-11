@@ -18,18 +18,22 @@ from .models import (
     InMemoryAttributionCatalog,
     KnownSongVerification,
     LocalizationCandidate,
+    RecoveryProfile,
     SongFingerprintIndex,
     SongRecord,
 )
-from .workflow import KnownSongAttributionWorkflow
+from .workflow import CLEAN_BLOCK_SECONDS, ROBUST_BLOCK_SECONDS, KnownSongAttributionWorkflow
 
 __all__ = [
+    "CLEAN_BLOCK_SECONDS",
     "ExportAttributionResult",
     "ExportRecord",
     "InMemoryAttributionCatalog",
     "KnownSongAttributionWorkflow",
     "KnownSongVerification",
     "LocalizationCandidate",
+    "RecoveryProfile",
+    "ROBUST_BLOCK_SECONDS",
     "SongFingerprintIndex",
     "SongRecord",
     "build_song_fingerprint_index",

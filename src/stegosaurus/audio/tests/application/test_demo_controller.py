@@ -81,3 +81,18 @@ def test_demo_controller_runs_v4_known_song_clean_leak_flow() -> None:
     assert result.matched_recipient_label == "export_01"
     assert controller.v4.state.export_count == 3
     assert controller.v4.state.suspicious_excerpt_ready
+
+
+def test_demo_controller_exposes_v4_robust_profile() -> None:
+    """Register robust V4 exports without opening Tkinter."""
+
+    controller = AttributionDemoController()
+
+    state = controller.v4.register_robust_song("controller robust V4 song")
+    generated = controller.v4.generate_demo_exports(2)
+    excerpt = controller.v4.make_demo_leak(duration_seconds=45.0)
+
+    assert state.profile_name == "robust"
+    assert generated.export_count == 2
+    assert excerpt.duration_seconds == 45.0
+    assert controller.v4.state.suspicious_excerpt_ready

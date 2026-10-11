@@ -1,0 +1,69 @@
+{
+  "block_seconds": 15.0,
+  "goal": "validate robust 15-second parent-child crop-distortion baseline",
+  "pass_count": 6,
+  "recommendation": "promote 15s robust profile into the application workflow",
+  "results": [
+    {
+      "accepted_label": "parent",
+      "best_label": "parent",
+      "best_rs_cost": 5,
+      "distress": "clean",
+      "false_accept_count": 0,
+      "scenario": "parent_clean_crop",
+      "status": "pass",
+      "visible_label": "parent"
+    },
+    {
+      "accepted_label": "parent",
+      "best_label": "parent",
+      "best_rs_cost": 6,
+      "distress": "peak_normalized",
+      "false_accept_count": 0,
+      "scenario": "parent_peak_normalized_crop",
+      "status": "pass",
+      "visible_label": "parent"
+    },
+    {
+      "accepted_label": "parent",
+      "best_label": "parent",
+      "best_rs_cost": 11,
+      "distress": "light_recorded_proxy",
+      "false_accept_count": 0,
+      "scenario": "parent_light_recorded_proxy_crop",
+      "status": "pass",
+      "visible_label": "parent"
+    },
+    {
+      "accepted_label": "child",
+      "best_label": "child",
+      "best_rs_cost": 5,
+      "distress": "clean",
+      "false_accept_count": 0,
+      "scenario": "child_clean_crop",
+      "status": "pass",
+      "visible_label": "child"
+    },
+    {
+      "accepted_label": "child",
+      "best_label": "child",
+      "best_rs_cost": 9,
+      "distress": "peak_normalized",
+      "false_accept_count": 0,
+      "scenario": "child_peak_normalized_crop",
+      "status": "pass",
+      "visible_label": "child"
+    },
+    {
+      "accepted_label": "child",
+      "best_label": "child",
+      "best_rs_cost": 7,
+      "distress": "light_recorded_proxy",
+      "false_accept_count": 0,
+      "scenario": "child_light_recorded_proxy_crop",
+      "status": "pass",
+      "visible_label": "child"
+    }
+  ],
+  "scenario_count": 6
+}

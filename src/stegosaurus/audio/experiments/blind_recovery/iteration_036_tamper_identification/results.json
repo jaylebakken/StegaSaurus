@@ -1,0 +1,191 @@
+{
+  "accept_rs_cost": 16,
+  "diagnostics": {
+    "clean_source": [
+      {
+        "block_votes": 0,
+        "carrier_erasures": 9,
+        "claim_name": "child",
+        "known_bit_errors": 78,
+        "pooled_rs_cost": 31,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "carrier_erasures": 7,
+        "claim_name": "parent",
+        "known_bit_errors": 70,
+        "pooled_rs_cost": 33,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "carrier_erasures": 7,
+        "claim_name": "wrong",
+        "known_bit_errors": 74,
+        "pooled_rs_cost": 35,
+        "recovered": false
+      }
+    ],
+    "cropped_parent": [
+      {
+        "block_votes": 0,
+        "carrier_erasures": 6,
+        "claim_name": "parent",
+        "known_bit_errors": 45,
+        "pooled_rs_cost": 26,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "carrier_erasures": 6,
+        "claim_name": "wrong",
+        "known_bit_errors": 68,
+        "pooled_rs_cost": 32,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "carrier_erasures": 6,
+        "claim_name": "child",
+        "known_bit_errors": 70,
+        "pooled_rs_cost": 37,
+        "recovered": false
+      }
+    ],
+    "distressed_parent": [
+      {
+        "block_votes": 0,
+        "carrier_erasures": 0,
+        "claim_name": "parent",
+        "known_bit_errors": 3,
+        "pooled_rs_cost": 6,
+        "recovered": true
+      },
+      {
+        "block_votes": 0,
+        "carrier_erasures": 3,
+        "claim_name": "child",
+        "known_bit_errors": 53,
+        "pooled_rs_cost": 31,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "carrier_erasures": 0,
+        "claim_name": "wrong",
+        "known_bit_errors": 59,
+        "pooled_rs_cost": 34,
+        "recovered": false
+      }
+    ],
+    "overwritten_parent_child": [
+      {
+        "block_votes": 0,
+        "carrier_erasures": 1,
+        "claim_name": "child",
+        "known_bit_errors": 13,
+        "pooled_rs_cost": 21,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "carrier_erasures": 1,
+        "claim_name": "parent",
+        "known_bit_errors": 23,
+        "pooled_rs_cost": 25,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "carrier_erasures": 1,
+        "claim_name": "wrong",
+        "known_bit_errors": 60,
+        "pooled_rs_cost": 33,
+        "recovered": false
+      }
+    ],
+    "valid_parent": [
+      {
+        "block_votes": 1,
+        "carrier_erasures": 0,
+        "claim_name": "parent",
+        "known_bit_errors": 0,
+        "pooled_rs_cost": 0,
+        "recovered": true
+      },
+      {
+        "block_votes": 0,
+        "carrier_erasures": 0,
+        "claim_name": "wrong",
+        "known_bit_errors": 60,
+        "pooled_rs_cost": 34,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "carrier_erasures": 0,
+        "claim_name": "child",
+        "known_bit_errors": 55,
+        "pooled_rs_cost": 36,
+        "recovered": false
+      }
+    ]
+  },
+  "goal": "separate overwrite/tamper-like evidence from absence and ordinary failures",
+  "outcomes": [
+    {
+      "accepted_claims": 0,
+      "best_rs_cost": 31,
+      "expected_class": "absent",
+      "matched_expected": true,
+      "predicted_class": "absent",
+      "rs_gap": 2,
+      "scenario": "clean_source",
+      "second_best_rs_cost": 33
+    },
+    {
+      "accepted_claims": 1,
+      "best_rs_cost": 0,
+      "expected_class": "accepted",
+      "matched_expected": true,
+      "predicted_class": "accepted",
+      "rs_gap": 34,
+      "scenario": "valid_parent",
+      "second_best_rs_cost": 34
+    },
+    {
+      "accepted_claims": 0,
+      "best_rs_cost": 21,
+      "expected_class": "tamper_suspected",
+      "matched_expected": true,
+      "predicted_class": "tamper_suspected",
+      "rs_gap": 4,
+      "scenario": "overwritten_parent_child",
+      "second_best_rs_cost": 25
+    },
+    {
+      "accepted_claims": 1,
+      "best_rs_cost": 6,
+      "expected_class": "accepted",
+      "matched_expected": true,
+      "predicted_class": "accepted",
+      "rs_gap": 25,
+      "scenario": "distressed_parent",
+      "second_best_rs_cost": 31
+    },
+    {
+      "accepted_claims": 0,
+      "best_rs_cost": 26,
+      "expected_class": "geometry_failure",
+      "matched_expected": true,
+      "predicted_class": "geometry_failure",
+      "rs_gap": 6,
+      "scenario": "cropped_parent",
+      "second_best_rs_cost": 32
+    }
+  ],
+  "recommendation": "promote tamper_suspected as an experimental result state and expand controls",
+  "source_file": "10. Lovers Rock.wav",
+  "tamper_band_rs_cost": 24
+}

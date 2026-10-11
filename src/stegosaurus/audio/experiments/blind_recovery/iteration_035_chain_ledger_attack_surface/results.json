@@ -1,0 +1,359 @@
+{
+  "events": {
+    "chain_1_clean": [
+      {
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "parent_event_id": null,
+        "system_fact": "local registry embedded handle for chain event 0",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 0"
+      }
+    ],
+    "chain_1_leading_crop_30s": [
+      {
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "parent_event_id": null,
+        "system_fact": "local registry embedded handle for chain event 0",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 0"
+      }
+    ],
+    "chain_1_light_recorded_proxy": [
+      {
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "parent_event_id": null,
+        "system_fact": "local registry embedded handle for chain event 0",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 0"
+      }
+    ],
+    "chain_1_peak_normalized": [
+      {
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "parent_event_id": null,
+        "system_fact": "local registry embedded handle for chain event 0",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 0"
+      }
+    ],
+    "chain_2_clean": [
+      {
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "parent_event_id": null,
+        "system_fact": "local registry embedded handle for chain event 0",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 0"
+      },
+      {
+        "event_id": "event_01",
+        "handle_hex": "D1000001",
+        "parent_event_id": "event_00",
+        "system_fact": "local registry embedded handle for chain event 1",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 1"
+      }
+    ],
+    "chain_2_light_recorded_proxy": [
+      {
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "parent_event_id": null,
+        "system_fact": "local registry embedded handle for chain event 0",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 0"
+      },
+      {
+        "event_id": "event_01",
+        "handle_hex": "D1000001",
+        "parent_event_id": "event_00",
+        "system_fact": "local registry embedded handle for chain event 1",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 1"
+      }
+    ],
+    "chain_2_peak_normalized": [
+      {
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "parent_event_id": null,
+        "system_fact": "local registry embedded handle for chain event 0",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 0"
+      },
+      {
+        "event_id": "event_01",
+        "handle_hex": "D1000001",
+        "parent_event_id": "event_00",
+        "system_fact": "local registry embedded handle for chain event 1",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 1"
+      }
+    ],
+    "chain_3_clean": [
+      {
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "parent_event_id": null,
+        "system_fact": "local registry embedded handle for chain event 0",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 0"
+      },
+      {
+        "event_id": "event_01",
+        "handle_hex": "D1000001",
+        "parent_event_id": "event_00",
+        "system_fact": "local registry embedded handle for chain event 1",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 1"
+      },
+      {
+        "event_id": "event_02",
+        "handle_hex": "D1000002",
+        "parent_event_id": "event_01",
+        "system_fact": "local registry embedded handle for chain event 2",
+        "trust_level": "system_created",
+        "user_label": "user supplied recipient/update label 2"
+      }
+    ]
+  },
+  "evidence": {
+    "chain_1_clean": [
+      {
+        "block_votes": 0,
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "pooled_rs_cost": 1,
+        "rank": 1,
+        "recovered": true
+      }
+    ],
+    "chain_1_leading_crop_30s": [
+      {
+        "block_votes": 0,
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "pooled_rs_cost": 37,
+        "rank": 1,
+        "recovered": false
+      }
+    ],
+    "chain_1_light_recorded_proxy": [
+      {
+        "block_votes": 0,
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "pooled_rs_cost": 6,
+        "rank": 1,
+        "recovered": true
+      }
+    ],
+    "chain_1_peak_normalized": [
+      {
+        "block_votes": 0,
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "pooled_rs_cost": 2,
+        "rank": 1,
+        "recovered": true
+      }
+    ],
+    "chain_2_clean": [
+      {
+        "block_votes": 0,
+        "event_id": "event_01",
+        "handle_hex": "D1000001",
+        "pooled_rs_cost": 18,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "pooled_rs_cost": 24,
+        "rank": 2,
+        "recovered": false
+      }
+    ],
+    "chain_2_light_recorded_proxy": [
+      {
+        "block_votes": 0,
+        "event_id": "event_01",
+        "handle_hex": "D1000001",
+        "pooled_rs_cost": 24,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "pooled_rs_cost": 28,
+        "rank": 2,
+        "recovered": false
+      }
+    ],
+    "chain_2_peak_normalized": [
+      {
+        "block_votes": 0,
+        "event_id": "event_01",
+        "handle_hex": "D1000001",
+        "pooled_rs_cost": 17,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "pooled_rs_cost": 27,
+        "rank": 2,
+        "recovered": false
+      }
+    ],
+    "chain_3_clean": [
+      {
+        "block_votes": 0,
+        "event_id": "event_00",
+        "handle_hex": "D1000000",
+        "pooled_rs_cost": 19,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_01",
+        "handle_hex": "D1000001",
+        "pooled_rs_cost": 34,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_02",
+        "handle_hex": "D1000002",
+        "pooled_rs_cost": 34,
+        "rank": 3,
+        "recovered": false
+      }
+    ]
+  },
+  "goal": "design a chain ledger and stress independent update robustness",
+  "ledger_design": {
+    "policy": "verification may identify a registry event; user labels remain context, not absolute fault claims",
+    "system_fact_fields": [
+      "event_id",
+      "parent_event_id",
+      "handle_hex",
+      "trust_level",
+      "system_fact"
+    ],
+    "trust_levels": [
+      "system_created",
+      "system_verified",
+      "imported_signed",
+      "imported_untrusted",
+      "user_label_only"
+    ],
+    "user_supplied_fields": [
+      "user_label"
+    ]
+  },
+  "outcomes": [
+    {
+      "best_event_id": "event_00",
+      "chain_length": 1,
+      "false_or_unexpected_recoveries": 0,
+      "latest_event_recovered": true,
+      "minimum_rs_cost": 1,
+      "recovered_events": 1,
+      "scenario": "chain_1_clean",
+      "status": "latest_event_recovered",
+      "transform": "clean"
+    },
+    {
+      "best_event_id": "event_00",
+      "chain_length": 1,
+      "false_or_unexpected_recoveries": 0,
+      "latest_event_recovered": true,
+      "minimum_rs_cost": 2,
+      "recovered_events": 1,
+      "scenario": "chain_1_peak_normalized",
+      "status": "latest_event_recovered",
+      "transform": "peak_normalized"
+    },
+    {
+      "best_event_id": "event_00",
+      "chain_length": 1,
+      "false_or_unexpected_recoveries": 0,
+      "latest_event_recovered": true,
+      "minimum_rs_cost": 6,
+      "recovered_events": 1,
+      "scenario": "chain_1_light_recorded_proxy",
+      "status": "latest_event_recovered",
+      "transform": "light_recorded_proxy"
+    },
+    {
+      "best_event_id": "event_00",
+      "chain_length": 1,
+      "false_or_unexpected_recoveries": 0,
+      "latest_event_recovered": false,
+      "minimum_rs_cost": 37,
+      "recovered_events": 0,
+      "scenario": "chain_1_leading_crop_30s",
+      "status": "no_recoverable_chain_event",
+      "transform": "leading_crop_30s"
+    },
+    {
+      "best_event_id": "event_01",
+      "chain_length": 2,
+      "false_or_unexpected_recoveries": 0,
+      "latest_event_recovered": false,
+      "minimum_rs_cost": 18,
+      "recovered_events": 0,
+      "scenario": "chain_2_clean",
+      "status": "independent_update_destroyed_chain_evidence",
+      "transform": "clean"
+    },
+    {
+      "best_event_id": "event_01",
+      "chain_length": 2,
+      "false_or_unexpected_recoveries": 0,
+      "latest_event_recovered": false,
+      "minimum_rs_cost": 17,
+      "recovered_events": 0,
+      "scenario": "chain_2_peak_normalized",
+      "status": "no_recoverable_chain_event",
+      "transform": "peak_normalized"
+    },
+    {
+      "best_event_id": "event_01",
+      "chain_length": 2,
+      "false_or_unexpected_recoveries": 0,
+      "latest_event_recovered": false,
+      "minimum_rs_cost": 24,
+      "recovered_events": 0,
+      "scenario": "chain_2_light_recorded_proxy",
+      "status": "no_recoverable_chain_event",
+      "transform": "light_recorded_proxy"
+    },
+    {
+      "best_event_id": "event_00",
+      "chain_length": 3,
+      "false_or_unexpected_recoveries": 0,
+      "latest_event_recovered": false,
+      "minimum_rs_cost": 19,
+      "recovered_events": 0,
+      "scenario": "chain_3_clean",
+      "status": "independent_update_destroyed_chain_evidence",
+      "transform": "clean"
+    }
+  ],
+  "recommendation": "do not ship independent child re-watermarking as V4.x robustness; implement ledger first, then test same-handle or partitioned updates",
+  "source_file": "10. Lovers Rock.wav"
+}

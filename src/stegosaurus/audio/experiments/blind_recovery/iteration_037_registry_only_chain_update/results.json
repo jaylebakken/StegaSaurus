@@ -1,0 +1,434 @@
+{
+  "accept_rs_cost": 16,
+  "block_seconds": 30.0,
+  "events": [
+    {
+      "event_id": "event_00_parent",
+      "handle_hex": "f1000000",
+      "parent_event_id": null,
+      "system_fact": "registered from clean master",
+      "trust_level": "system",
+      "user_label": "initial private export"
+    },
+    {
+      "event_id": "event_01_child_a",
+      "handle_hex": "f1000001",
+      "parent_event_id": "event_00_parent",
+      "system_fact": "derived in registry only",
+      "trust_level": "system",
+      "user_label": "downstream collaborator A"
+    },
+    {
+      "event_id": "event_02_child_b",
+      "handle_hex": "f1000002",
+      "parent_event_id": "event_00_parent",
+      "system_fact": "derived in registry only",
+      "trust_level": "system",
+      "user_label": "downstream collaborator B"
+    },
+    {
+      "event_id": "event_03_grandchild",
+      "handle_hex": "f1000003",
+      "parent_event_id": "event_01_child_a",
+      "system_fact": "derived in registry only",
+      "trust_level": "system",
+      "user_label": "second-hop collaborator"
+    },
+    {
+      "event_id": "event_99_unrelated",
+      "handle_hex": "f1000063",
+      "parent_event_id": null,
+      "system_fact": "not part of the custody chain",
+      "trust_level": "control",
+      "user_label": "unrelated control"
+    }
+  ],
+  "evidence": {
+    "child_a_leading_crop_30s": [
+      {
+        "block_votes": 0,
+        "event_id": "event_01_child_a",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 28,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_00_parent",
+        "parent_event_id": null,
+        "pooled_rs_cost": 32,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_02_child_b",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 32,
+        "rank": 3,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_03_grandchild",
+        "parent_event_id": "event_01_child_a",
+        "pooled_rs_cost": 32,
+        "rank": 4,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_99_unrelated",
+        "parent_event_id": null,
+        "pooled_rs_cost": 32,
+        "rank": 5,
+        "recovered": false
+      }
+    ],
+    "child_a_light_recorded_proxy": [
+      {
+        "block_votes": 0,
+        "event_id": "event_01_child_a",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 0,
+        "rank": 1,
+        "recovered": true
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_00_parent",
+        "parent_event_id": null,
+        "pooled_rs_cost": 34,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_02_child_b",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 34,
+        "rank": 3,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_03_grandchild",
+        "parent_event_id": "event_01_child_a",
+        "pooled_rs_cost": 34,
+        "rank": 4,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_99_unrelated",
+        "parent_event_id": null,
+        "pooled_rs_cost": 34,
+        "rank": 5,
+        "recovered": false
+      }
+    ],
+    "child_a_peak_normalized": [
+      {
+        "block_votes": 1,
+        "event_id": "event_01_child_a",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 0,
+        "rank": 1,
+        "recovered": true
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_00_parent",
+        "parent_event_id": null,
+        "pooled_rs_cost": 34,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_02_child_b",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 34,
+        "rank": 3,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_03_grandchild",
+        "parent_event_id": "event_01_child_a",
+        "pooled_rs_cost": 34,
+        "rank": 4,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_99_unrelated",
+        "parent_event_id": null,
+        "pooled_rs_cost": 34,
+        "rank": 5,
+        "recovered": false
+      }
+    ],
+    "child_a_visible_clean": [
+      {
+        "block_votes": 2,
+        "event_id": "event_01_child_a",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 0,
+        "rank": 1,
+        "recovered": true
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_00_parent",
+        "parent_event_id": null,
+        "pooled_rs_cost": 34,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_02_child_b",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 34,
+        "rank": 3,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_03_grandchild",
+        "parent_event_id": "event_01_child_a",
+        "pooled_rs_cost": 34,
+        "rank": 4,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_99_unrelated",
+        "parent_event_id": null,
+        "pooled_rs_cost": 34,
+        "rank": 5,
+        "recovered": false
+      }
+    ],
+    "clean_source": [
+      {
+        "block_votes": 0,
+        "event_id": "event_00_parent",
+        "parent_event_id": null,
+        "pooled_rs_cost": 30,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_01_child_a",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 30,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_02_child_b",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 30,
+        "rank": 3,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_03_grandchild",
+        "parent_event_id": "event_01_child_a",
+        "pooled_rs_cost": 30,
+        "rank": 4,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_99_unrelated",
+        "parent_event_id": null,
+        "pooled_rs_cost": 30,
+        "rank": 5,
+        "recovered": false
+      }
+    ],
+    "grandchild_visible_clean": [
+      {
+        "block_votes": 2,
+        "event_id": "event_03_grandchild",
+        "parent_event_id": "event_01_child_a",
+        "pooled_rs_cost": 0,
+        "rank": 1,
+        "recovered": true
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_00_parent",
+        "parent_event_id": null,
+        "pooled_rs_cost": 34,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_01_child_a",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 34,
+        "rank": 3,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_02_child_b",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 34,
+        "rank": 4,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_99_unrelated",
+        "parent_event_id": null,
+        "pooled_rs_cost": 34,
+        "rank": 5,
+        "recovered": false
+      }
+    ],
+    "parent_visible_clean": [
+      {
+        "block_votes": 0,
+        "event_id": "event_00_parent",
+        "parent_event_id": null,
+        "pooled_rs_cost": 4,
+        "rank": 1,
+        "recovered": true
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_01_child_a",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 34,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_02_child_b",
+        "parent_event_id": "event_00_parent",
+        "pooled_rs_cost": 34,
+        "rank": 3,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_03_grandchild",
+        "parent_event_id": "event_01_child_a",
+        "pooled_rs_cost": 34,
+        "rank": 4,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "event_id": "event_99_unrelated",
+        "parent_event_id": null,
+        "pooled_rs_cost": 34,
+        "rank": 5,
+        "recovered": false
+      }
+    ]
+  },
+  "goal": "validate one visible watermark with parent-child history maintained in registry only",
+  "outcomes": [
+    {
+      "accepted_event_ids": [],
+      "best_event_id": "event_00_parent",
+      "expected_accepted_event_id": null,
+      "minimum_rs_cost": 30,
+      "scenario": "clean_source",
+      "sibling_or_parent_recovered": false,
+      "status": "no_event_recovered",
+      "unrelated_recovered": false,
+      "visible_event_id": null
+    },
+    {
+      "accepted_event_ids": [
+        "event_00_parent"
+      ],
+      "best_event_id": "event_00_parent",
+      "expected_accepted_event_id": "event_00_parent",
+      "minimum_rs_cost": 4,
+      "scenario": "parent_visible_clean",
+      "sibling_or_parent_recovered": false,
+      "status": "single_visible_event_recovered",
+      "unrelated_recovered": false,
+      "visible_event_id": "event_00_parent"
+    },
+    {
+      "accepted_event_ids": [
+        "event_01_child_a"
+      ],
+      "best_event_id": "event_01_child_a",
+      "expected_accepted_event_id": "event_01_child_a",
+      "minimum_rs_cost": 0,
+      "scenario": "child_a_visible_clean",
+      "sibling_or_parent_recovered": false,
+      "status": "single_visible_event_recovered",
+      "unrelated_recovered": false,
+      "visible_event_id": "event_01_child_a"
+    },
+    {
+      "accepted_event_ids": [
+        "event_03_grandchild"
+      ],
+      "best_event_id": "event_03_grandchild",
+      "expected_accepted_event_id": "event_03_grandchild",
+      "minimum_rs_cost": 0,
+      "scenario": "grandchild_visible_clean",
+      "sibling_or_parent_recovered": false,
+      "status": "single_visible_event_recovered",
+      "unrelated_recovered": false,
+      "visible_event_id": "event_03_grandchild"
+    },
+    {
+      "accepted_event_ids": [
+        "event_01_child_a"
+      ],
+      "best_event_id": "event_01_child_a",
+      "expected_accepted_event_id": "event_01_child_a",
+      "minimum_rs_cost": 0,
+      "scenario": "child_a_peak_normalized",
+      "sibling_or_parent_recovered": false,
+      "status": "single_visible_event_recovered",
+      "unrelated_recovered": false,
+      "visible_event_id": "event_01_child_a"
+    },
+    {
+      "accepted_event_ids": [
+        "event_01_child_a"
+      ],
+      "best_event_id": "event_01_child_a",
+      "expected_accepted_event_id": "event_01_child_a",
+      "minimum_rs_cost": 0,
+      "scenario": "child_a_light_recorded_proxy",
+      "sibling_or_parent_recovered": false,
+      "status": "single_visible_event_recovered",
+      "unrelated_recovered": false,
+      "visible_event_id": "event_01_child_a"
+    },
+    {
+      "accepted_event_ids": [],
+      "best_event_id": "event_01_child_a",
+      "expected_accepted_event_id": "event_01_child_a",
+      "minimum_rs_cost": 28,
+      "scenario": "child_a_leading_crop_30s",
+      "sibling_or_parent_recovered": false,
+      "status": "geometry_failure",
+      "unrelated_recovered": false,
+      "visible_event_id": "event_01_child_a"
+    }
+  ],
+  "recommendation": "use registry-only chain updates: regenerate child exports from the clean master and store ancestry in the registry",
+  "source_file": "10. Lovers Rock.wav"
+}

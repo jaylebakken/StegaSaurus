@@ -59,3 +59,21 @@ def test_known_song_workflow_identifies_matching_clean_export() -> None:
     assert result.matched_recipient_label == leaked_export.recipient_label
     assert result.ranked_exports[0].export_id == leaked_export.export_id
     assert sum(export.accepted for export in result.ranked_exports) == 1
+
+
+def test_registry_child_export_uses_one_visible_watermark() -> None:
+    """Recover a child export without also accepting its registry parent."""
+
+    workflow = KnownSongAttributionWorkflow(b"v4-registry-chain-application-test")
+    song = workflow.register_song("registry chain song", music_like_sample(150))
+    parent, _ = workflow.create_export(song.song_id, "parent", _handle(10))
+    child, child_audio = workflow.create_child_export(song.song_id, "child", _handle(11), parent.export_id)
+    excerpt = _crop(child_audio, 37.25, 90.0)
+
+    result = workflow.verify_excerpt(song.song_id, excerpt)
+    lineage = workflow.catalog.export_lineage(child.export_id)
+
+    assert result.accepted
+    assert result.matched_export_id == child.export_id
+    assert sum(export.accepted for export in result.ranked_exports) == 1
+    assert tuple(export.export_id for export in lineage) == (parent.export_id, child.export_id)

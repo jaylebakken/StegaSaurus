@@ -1,0 +1,27 @@
+{
+  "goal": "test whether shorter blocks separate light proxy crop evidence",
+  "pass_count": 1,
+  "recommendation": "promote 15s blocks for distressed crop profile validation",
+  "results": [
+    {
+      "accepted_label": null,
+      "best_label": "child",
+      "best_rs_cost": 20,
+      "block_seconds": 30.0,
+      "false_accept_count": 0,
+      "second_label": "parent",
+      "second_rs_cost": 20,
+      "status": "child_near_miss"
+    },
+    {
+      "accepted_label": "child",
+      "best_label": "child",
+      "best_rs_cost": 10,
+      "block_seconds": 15.0,
+      "false_accept_count": 0,
+      "second_label": "parent",
+      "second_rs_cost": 20,
+      "status": "pass"
+    }
+  ]
+}

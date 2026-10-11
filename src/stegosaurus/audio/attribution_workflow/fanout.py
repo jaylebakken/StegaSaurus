@@ -18,7 +18,7 @@ import numpy as np
 from .fingerprints import _window
 from .models import ExportAttributionResult, ExportRecord, LocalizationCandidate
 from ..attribution import BlockAttributionCodec
-from ..attribution_core import AttributionStatus
+from ..attribution_core.models import AttributionVerification
 from ..pilot import PcmAudio
 
 
@@ -67,8 +67,8 @@ def _verify_export(
             for offset in np.arange(-phase_radius_seconds, phase_radius_seconds + 0.0001, phase_stride_seconds)
         )
         verifications.append(min(phases, key=lambda item: (item.claim_rs_cost, item.carrier_erasures, item.known_bit_errors)))
-    pooled = codec._pool(export.handle, list(verifications))
-    accepted = pooled.status is AttributionStatus.RECOVERED and pooled.claim_rs_cost <= maximum_rs_cost
+    pooled = _best_claim(codec, export.handle, tuple(verifications))
+    accepted = pooled.claim_rs_cost <= maximum_rs_cost
     return ExportAttributionResult(export.export_id, export.recipient_label, accepted, pooled.claim_rs_cost, sum(item.recovered for item in verifications), 0)
 
 
@@ -86,6 +86,17 @@ def _verify_phase(
         return codec._unrecoverable(export.handle, "phase candidate outside excerpt")
     window = _window(excerpt, start_seconds, block_seconds)
     return codec._codec.verify(window, export.attribution_record.block_records[block_index])
+
+
+def _best_claim(
+    codec: BlockAttributionCodec,
+    handle: bytes,
+    verifications: tuple[AttributionVerification, ...],
+) -> AttributionVerification:
+    """Return the strongest pooled-or-single claim evidence."""
+
+    pooled = codec._pool(handle, list(verifications))
+    return min((pooled, *verifications), key=lambda item: (item.claim_rs_cost, item.carrier_erasures, item.known_bit_errors))
 
 
 def _rank(results: tuple[ExportAttributionResult, ...]) -> tuple[ExportAttributionResult, ...]:

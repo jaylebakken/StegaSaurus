@@ -7,7 +7,7 @@ Stegosaurus is a local experimental audio-watermarking prototype. It embeds a se
 - **Encoding:** supported experimentally through a spectral STFT pilot.
 - **Detection:** supported as `verified`, `inconclusive`, or `absent` with synchronization-offset correction.
 - **Attribution:** v1 supports single-map claimed-handle verification. The repeated-block waterfall repeats a 4-byte opaque registry handle across blocks, then reports whether fast block votes or pooled carrier evidence accepted the claim.
-- **V4 known-song workflow:** supports a clean-file demo path for leak attribution when the user selects the registered source song: source-audio localization, fine phase search, export-record fanout, and pooled evidence ranking identify the matching recipient/export record.
+- **V4 known-song workflow:** supports a clean-file demo path and a measured robust-profile path for named crop-plus-distortion tests when the user selects the registered source song. Source-audio localization, phase search, export-record fanout, and pooled evidence ranking identify the matching recipient/export record.
 - **Blind-recovery policy:** the reusable decision layers support bounded `accepted`, `rejected`, and `abstained` outcomes. They do not reconstruct carrier maps or discover unknown handles.
 - **Non-oracle research:** iteration 032 reconstructs a bounded duration-derived leading/trailing crop-mode bank without a retained map and recovers all 20 named fresh synthetic `250 ms` crop trials within its RS budget. It remains an experiment, not a v1 capability or general robustness claim.
 - **Scope:** generated or licensed non-sensitive audio only. This project does not claim imperceptibility, universal robustness, or resistance to arbitrary resynthesis.
@@ -43,9 +43,9 @@ Repeated-block attribution waterfall
   -> cross-block carrier pooling when individual blocks are weak
   -> accepted | rejected | abstained decision diagnostics
 
-V4 known-song clean leak attribution
+V4 known-song leak attribution
   -> registered source song plus recipient/export records
-  -> suspicious clean WAV excerpt
+  -> suspicious WAV excerpt
   -> source-audio crop localization
   -> phase-refined export fanout
   -> ranked matching export or no accepted match
@@ -63,7 +63,7 @@ The production code is intentionally decomposed so an unfamiliar reader can foll
 4. Read `transport.py` for attribution transport: sync framing, keyed interleaving, and Reed--Solomon recovery are separate modules.
 5. Read `attacks.py` and `benchmark.py` last: they define measured transformations and replayable test recipes, not a general robustness guarantee.
 6. Read `attribution.py` for the claimed-handle attribution facades. `attribution_core/` holds records, registry handling, v1 retained-map verification, repeated-block pooling, and the block-waterfall decision layer.
-7. Read `attribution_workflow/` for the V4 known-song clean excerpt workflow: in-memory song/export records, source fingerprints, phase-refined fanout, and orchestration.
+7. Read `attribution_workflow/` for the V4 known-song workflow: in-memory song/export records, source fingerprints, phase-refined fanout, robust recovery profile knobs, and orchestration.
 8. Read `experiments/non_oracle_reconstruction/iteration_032_edge_mode_coarse_bank/` only after the application path. It documents a bounded, measured no-map crop decoder and its explicit scope limits.
 9. Read `experiments/blind_recovery/iteration_001_geometry_dependency_audit/` for the separate track that measures how much original waveform geometry the decoder still needs before attribution recovery.
 
@@ -193,19 +193,23 @@ carrier evidence when individual blocks are weak, and otherwise abstains.
 Unknown-handle discovery, arbitrary crop synchronization, and capacity
 adaptation for sparse real songs remain experimental.
 
-The V4 workflow is a known-song clean-file leak-attribution path. It assumes the
-user selects or resolves a registered source song, then localizes the clean
-suspicious excerpt against source-audio fingerprints before checking the song's
-recipient/export records. It does not claim recorded-audio, normalization,
-compression, platform, or unknown-song robustness.
+The V4 workflow is a known-song leak-attribution path. It assumes the user
+selects or resolves a registered source song, then localizes the suspicious
+excerpt against source-audio fingerprints before checking the song's
+recipient/export records. The clean 30-second profile remains the fast default.
+The robust 15-second profile is measured against the named compact baseline in
+`experiments/blind_recovery/iteration_041_robust_profile_baseline`: parent and
+child cropped excerpts, peak normalization, and the synthetic light
+recorded-proxy transform. This is not a claim about arbitrary recorded audio,
+compression, platform processing, or unknown-song robustness.
 
 The Tkinter lab is a local display and manual-testing surface for that same
 claimed-handle flow. It issues or accepts a handle, embeds repeated blocks,
 plays or saves the current WAV, reports the accepting waterfall stage, and
 offers a V4 demo sequence: register current song, generate exports, make a clean
-leak excerpt, and verify the matching export. Its toggles apply named,
+or proxy leak excerpt, and verify the matching export. Its toggles apply named,
 fixed-parameter transformations to the displayed audio. They are test inputs,
-not a robustness claim.
+not a broad robustness claim.
 
 ## Evaluation Boundaries
 

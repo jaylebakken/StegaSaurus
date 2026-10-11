@@ -1,0 +1,281 @@
+{
+  "block_seconds": 30.0,
+  "goal": "measure whether stacked watermarks interfere with pooling and attribution identity",
+  "handle_outcomes": {
+    "1": [
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000000",
+        "handle_index": 0,
+        "pooled_rs_cost": 4,
+        "rank": 1,
+        "recovered": true
+      }
+    ],
+    "2": [
+      {
+        "block_votes": 1,
+        "handle_hex": "C1000000",
+        "handle_index": 0,
+        "pooled_rs_cost": 21,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000001",
+        "handle_index": 1,
+        "pooled_rs_cost": 25,
+        "rank": 2,
+        "recovered": false
+      }
+    ],
+    "3": [
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000000",
+        "handle_index": 0,
+        "pooled_rs_cost": 17,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000002",
+        "handle_index": 2,
+        "pooled_rs_cost": 31,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000001",
+        "handle_index": 1,
+        "pooled_rs_cost": 32,
+        "rank": 3,
+        "recovered": false
+      }
+    ],
+    "4": [
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000000",
+        "handle_index": 0,
+        "pooled_rs_cost": 22,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000003",
+        "handle_index": 3,
+        "pooled_rs_cost": 27,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000001",
+        "handle_index": 1,
+        "pooled_rs_cost": 30,
+        "rank": 3,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000002",
+        "handle_index": 2,
+        "pooled_rs_cost": 32,
+        "rank": 4,
+        "recovered": false
+      }
+    ],
+    "6": [
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000005",
+        "handle_index": 5,
+        "pooled_rs_cost": 28,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000000",
+        "handle_index": 0,
+        "pooled_rs_cost": 29,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000001",
+        "handle_index": 1,
+        "pooled_rs_cost": 31,
+        "rank": 3,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000003",
+        "handle_index": 3,
+        "pooled_rs_cost": 31,
+        "rank": 4,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000002",
+        "handle_index": 2,
+        "pooled_rs_cost": 34,
+        "rank": 5,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000004",
+        "handle_index": 4,
+        "pooled_rs_cost": 34,
+        "rank": 6,
+        "recovered": false
+      }
+    ],
+    "8": [
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000004",
+        "handle_index": 4,
+        "pooled_rs_cost": 29,
+        "rank": 1,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000005",
+        "handle_index": 5,
+        "pooled_rs_cost": 29,
+        "rank": 2,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000002",
+        "handle_index": 2,
+        "pooled_rs_cost": 30,
+        "rank": 3,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000007",
+        "handle_index": 7,
+        "pooled_rs_cost": 30,
+        "rank": 4,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000001",
+        "handle_index": 1,
+        "pooled_rs_cost": 31,
+        "rank": 5,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000006",
+        "handle_index": 6,
+        "pooled_rs_cost": 32,
+        "rank": 6,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000003",
+        "handle_index": 3,
+        "pooled_rs_cost": 33,
+        "rank": 7,
+        "recovered": false
+      },
+      {
+        "block_votes": 0,
+        "handle_hex": "C1000000",
+        "handle_index": 0,
+        "pooled_rs_cost": 34,
+        "rank": 8,
+        "recovered": false
+      }
+    ]
+  },
+  "maximum_rs_cost": 16,
+  "recommendation": "stacking lowers capacity before ambiguity appears; optimize shorter/same-handle blocks instead",
+  "source_file": "10. Lovers Rock.wav",
+  "summaries": [
+    {
+      "best_handle_index": 0,
+      "best_handle_recovered": true,
+      "maximum_recovered_index": 0,
+      "median_rs_cost": 4.0,
+      "minimum_rs_cost": 4,
+      "notes": "only one stacked handle recovered",
+      "recovered_handles": 1,
+      "stack_count": 1,
+      "wrong_recovered_handles": 0
+    },
+    {
+      "best_handle_index": 0,
+      "best_handle_recovered": false,
+      "maximum_recovered_index": null,
+      "median_rs_cost": 23.0,
+      "minimum_rs_cost": 21,
+      "notes": "all stacked handles lost under clean retained-record verification",
+      "recovered_handles": 0,
+      "stack_count": 2,
+      "wrong_recovered_handles": 0
+    },
+    {
+      "best_handle_index": 0,
+      "best_handle_recovered": false,
+      "maximum_recovered_index": null,
+      "median_rs_cost": 31.0,
+      "minimum_rs_cost": 17,
+      "notes": "all stacked handles lost under clean retained-record verification",
+      "recovered_handles": 0,
+      "stack_count": 3,
+      "wrong_recovered_handles": 0
+    },
+    {
+      "best_handle_index": 0,
+      "best_handle_recovered": false,
+      "maximum_recovered_index": null,
+      "median_rs_cost": 28.5,
+      "minimum_rs_cost": 22,
+      "notes": "all stacked handles lost under clean retained-record verification",
+      "recovered_handles": 0,
+      "stack_count": 4,
+      "wrong_recovered_handles": 0
+    },
+    {
+      "best_handle_index": 5,
+      "best_handle_recovered": false,
+      "maximum_recovered_index": null,
+      "median_rs_cost": 31.0,
+      "minimum_rs_cost": 28,
+      "notes": "all stacked handles lost under clean retained-record verification",
+      "recovered_handles": 0,
+      "stack_count": 6,
+      "wrong_recovered_handles": 0
+    },
+    {
+      "best_handle_index": 4,
+      "best_handle_recovered": false,
+      "maximum_recovered_index": null,
+      "median_rs_cost": 30.5,
+      "minimum_rs_cost": 29,
+      "notes": "all stacked handles lost under clean retained-record verification",
+      "recovered_handles": 0,
+      "stack_count": 8,
+      "wrong_recovered_handles": 0
+    }
+  ]
+}

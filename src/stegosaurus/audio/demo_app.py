@@ -84,12 +84,14 @@ class AttributionDemoApp:
         ttk.Button(controls, text="Play Current WAV", command=self._play_current).grid(row=1, column=0, padx=(0, 6), pady=(6, 0))
         ttk.Button(controls, text="Stop Playback", command=self._stop_playback).grid(row=1, column=1, padx=6, pady=(6, 0))
         ttk.Button(controls, text="Save Current WAV", command=self._save_wav).grid(row=1, column=2, padx=6, pady=(6, 0))
-        v4 = ttk.LabelFrame(frame, text="V4 Known-Song Clean Leak Demo", padding=8)
+        v4 = ttk.LabelFrame(frame, text="V4 Known-Song Leak Demo", padding=8)
         v4.grid(row=4, column=0, columnspan=3, sticky="ew", pady=(12, 0))
         ttk.Button(v4, text="Register Song", command=self._v4_register_song).grid(row=0, column=0, padx=(0, 6))
-        ttk.Button(v4, text="Generate Exports", command=self._v4_generate_exports).grid(row=0, column=1, padx=6)
-        ttk.Button(v4, text="Make Clean Leak", command=self._v4_make_leak).grid(row=0, column=2, padx=6)
-        ttk.Button(v4, text="Verify Leak", command=self._v4_verify_leak).grid(row=0, column=3, padx=6)
+        ttk.Button(v4, text="Register Robust", command=self._v4_register_robust_song).grid(row=0, column=1, padx=6)
+        ttk.Button(v4, text="Generate Exports", command=self._v4_generate_exports).grid(row=0, column=2, padx=6)
+        ttk.Button(v4, text="Make Clean Leak", command=self._v4_make_leak).grid(row=0, column=3, padx=6)
+        ttk.Button(v4, text="Make Proxy Leak", command=self._v4_make_proxy_leak).grid(row=1, column=0, padx=(0, 6), pady=(6, 0))
+        ttk.Button(v4, text="Verify Leak", command=self._v4_verify_leak).grid(row=1, column=1, padx=6, pady=(6, 0))
         distortions = ttk.LabelFrame(frame, text="Named Manual Transformations", padding=8)
         distortions.grid(row=5, column=0, columnspan=3, sticky="ew", pady=(12, 0))
         for index, name in enumerate(DISTORTION_NAMES):
@@ -149,6 +151,11 @@ class AttributionDemoApp:
 
         self._run_action(lambda: self._controller.v4.register_current_song("V4 demo song"), "V4 registered song")
 
+    def _v4_register_robust_song(self) -> None:
+        """Register the current source with the robust V4 demo profile."""
+
+        self._run_action(lambda: self._controller.v4.register_robust_song("V4 robust demo song"), "V4 registered robust song")
+
     def _v4_generate_exports(self) -> None:
         """Generate demo recipient/export records for the V4 workflow."""
 
@@ -163,6 +170,16 @@ class AttributionDemoApp:
             return self._controller.v4.state
 
         self._run_action(make, "V4 made clean suspicious excerpt")
+
+    def _v4_make_proxy_leak(self) -> None:
+        """Create and display a light recorded-proxy suspicious excerpt."""
+
+        def make() -> object:
+            excerpt = self._controller.v4.make_robust_proxy_leak()
+            self._controller._current_audio = excerpt
+            return self._controller.v4.state
+
+        self._run_action(make, "V4 made proxy suspicious excerpt")
 
     def _v4_verify_leak(self) -> None:
         """Verify the clean suspicious excerpt against V4 demo exports."""
@@ -224,7 +241,8 @@ class AttributionDemoApp:
             f"Source: {state.source_name} | {state.current_audio.duration_seconds:.2f} s @ {state.current_audio.sample_rate} Hz | "
             f"claim: {handle} | mode: block waterfall | blocks: {state.block_count} | "
             f"embedding SNR: {snr} | transforms: {transforms} | "
-            f"V4 exports: {v4.export_count} | V4 suspicious excerpt: {'yes' if v4.suspicious_excerpt_ready else 'no'} | V4 match: {v4_match}"
+            f"V4 profile: {v4.profile_name} | V4 exports: {v4.export_count} | "
+            f"V4 suspicious excerpt: {'yes' if v4.suspicious_excerpt_ready else 'no'} | V4 match: {v4_match}"
         )
         draw_waveform(self._waveform, state.current_audio.samples)
 
