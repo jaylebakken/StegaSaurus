@@ -1,7 +1,8 @@
-"""Test the v2 repeated-block attribution prototype.
+"""Test the repeated-block attribution waterfall.
 
-The v2 codec embeds the same handle into complete 30-second blocks and pools
-carrier evidence across block verifications. The test keeps the fixture
+The block codec embeds the same handle into complete 30-second blocks and pools
+carrier evidence across block verifications. The waterfall policy then names whether
+fast block votes or pooled evidence accepted the claim. The test keeps the fixture
 synthetic and clean; it does not claim blind localization, crop recovery,
 compression robustness, or perceptual transparency.
 """
@@ -10,12 +11,12 @@ from __future__ import annotations
 
 import numpy as np
 
-from stegosaurus.audio.attribution import AttributionStatus, BlockAttributionCodec
+from stegosaurus.audio.attribution import AttributionStatus, BlockAttributionCodec, RepeatedBlockWaterfallPolicy
 from stegosaurus.audio.pilot import PcmAudio
 
 
 def _music_like_fixture(duration_seconds: int = 150) -> PcmAudio:
-    """Create a deterministic multi-block synthetic cover for v2 attribution tests."""
+    """Create a deterministic multi-block synthetic cover for repeated-block attribution tests."""
 
     sample_rate = 16000
     positions = np.arange(sample_rate * duration_seconds, dtype=np.float64) / sample_rate
@@ -32,7 +33,7 @@ def _music_like_fixture(duration_seconds: int = 150) -> PcmAudio:
 
 
 def test_block_attribution_pools_repeated_clean_block_evidence() -> None:
-    """Recover a repeated v2 handle through pooled block evidence."""
+    """Recover a repeated handle through pooled block evidence."""
 
     codec = BlockAttributionCodec(b"block-attribution-test-secret")
     handle = bytes.fromhex("01020304")
@@ -45,6 +46,20 @@ def test_block_attribution_pools_repeated_clean_block_evidence() -> None:
     assert verification.recovered_handle == handle
     assert verification.pooled_verification.claim_rs_cost <= 16
     assert verification.recovered_block_count >= 1
+
+
+def test_block_waterfall_accepts_repeated_block_verification() -> None:
+    """Classify a clean repeated-block verification through the block waterfall."""
+
+    codec = BlockAttributionCodec(b"block-attribution-test-secret")
+    handle = bytes.fromhex("01020304")
+    embedding = codec.embed(_music_like_fixture(), handle)
+
+    decision = RepeatedBlockWaterfallPolicy().decide(codec.verify(embedding.audio, embedding.record))
+
+    assert decision.accepted
+    assert decision.pooled_rs_cost <= 16
+    assert decision.block_count == 5
 
 
 def test_block_attribution_reports_sample_rate_mismatch() -> None:

@@ -1,0 +1,86 @@
+{
+  "goal": "save strongest recorded-proxy distorted WAVs that still verify",
+  "output_dir": "samples\\max_distortion_recoverable",
+  "results": [
+    {
+      "block_count": 9,
+      "block_votes": 0,
+      "highest_level": "level_3_strong",
+      "output_path": "samples\\max_distortion_recoverable\\02_lullaby__level_3_strong.wav",
+      "pooled_rs_cost": 11,
+      "preflight": "whole_song_peak_normalized",
+      "source_file": "02. Lullaby.wav",
+      "status": "written"
+    },
+    {
+      "block_count": 10,
+      "block_votes": 0,
+      "highest_level": "level_1_light",
+      "output_path": "samples\\max_distortion_recoverable\\02_sax_and_violins__level_1_light.wav",
+      "pooled_rs_cost": 12,
+      "preflight": "whole_song_peak_normalized",
+      "source_file": "02. Sax and Violins.wav",
+      "status": "written"
+    },
+    {
+      "block_count": 9,
+      "block_votes": 0,
+      "highest_level": "level_1_light",
+      "output_path": "samples\\max_distortion_recoverable\\03_king_of_sorrow__level_1_light.wav",
+      "pooled_rs_cost": 14,
+      "preflight": "raw",
+      "source_file": "03. King of Sorrow.wav",
+      "status": "written"
+    },
+    {
+      "block_count": 8,
+      "block_votes": 0,
+      "highest_level": "level_1_light",
+      "output_path": "samples\\max_distortion_recoverable\\08_gutta_bitch__level_1_light.wav",
+      "pooled_rs_cost": 16,
+      "preflight": "raw",
+      "source_file": "08. Gutta Bitch.wav",
+      "status": "written"
+    },
+    {
+      "block_count": 10,
+      "block_votes": 0,
+      "highest_level": "clean_no_extra_distortion",
+      "output_path": "samples\\max_distortion_recoverable\\10_cry_me_a_river__clean_no_extra_distortion.wav",
+      "pooled_rs_cost": 16,
+      "preflight": "raw",
+      "source_file": "10. Cry Me a River.wav",
+      "status": "written_clean_ceiling"
+    },
+    {
+      "block_count": 8,
+      "block_votes": 0,
+      "highest_level": "level_2_moderate",
+      "output_path": "samples\\max_distortion_recoverable\\10_lovers_rock__level_2_moderate.wav",
+      "pooled_rs_cost": 12,
+      "preflight": "raw",
+      "source_file": "10. Lovers Rock.wav",
+      "status": "written"
+    },
+    {
+      "block_count": 11,
+      "block_votes": 0,
+      "highest_level": "level_0_very_light",
+      "output_path": "samples\\max_distortion_recoverable\\19_get_low__level_0_very_light.wav",
+      "pooled_rs_cost": 6,
+      "preflight": "raw",
+      "source_file": "19. Get Low.wav",
+      "status": "written"
+    },
+    {
+      "block_count": 3,
+      "block_votes": 0,
+      "highest_level": null,
+      "output_path": null,
+      "pooled_rs_cost": 32,
+      "preflight": "whole_song_peak_normalized",
+      "source_file": "onclassical_demo_luisi_bach_partita_a-minor_bwv-827_1_small-version.wav",
+      "status": "no_recoverable_artifact"
+    }
+  ]
+}

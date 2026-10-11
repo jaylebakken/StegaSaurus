@@ -14,6 +14,11 @@ from .blind_policy import (
     BlindRecoveryStatus,
     BlindRecoveryVote,
 )
+from .block_waterfall import (
+    RepeatedBlockWaterfallDecision,
+    RepeatedBlockWaterfallPolicy,
+    RepeatedBlockWaterfallStage,
+)
 from .blocks import BlockAttributionCodec, BlockAttributionEmbedding, BlockAttributionRecord, BlockAttributionVerification
 from .decoder import SpectralAttributionDecoder
 from .encoder import SpectralAttributionEncoder
@@ -41,6 +46,9 @@ __all__ = [
     "BlockAttributionVerification",
     "InMemoryAttributionRegistry",
     "RegistryEntry",
+    "RepeatedBlockWaterfallDecision",
+    "RepeatedBlockWaterfallPolicy",
+    "RepeatedBlockWaterfallStage",
     "SpectralAttributionConfig",
     "SpectralAttributionDecoder",
     "SpectralAttributionEncoder",

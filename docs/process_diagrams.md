@@ -9,7 +9,8 @@ edge-crop experiment but does not change the v1 verifier. Render this file in a 
 the text and code maps remain useful if no renderer is present.
 
 For the newer repeated-block attribution prototype, see
-`docs/attribution_v2_visuals.md`.
+`docs/attribution_v2_visuals.md`. The V4 known-song workflow is documented in
+section 5 below.
 
 ## 1. Encoding Scheme
 
@@ -177,3 +178,41 @@ flowchart TD
 - Record named transformations and replayable entropy recipes before interpreting resilience.
 - Treat the v1 verifier as a claimed-handle prototype with a retained map. Keep the edge-mode no-map decoder experimental until broader independent validation covers waveform geometry errors, other edit models, and open-world controls.
 - Do not interpret any diagram as a claim of codec, DSP, perceptual, corpus, or adversarial robustness beyond documented experiments.
+
+## 5. V4 Known-Song Clean Leak Workflow
+
+```mermaid
+flowchart TD
+    source["Registered source song"] --> fp["Cached source block fingerprints"]
+    source --> exports["Recipient/export watermarked records"]
+    excerpt["Suspicious clean WAV excerpt"] --> localize["Source-audio crop localization"]
+    fp --> localize
+    localize --> candidates["Top crop-local candidate windows"]
+    candidates --> phase["Fine phase search around each candidate"]
+    exports --> phase
+    phase --> pool["Pool carrier evidence per export"]
+    pool --> rank["Rank export records"]
+    rank --> decision["accepted match or no accepted export"]
+
+    classDef current fill:#d9edf7,stroke:#31708f,color:#000;
+    classDef boundary fill:#fcf8e3,stroke:#8a6d3b,color:#000;
+    class source,excerpt boundary;
+    class fp,exports,localize,candidates,phase,pool,rank,decision current;
+```
+
+**Interpretation**
+
+- This is the V4 clean-file product workflow, not unknown-song discovery.
+- Source localization is shared once per selected song; only the top candidate
+  windows fan out across recipient/export records.
+- The measured release boundary is clean suspicious WAV excerpts. Recorded
+  audio, normalization, lossy codec, platform processing, and resynthesis remain
+  experimental.
+
+| Diagram step | Application code |
+| --- | --- |
+| Song/export records | `src/stegosaurus/audio/attribution_workflow/models.py` |
+| Source block fingerprints and excerpt localization | `src/stegosaurus/audio/attribution_workflow/fingerprints.py` |
+| Phase-refined export fanout | `src/stegosaurus/audio/attribution_workflow/fanout.py` |
+| Workflow facade | `src/stegosaurus/audio/attribution_workflow/workflow.py` |
+| Tkinter demo controller | `src/stegosaurus/audio/demo_v4_controller.py` |

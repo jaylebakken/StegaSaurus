@@ -3,11 +3,11 @@
 Tkinter only renders state; this controller owns the reproducible process map
 used by the buttons:
 
-    sample/WAV -> issue or register a claim -> encode v1 or v2 blocks
-        -> named transforms -> verify retained-record claim evidence
+    sample/WAV -> issue or register a claim -> encode repeated blocks
+        -> named transforms -> verify with block votes and pooled evidence
 
 It intentionally preserves the retained-record boundary: verification needs
-private carrier evidence retained during embedding and is not blind discovery.
+private carrier evidence retained during embedding and is not arbitrary discovery.
 Named transforms are manual test cases, not assertions of robustness.
 """
 
@@ -16,19 +16,21 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from .attribution import (
-    AttributionEmbedding,
-    AttributionVerification,
     BlockAttributionCodec,
     BlockAttributionEmbedding,
     BlockAttributionRecord,
     BlockAttributionVerification,
     InMemoryAttributionRegistry,
-    SpectralAttributionDecoder,
-    SpectralAttributionEncoder,
+    RepeatedBlockWaterfallDecision,
+    RepeatedBlockWaterfallPolicy,
 )
 from .demo_samples import music_like_sample, speech_like_sample
 from .demo_transforms import DISTORTION_NAMES, apply_demo_distortion
+from .demo_v4_controller import V4DemoController
 from .pilot import PcmAudio, read_pcm16_wav
+
+
+DEMO_BLOCK_DURATION_SECONDS = 150
 
 
 @dataclass(frozen=True, slots=True)
@@ -39,7 +41,6 @@ class DemoState:
     source_audio: PcmAudio
     current_audio: PcmAudio
     active_handle: bytes | None
-    attribution_mode: str
     block_count: int
     embedding_signal_to_noise_db: float | None
     applied_distortions: tuple[str, ...]
@@ -52,18 +53,17 @@ class AttributionDemoController:
         """Initialize an isolated local lab with deterministic fixture audio and private registry state."""
 
         self._registry = InMemoryAttributionRegistry(b"stegosaurus-demo-registry-secret")
-        self._encoder = SpectralAttributionEncoder(master_secret)
-        self._decoder = SpectralAttributionDecoder(master_secret)
         self._block_codec = BlockAttributionCodec(master_secret)
+        self._waterfall_policy = RepeatedBlockWaterfallPolicy()
         self._source_name = "Music-like sample"
-        self._source_audio = music_like_sample()
+        self._source_audio = music_like_sample(DEMO_BLOCK_DURATION_SECONDS)
         self._current_audio = self._source_audio
         self._encoded_audio: PcmAudio | None = None
         self._active_handle: bytes | None = None
-        self._active_mode = "none"
         self._active_block_record: BlockAttributionRecord | None = None
         self._embedding_signal_to_noise_db: float | None = None
         self._applied_distortions: tuple[str, ...] = ()
+        self.v4 = V4DemoController(self._source_audio, master_secret)
 
     @property
     def state(self) -> DemoState:
@@ -74,7 +74,6 @@ class AttributionDemoController:
             self._source_audio,
             self._current_audio,
             self._active_handle,
-            self._active_mode,
             0 if self._active_block_record is None else len(self._active_block_record.block_records),
             self._embedding_signal_to_noise_db,
             self._applied_distortions,
@@ -83,7 +82,10 @@ class AttributionDemoController:
     def select_sample(self, sample_name: str) -> DemoState:
         """Select a named built-in sample and clear any existing local attribution claim."""
 
-        samples = {"Music-like sample": music_like_sample, "Speech-like sample": speech_like_sample}
+        samples = {
+            "Music-like sample": lambda: music_like_sample(DEMO_BLOCK_DURATION_SECONDS),
+            "Speech-like sample": lambda: speech_like_sample(DEMO_BLOCK_DURATION_SECONDS),
+        }
         try:
             audio_factory = samples[sample_name]
         except KeyError as error:
@@ -97,19 +99,8 @@ class AttributionDemoController:
         self._set_source(path, read_pcm16_wav(path))
         return self.state
 
-    def issue_and_encode(self, provenance: str) -> AttributionEmbedding:
-        """Issue a calibrated local handle, embed it, and retain its private verification record."""
-
-        entry, embedding = self._encoder.issue_and_encode(
-            self._source_audio,
-            self._registry,
-            _provenance_bytes(provenance),
-        )
-        self._activate_embedding(entry.handle, embedding)
-        return embedding
-
     def issue_and_encode_blocks(self, provenance: str, maximum_attempts: int = 32) -> BlockAttributionEmbedding:
-        """Issue a local handle and embed it into repeated complete v2 blocks."""
+        """Issue a local handle and embed it into repeated complete attribution blocks."""
 
         if isinstance(maximum_attempts, bool) or not isinstance(maximum_attempts, int) or maximum_attempts < 1:
             raise ValueError("maximum_attempts must be a positive integer")
@@ -121,24 +112,14 @@ class AttributionDemoController:
                 self._activate_block_embedding(entry.handle, embedding)
                 return embedding
             self._registry.discard(entry.handle)
-        raise RuntimeError("could not issue a handle that passes clean v2 block attribution calibration")
-
-    def encode_supplied_handle(self, handle_hex: str, provenance: str) -> tuple[AttributionEmbedding, AttributionVerification]:
-        """Register and embed a supplied handle, returning its immediate clean verification result."""
-
-        handle = _parse_handle(handle_hex)
-        self._registry.register(handle, _provenance_bytes(provenance))
-        embedding = self._encoder.encode(self._source_audio, handle)
-        self._registry.retain_record(embedding.record)
-        self._activate_embedding(handle, embedding)
-        return embedding, self.verify()
+        raise RuntimeError("could not issue a handle that passes clean block attribution calibration")
 
     def encode_supplied_handle_blocks(
         self,
         handle_hex: str,
         provenance: str,
-    ) -> tuple[BlockAttributionEmbedding, BlockAttributionVerification]:
-        """Register and embed a supplied handle into v2 repeated blocks."""
+    ) -> tuple[BlockAttributionEmbedding, tuple[BlockAttributionVerification, RepeatedBlockWaterfallDecision]]:
+        """Register and embed a supplied handle into repeated attribution blocks."""
 
         handle = _parse_handle(handle_hex)
         self._registry.register(handle, _provenance_bytes(provenance))
@@ -167,19 +148,15 @@ class AttributionDemoController:
         self._applied_distortions = ()
         return self.state
 
-    def verify(self) -> AttributionVerification | BlockAttributionVerification:
-        """Verify the active claim through retained v1 or v2 block evidence."""
+    def verify(self) -> tuple[BlockAttributionVerification, RepeatedBlockWaterfallDecision]:
+        """Verify the active claim through block-vote and pooled-evidence gates."""
 
         if self._active_handle is None:
             raise ValueError("encode audio before verifying an attribution claim")
-        if self._active_mode == "v2_blocks":
-            if self._active_block_record is None:
-                raise RuntimeError("active handle has no retained v2 block verification record")
-            return self._block_codec.verify(self._current_audio, self._active_block_record)
-        record = self._registry.record_for(self._active_handle)
-        if record is None:
-            raise RuntimeError("active handle has no retained private verification record")
-        return self._decoder.verify(self._current_audio, record)
+        if self._active_block_record is None:
+            raise RuntimeError("active handle has no retained block verification record")
+        verification = self._block_codec.verify(self._current_audio, self._active_block_record)
+        return verification, self._waterfall_policy.decide(verification)
 
     def _set_source(self, source_name: str, audio: PcmAudio) -> None:
         """Replace the selected source and reset transient state that belongs to its prior waveform."""
@@ -189,27 +166,15 @@ class AttributionDemoController:
         self._current_audio = audio
         self._encoded_audio = None
         self._active_handle = None
-        self._active_mode = "none"
         self._active_block_record = None
         self._embedding_signal_to_noise_db = None
         self._applied_distortions = ()
-
-    def _activate_embedding(self, handle: bytes, embedding: AttributionEmbedding) -> None:
-        """Make a completed embedding the clean base audio for later manual transformations."""
-
-        self._active_handle = handle
-        self._active_mode = "v1_retained_map"
-        self._active_block_record = None
-        self._encoded_audio = embedding.audio
-        self._current_audio = embedding.audio
-        self._embedding_signal_to_noise_db = embedding.signal_to_noise_db
-        self._applied_distortions = ()
+        self.v4.reset_source(audio)
 
     def _activate_block_embedding(self, handle: bytes, embedding: BlockAttributionEmbedding) -> None:
-        """Make a v2 repeated-block embedding the clean base audio for manual transformations."""
+        """Make a repeated-block embedding the clean base audio for manual transformations."""
 
         self._active_handle = handle
-        self._active_mode = "v2_blocks"
         self._active_block_record = embedding.record
         self._encoded_audio = embedding.audio
         self._current_audio = embedding.audio

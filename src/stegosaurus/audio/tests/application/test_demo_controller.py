@@ -52,16 +52,32 @@ def test_registry_accepts_idempotent_local_supplied_handle_registration() -> Non
         registry.register(handle, b"other provenance")
 
 
-def test_demo_controller_verifies_v2_block_claims() -> None:
-    """Exercise the manual lab's repeated-block attribution path without opening Tkinter."""
+def test_demo_controller_verifies_repeated_block_claims() -> None:
+    """Exercise the manual lab's block-waterfall attribution path without opening Tkinter."""
 
     controller = AttributionDemoController()
 
-    embedding = controller.issue_and_encode_blocks("local v2 block test")
-    verification = controller.verify()
+    embedding = controller.issue_and_encode_blocks("local repeated block test")
+    verification, decision = controller.verify()
 
     assert embedding.record.block_records
     assert verification.recovered
+    assert decision.accepted
     assert verification.pooled_verification.claim_rs_cost <= 16
-    assert controller.state.attribution_mode == "v2_blocks"
     assert controller.state.block_count == len(embedding.record.block_records)
+
+
+def test_demo_controller_runs_v4_known_song_clean_leak_flow() -> None:
+    """Exercise the V4 demo workflow without opening Tkinter."""
+
+    controller = AttributionDemoController()
+
+    controller.v4.register_current_song("controller V4 song")
+    controller.v4.generate_demo_exports(3)
+    controller.v4.make_demo_leak()
+    result = controller.v4.verify_demo_leak()
+
+    assert result.accepted
+    assert result.matched_recipient_label == "export_01"
+    assert controller.v4.state.export_count == 3
+    assert controller.v4.state.suspicious_excerpt_ready

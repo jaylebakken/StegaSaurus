@@ -1,0 +1,602 @@
+{
+  "crop_seconds": 90.0,
+  "crop_start_seconds": 60.877,
+  "details": {
+    "clean": {
+      "prefilter_candidates": [
+        {
+          "crop_window_start_seconds": 29.0,
+          "nearest_boundary_error_seconds": 1.0,
+          "registry_block_index": 3,
+          "registry_block_start_seconds": 90.0,
+          "score": 0.999999874384334,
+          "useful_boundary_hit": true
+        },
+        {
+          "crop_window_start_seconds": 59.0,
+          "nearest_boundary_error_seconds": 1.0,
+          "registry_block_index": 4,
+          "registry_block_start_seconds": 120.0,
+          "score": 0.9999997805247142,
+          "useful_boundary_hit": true
+        }
+      ],
+      "prefilter_trial": {
+        "best_error_seconds": 0.5,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 0.0,
+        "elapsed_ms": 4693.9646000100765,
+        "searched_coarse_windows": 13,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      },
+      "ranked_verifications": [
+        {
+          "expected_match": true,
+          "gate_passed": true,
+          "label": "export_07",
+          "pooled_rs_cost": 15,
+          "rank": 1,
+          "recovered": true,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_00",
+          "pooled_rs_cost": 35,
+          "rank": 2,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_09",
+          "pooled_rs_cost": 35,
+          "rank": 3,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_11",
+          "pooled_rs_cost": 35,
+          "rank": 4,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_01",
+          "pooled_rs_cost": 36,
+          "rank": 5,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_02",
+          "pooled_rs_cost": 36,
+          "rank": 6,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_06",
+          "pooled_rs_cost": 36,
+          "rank": 7,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_08",
+          "pooled_rs_cost": 36,
+          "rank": 8,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_10",
+          "pooled_rs_cost": 36,
+          "rank": 9,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_03",
+          "pooled_rs_cost": 37,
+          "rank": 10,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_05",
+          "pooled_rs_cost": 37,
+          "rank": 11,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_04",
+          "pooled_rs_cost": 39,
+          "rank": 12,
+          "recovered": false,
+          "recovered_windows": 0
+        }
+      ]
+    },
+    "light_recorded_proxy": {
+      "prefilter_candidates": [
+        {
+          "crop_window_start_seconds": 48.5,
+          "nearest_boundary_error_seconds": 11.5,
+          "registry_block_index": 7,
+          "registry_block_start_seconds": 210.0,
+          "score": 0.9881475518029643,
+          "useful_boundary_hit": false
+        }
+      ],
+      "prefilter_trial": {
+        "best_error_seconds": 10.5,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 0.0,
+        "elapsed_ms": 5606.308100002934,
+        "searched_coarse_windows": 13,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": false,
+        "top5_hit": false,
+        "useful_boundaries": 3
+      },
+      "ranked_verifications": [
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_00",
+          "pooled_rs_cost": 32,
+          "rank": 1,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_01",
+          "pooled_rs_cost": 32,
+          "rank": 2,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_02",
+          "pooled_rs_cost": 32,
+          "rank": 3,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_03",
+          "pooled_rs_cost": 32,
+          "rank": 4,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_04",
+          "pooled_rs_cost": 32,
+          "rank": 5,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_05",
+          "pooled_rs_cost": 32,
+          "rank": 6,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_06",
+          "pooled_rs_cost": 32,
+          "rank": 7,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": true,
+          "gate_passed": false,
+          "label": "export_07",
+          "pooled_rs_cost": 32,
+          "rank": 8,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_08",
+          "pooled_rs_cost": 32,
+          "rank": 9,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_09",
+          "pooled_rs_cost": 32,
+          "rank": 10,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_10",
+          "pooled_rs_cost": 32,
+          "rank": 11,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_11",
+          "pooled_rs_cost": 32,
+          "rank": 12,
+          "recovered": false,
+          "recovered_windows": 0
+        }
+      ]
+    },
+    "moderate_recorded_proxy": {
+      "prefilter_candidates": [
+        {
+          "crop_window_start_seconds": 46.0,
+          "nearest_boundary_error_seconds": 14.0,
+          "registry_block_index": 7,
+          "registry_block_start_seconds": 210.0,
+          "score": 0.9918847066307314,
+          "useful_boundary_hit": false
+        }
+      ],
+      "prefilter_trial": {
+        "best_error_seconds": 13.0,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 0.0,
+        "elapsed_ms": 5640.495699990424,
+        "searched_coarse_windows": 13,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": false,
+        "top5_hit": false,
+        "useful_boundaries": 3
+      },
+      "ranked_verifications": [
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_01",
+          "pooled_rs_cost": 27,
+          "rank": 1,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_00",
+          "pooled_rs_cost": 29,
+          "rank": 2,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_02",
+          "pooled_rs_cost": 29,
+          "rank": 3,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_03",
+          "pooled_rs_cost": 29,
+          "rank": 4,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_04",
+          "pooled_rs_cost": 29,
+          "rank": 5,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_05",
+          "pooled_rs_cost": 29,
+          "rank": 6,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_06",
+          "pooled_rs_cost": 29,
+          "rank": 7,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": true,
+          "gate_passed": false,
+          "label": "export_07",
+          "pooled_rs_cost": 29,
+          "rank": 8,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_08",
+          "pooled_rs_cost": 29,
+          "rank": 9,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_09",
+          "pooled_rs_cost": 29,
+          "rank": 10,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_10",
+          "pooled_rs_cost": 29,
+          "rank": 11,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_11",
+          "pooled_rs_cost": 29,
+          "rank": 12,
+          "recovered": false,
+          "recovered_windows": 0
+        }
+      ]
+    },
+    "peak_normalized": {
+      "prefilter_candidates": [
+        {
+          "crop_window_start_seconds": 59.5,
+          "nearest_boundary_error_seconds": 0.5,
+          "registry_block_index": 4,
+          "registry_block_start_seconds": 120.0,
+          "score": 0.9999742649115217,
+          "useful_boundary_hit": true
+        },
+        {
+          "crop_window_start_seconds": 29.0,
+          "nearest_boundary_error_seconds": 1.0,
+          "registry_block_index": 3,
+          "registry_block_start_seconds": 90.0,
+          "score": 0.9999694006978151,
+          "useful_boundary_hit": true
+        }
+      ],
+      "prefilter_trial": {
+        "best_error_seconds": 0.0,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 0.0,
+        "elapsed_ms": 4875.223100010771,
+        "searched_coarse_windows": 13,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      },
+      "ranked_verifications": [
+        {
+          "expected_match": true,
+          "gate_passed": false,
+          "label": "export_07",
+          "pooled_rs_cost": 33,
+          "rank": 1,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_00",
+          "pooled_rs_cost": 34,
+          "rank": 2,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_11",
+          "pooled_rs_cost": 34,
+          "rank": 3,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_01",
+          "pooled_rs_cost": 36,
+          "rank": 4,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_02",
+          "pooled_rs_cost": 36,
+          "rank": 5,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_03",
+          "pooled_rs_cost": 36,
+          "rank": 6,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_05",
+          "pooled_rs_cost": 36,
+          "rank": 7,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_06",
+          "pooled_rs_cost": 36,
+          "rank": 8,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_08",
+          "pooled_rs_cost": 36,
+          "rank": 9,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_09",
+          "pooled_rs_cost": 36,
+          "rank": 10,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_04",
+          "pooled_rs_cost": 38,
+          "rank": 11,
+          "recovered": false,
+          "recovered_windows": 0
+        },
+        {
+          "expected_match": false,
+          "gate_passed": true,
+          "label": "export_10",
+          "pooled_rs_cost": 38,
+          "rank": 12,
+          "recovered": false,
+          "recovered_windows": 0
+        }
+      ]
+    }
+  },
+  "goal": "validate known-song fanout under named suspicious-excerpt distress",
+  "outcomes": [
+    {
+      "correct_record_rank": 1,
+      "correct_record_recovered": true,
+      "correct_record_rs_cost": 15,
+      "distress": "clean",
+      "expected": "must_pass",
+      "false_acceptances": 0,
+      "prefilter_elapsed_ms": 4704.864400002407,
+      "verification_elapsed_ms": 70792.3446999921,
+      "workflow_passed": true
+    },
+    {
+      "correct_record_rank": 1,
+      "correct_record_recovered": false,
+      "correct_record_rs_cost": 33,
+      "distress": "peak_normalized",
+      "expected": "must_pass",
+      "false_acceptances": 0,
+      "prefilter_elapsed_ms": 4885.697700010496,
+      "verification_elapsed_ms": 69615.4208999942,
+      "workflow_passed": false
+    },
+    {
+      "correct_record_rank": 8,
+      "correct_record_recovered": false,
+      "correct_record_rs_cost": 32,
+      "distress": "light_recorded_proxy",
+      "expected": "stretch_goal",
+      "false_acceptances": 0,
+      "prefilter_elapsed_ms": 5615.138000008301,
+      "verification_elapsed_ms": 30500.167100006365,
+      "workflow_passed": false
+    },
+    {
+      "correct_record_rank": 8,
+      "correct_record_recovered": false,
+      "correct_record_rs_cost": 29,
+      "distress": "moderate_recorded_proxy",
+      "expected": "exploratory",
+      "false_acceptances": 0,
+      "prefilter_elapsed_ms": 5648.323699992034,
+      "verification_elapsed_ms": 28178.298600003473,
+      "workflow_passed": false
+    }
+  ],
+  "source_file": "10. Lovers Rock.wav"
+}

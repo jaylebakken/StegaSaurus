@@ -1,10 +1,10 @@
 """Expose the bounded claimed-handle attribution prototypes.
 
 Use these APIs only with a registry that retains attribution records. The v1
-surface verifies one retained carrier map. The v2 block surface repeats the
-same handle across fixed-duration blocks and pools retained block evidence. The
-public facade still does not claim unknown-handle discovery from arbitrary
-audio; blind localization remains a measured experiment path until promoted.
+surface verifies one retained carrier map. The repeated-block surface embeds
+the same handle across fixed-duration blocks, pools retained block evidence,
+and exposes the repeated-block fast-vote/pooling decision layer. The public
+facade still does not claim unknown-handle discovery from arbitrary audio.
 """
 
 from .attribution_core import (
@@ -22,6 +22,9 @@ from .attribution_core import (
     BlockAttributionVerification,
     InMemoryAttributionRegistry,
     RegistryEntry,
+    RepeatedBlockWaterfallDecision,
+    RepeatedBlockWaterfallPolicy,
+    RepeatedBlockWaterfallStage,
     SpectralAttributionConfig,
     SpectralAttributionDecoder,
     SpectralAttributionEncoder,
@@ -42,6 +45,9 @@ __all__ = [
     "BlindRecoveryVote",
     "InMemoryAttributionRegistry",
     "RegistryEntry",
+    "RepeatedBlockWaterfallDecision",
+    "RepeatedBlockWaterfallPolicy",
+    "RepeatedBlockWaterfallStage",
     "SpectralAttributionConfig",
     "SpectralAttributionDecoder",
     "SpectralAttributionEncoder",

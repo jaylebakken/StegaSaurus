@@ -1,0 +1,1157 @@
+{
+  "block_seconds": 30.0,
+  "crop_seconds": [
+    15.0,
+    30.0,
+    45.0,
+    60.0,
+    90.0,
+    120.0
+  ],
+  "goal": "estimate crop tolerance for dense modern pop/rap-style samples",
+  "scope": "oracle surviving-block upper bound, not full blind geometry recovery",
+  "summaries": [
+    {
+      "duration_seconds": 292.8933333333333,
+      "embedded_blocks": 9,
+      "minimum_recoverable_crop_seconds": 120.0,
+      "notes": "recovery needs multiple surviving block opportunities",
+      "preflight": "raw",
+      "recoverable_trial_count": 2,
+      "source_file": "03. King of Sorrow.wav",
+      "total_trial_count": 24
+    },
+    {
+      "duration_seconds": 243.14666666666668,
+      "embedded_blocks": 8,
+      "minimum_recoverable_crop_seconds": 60.0,
+      "notes": "recovery needs multiple surviving block opportunities",
+      "preflight": "raw",
+      "recoverable_trial_count": 8,
+      "source_file": "08. Gutta Bitch.wav",
+      "total_trial_count": 24
+    },
+    {
+      "duration_seconds": 302.6,
+      "embedded_blocks": 10,
+      "minimum_recoverable_crop_seconds": 120.0,
+      "notes": "recovery needs multiple surviving block opportunities",
+      "preflight": "raw",
+      "recoverable_trial_count": 1,
+      "source_file": "10. Cry Me a River.wav",
+      "total_trial_count": 24
+    },
+    {
+      "duration_seconds": 254.53333333333333,
+      "embedded_blocks": 8,
+      "minimum_recoverable_crop_seconds": 60.0,
+      "notes": "recovery needs multiple surviving block opportunities",
+      "preflight": "raw",
+      "recoverable_trial_count": 8,
+      "source_file": "10. Lovers Rock.wav",
+      "total_trial_count": 24
+    },
+    {
+      "duration_seconds": 334.06666666666666,
+      "embedded_blocks": 11,
+      "minimum_recoverable_crop_seconds": 90.0,
+      "notes": "recovery needs multiple surviving block opportunities",
+      "preflight": "raw",
+      "recoverable_trial_count": 7,
+      "source_file": "19. Get Low.wav",
+      "total_trial_count": 24
+    }
+  ],
+  "trials": {
+    "03. King of Sorrow.wav": [
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 55.579,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 111.157,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 166.736,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 38,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 52.579,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 105.157,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 157.736,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 38,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 26,
+        "recovered": false,
+        "start_seconds": 49.579,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 99.157,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 24,
+        "recovered": false,
+        "start_seconds": 148.736,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 30,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 26,
+        "recovered": false,
+        "start_seconds": 46.579,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 27,
+        "recovered": false,
+        "start_seconds": 93.157,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 24,
+        "recovered": false,
+        "start_seconds": 139.736,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 27,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 17,
+        "recovered": false,
+        "start_seconds": 40.579,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 19,
+        "recovered": false,
+        "start_seconds": 81.157,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 23,
+        "recovered": false,
+        "start_seconds": 121.736,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 19,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 4
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 12,
+        "recovered": true,
+        "start_seconds": 34.579,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 5,
+        "recovered": true,
+        "start_seconds": 69.157,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 18,
+        "recovered": false,
+        "start_seconds": 103.736,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 3
+      }
+    ],
+    "08. Gutta Bitch.wav": [
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 45.629,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 91.259,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 136.888,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 25,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 42.629,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 85.259,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 127.888,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 25,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 39.629,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 25,
+        "recovered": false,
+        "start_seconds": 79.259,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 28,
+        "recovered": false,
+        "start_seconds": 118.888,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 16,
+        "recovered": true,
+        "start_seconds": 0.0,
+        "status": "recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 21,
+        "recovered": false,
+        "start_seconds": 36.629,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 25,
+        "recovered": false,
+        "start_seconds": 73.259,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 28,
+        "recovered": false,
+        "start_seconds": 109.888,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 14,
+        "recovered": true,
+        "start_seconds": 0.0,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 15,
+        "recovered": true,
+        "start_seconds": 30.629,
+        "status": "recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 19,
+        "recovered": false,
+        "start_seconds": 61.259,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 14,
+        "recovered": true,
+        "start_seconds": 91.888,
+        "status": "recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 9,
+        "recovered": true,
+        "start_seconds": 0.0,
+        "status": "recovered",
+        "surviving_complete_blocks": 4
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 13,
+        "recovered": true,
+        "start_seconds": 24.629,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 13,
+        "recovered": true,
+        "start_seconds": 49.259,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 10,
+        "recovered": true,
+        "start_seconds": 73.888,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      }
+    ],
+    "10. Cry Me a River.wav": [
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 57.52,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 115.04,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 172.56,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 36,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 54.52,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 109.04,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 163.56,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 36,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 29,
+        "recovered": false,
+        "start_seconds": 51.52,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 103.04,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 154.56,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 28,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 29,
+        "recovered": false,
+        "start_seconds": 48.52,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 36,
+        "recovered": false,
+        "start_seconds": 97.04,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 26,
+        "recovered": false,
+        "start_seconds": 145.56,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 18,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 26,
+        "recovered": false,
+        "start_seconds": 42.52,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 25,
+        "recovered": false,
+        "start_seconds": 85.04,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 22,
+        "recovered": false,
+        "start_seconds": 127.56,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 17,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 4
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 16,
+        "recovered": true,
+        "start_seconds": 36.52,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 18,
+        "recovered": false,
+        "start_seconds": 73.04,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 20,
+        "recovered": false,
+        "start_seconds": 109.56,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 3
+      }
+    ],
+    "10. Lovers Rock.wav": [
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 47.907,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 95.813,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 143.72,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 21,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 44.907,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 89.813,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 134.72,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 21,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 41.907,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 30,
+        "recovered": false,
+        "start_seconds": 83.813,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 125.72,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 10,
+        "recovered": true,
+        "start_seconds": 0.0,
+        "status": "recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 27,
+        "recovered": false,
+        "start_seconds": 38.907,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 30,
+        "recovered": false,
+        "start_seconds": 77.813,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 19,
+        "recovered": false,
+        "start_seconds": 116.72,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 10,
+        "recovered": true,
+        "start_seconds": 0.0,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 12,
+        "recovered": true,
+        "start_seconds": 32.907,
+        "status": "recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 14,
+        "recovered": true,
+        "start_seconds": 65.813,
+        "status": "recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 26,
+        "recovered": false,
+        "start_seconds": 98.72,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 7,
+        "recovered": true,
+        "start_seconds": 0.0,
+        "status": "recovered",
+        "surviving_complete_blocks": 4
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 5,
+        "recovered": true,
+        "start_seconds": 26.907,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 10,
+        "recovered": true,
+        "start_seconds": 53.813,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 15,
+        "recovered": true,
+        "start_seconds": 80.72,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      }
+    ],
+    "19. Get Low.wav": [
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 63.813,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 127.627,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 15.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 191.44,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 29,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 60.813,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 121.627,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 30.0,
+        "pooled_rs_cost": 32,
+        "recovered": false,
+        "start_seconds": 182.44,
+        "status": "no_complete_original_blocks",
+        "surviving_complete_blocks": 0
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 29,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 19,
+        "recovered": false,
+        "start_seconds": 57.813,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 18,
+        "recovered": false,
+        "start_seconds": 115.627,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 45.0,
+        "pooled_rs_cost": 18,
+        "recovered": false,
+        "start_seconds": 173.44,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 20,
+        "recovered": false,
+        "start_seconds": 0.0,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 19,
+        "recovered": false,
+        "start_seconds": 54.813,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 18,
+        "recovered": false,
+        "start_seconds": 109.627,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 60.0,
+        "pooled_rs_cost": 18,
+        "recovered": false,
+        "start_seconds": 164.44,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 1
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 10,
+        "recovered": true,
+        "start_seconds": 0.0,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 19,
+        "recovered": false,
+        "start_seconds": 48.813,
+        "status": "not_recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 11,
+        "recovered": true,
+        "start_seconds": 97.627,
+        "status": "recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 90.0,
+        "pooled_rs_cost": 8,
+        "recovered": true,
+        "start_seconds": 146.44,
+        "status": "recovered",
+        "surviving_complete_blocks": 2
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 7,
+        "recovered": true,
+        "start_seconds": 0.0,
+        "status": "recovered",
+        "surviving_complete_blocks": 4
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 12,
+        "recovered": true,
+        "start_seconds": 42.813,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 0,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 7,
+        "recovered": true,
+        "start_seconds": 85.627,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      },
+      {
+        "block_votes": 1,
+        "crop_seconds": 120.0,
+        "pooled_rs_cost": 4,
+        "recovered": true,
+        "start_seconds": 128.44,
+        "status": "recovered",
+        "surviving_complete_blocks": 3
+      }
+    ]
+  }
+}

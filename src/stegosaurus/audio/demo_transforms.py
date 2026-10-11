@@ -7,7 +7,7 @@ claims of robustness against a transformation class.
 
 from __future__ import annotations
 
-from .attacks import add_white_noise, low_pass_filter, mp3_round_trip, normalize_peak, resample_audio, trim_audio
+from .attacks import add_reverberation, add_white_noise, low_pass_filter, mp3_round_trip, normalize_peak, resample_audio, trim_audio
 from .pilot import PcmAudio
 
 
@@ -17,6 +17,7 @@ DISTORTION_NAMES = (
     "Low-pass filter (4 kHz)",
     "MP3 round trip (96 kbps)",
     "Resample 12 kHz round trip",
+    "Recorded proxy (moderate)",
     "Leading crop (250 ms)",
 )
 
@@ -34,6 +35,12 @@ def apply_demo_distortion(audio: PcmAudio, name: str) -> PcmAudio:
         return mp3_round_trip(audio, 96)
     if name == "Resample 12 kHz round trip":
         return resample_audio(resample_audio(audio, 12000), audio.sample_rate)
+    if name == "Recorded proxy (moderate)":
+        transformed = resample_audio(resample_audio(audio, 10000), audio.sample_rate)
+        transformed = low_pass_filter(transformed, 3400.0)
+        transformed = add_reverberation(transformed, 0.120, 0.16, seed=20261010)
+        transformed = add_white_noise(transformed, 30.0, seed=20261010)
+        return normalize_peak(transformed, 0.82)
     if name == "Leading crop (250 ms)":
         return trim_audio(audio, 0.25, audio.duration_seconds)
     raise ValueError(f"unknown distortion: {name}")

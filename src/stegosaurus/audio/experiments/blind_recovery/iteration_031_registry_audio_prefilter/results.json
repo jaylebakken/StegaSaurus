@@ -1,0 +1,1476 @@
+{
+  "block_seconds": 30.0,
+  "goal": "test a shared song-level prefilter before many embedding-record checks",
+  "scope": "known song source audio is available in the user registry",
+  "summaries": [
+    {
+      "embedded_blocks": 8,
+      "median_elapsed_ms": 4082.4251000012737,
+      "source_file": "08. Gutta Bitch.wav",
+      "top1_hits": 9,
+      "top5_hits": 9,
+      "trials": 9,
+      "workflow_note": "shared song-level prefilter is viable for registry fanout"
+    },
+    {
+      "embedded_blocks": 8,
+      "median_elapsed_ms": 3756.260599999223,
+      "source_file": "10. Lovers Rock.wav",
+      "top1_hits": 9,
+      "top5_hits": 9,
+      "trials": 9,
+      "workflow_note": "shared song-level prefilter is viable for registry fanout"
+    },
+    {
+      "embedded_blocks": 11,
+      "median_elapsed_ms": 4454.723900009412,
+      "source_file": "19. Get Low.wav",
+      "top1_hits": 9,
+      "top5_hits": 9,
+      "trials": 9,
+      "workflow_note": "shared song-level prefilter is viable for registry fanout"
+    }
+  ],
+  "top_candidates": {
+    "08. Gutta Bitch.wav|120.0|20.935": [
+      {
+        "crop_window_start_seconds": 39.0,
+        "nearest_boundary_error_seconds": 0.06499999999999773,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999954818709,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 69.0,
+        "nearest_boundary_error_seconds": 0.06499999999999773,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999999931121456,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 9.0,
+        "nearest_boundary_error_seconds": 0.06500000000000128,
+        "registry_block_index": 1,
+        "registry_block_start_seconds": 30.0,
+        "score": 0.9999999687100544,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 39.5,
+        "nearest_boundary_error_seconds": 0.4350000000000023,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999364986611,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 38.5,
+        "nearest_boundary_error_seconds": 0.5649999999999977,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999998771507814,
+        "useful_boundary_hit": true
+      }
+    ],
+    "08. Gutta Bitch.wav|120.0|45.564": [
+      {
+        "crop_window_start_seconds": 14.5,
+        "nearest_boundary_error_seconds": 0.06400000000000006,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999984846416,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 44.5,
+        "nearest_boundary_error_seconds": 0.06400000000000006,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999999892043557,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 74.5,
+        "nearest_boundary_error_seconds": 0.06399999999999295,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999999721393662,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 14.0,
+        "nearest_boundary_error_seconds": 0.43599999999999994,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999224837932,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 15.0,
+        "nearest_boundary_error_seconds": 0.5640000000000001,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.999999889725211,
+        "useful_boundary_hit": true
+      }
+    ],
+    "08. Gutta Bitch.wav|120.0|65.268": [
+      {
+        "crop_window_start_seconds": 24.5,
+        "nearest_boundary_error_seconds": 0.23199999999999932,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999999255764259,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 25.0,
+        "nearest_boundary_error_seconds": 0.2680000000000007,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999998773676727,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 84.5,
+        "nearest_boundary_error_seconds": 0.23199999999999932,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999997343944844,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 85.0,
+        "nearest_boundary_error_seconds": 0.2680000000000007,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999996756086365,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 54.5,
+        "nearest_boundary_error_seconds": 0.23199999999999932,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999996516319806,
+        "useful_boundary_hit": true
+      }
+    ],
+    "08. Gutta Bitch.wav|60.0|31.135": [
+      {
+        "crop_window_start_seconds": 29.0,
+        "nearest_boundary_error_seconds": 0.13500000000000156,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999948426438,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 28.5,
+        "nearest_boundary_error_seconds": 0.36499999999999844,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999433397697,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 29.5,
+        "nearest_boundary_error_seconds": 0.6350000000000016,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999998584082318,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 28.0,
+        "nearest_boundary_error_seconds": 0.8649999999999984,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999997397569171,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 28.0,
+        "nearest_boundary_error_seconds": 0.8649999999999984,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999997397569171,
+        "useful_boundary_hit": true
+      }
+    ],
+    "08. Gutta Bitch.wav|60.0|67.764": [
+      {
+        "crop_window_start_seconds": 22.0,
+        "nearest_boundary_error_seconds": 0.2360000000000042,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999999229786957,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 22.0,
+        "nearest_boundary_error_seconds": 0.2360000000000042,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999999229786957,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 22.5,
+        "nearest_boundary_error_seconds": 0.2639999999999958,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999998808648607,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 22.5,
+        "nearest_boundary_error_seconds": 0.2639999999999958,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999998808648607,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 21.5,
+        "nearest_boundary_error_seconds": 0.7360000000000042,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999992659509244,
+        "useful_boundary_hit": true
+      }
+    ],
+    "08. Gutta Bitch.wav|60.0|97.068": [
+      {
+        "crop_window_start_seconds": 23.0,
+        "nearest_boundary_error_seconds": 0.06799999999999784,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999999688232631,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 23.0,
+        "nearest_boundary_error_seconds": 0.06799999999999784,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999999688232631,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 22.5,
+        "nearest_boundary_error_seconds": 0.43200000000000216,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999988513528483,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 22.5,
+        "nearest_boundary_error_seconds": 0.43200000000000216,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999988513528483,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 23.5,
+        "nearest_boundary_error_seconds": 0.5679999999999978,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999977511779785,
+        "useful_boundary_hit": true
+      }
+    ],
+    "08. Gutta Bitch.wav|90.0|26.035": [
+      {
+        "crop_window_start_seconds": 34.0,
+        "nearest_boundary_error_seconds": 0.03499999999999659,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999988801469,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 4.0,
+        "nearest_boundary_error_seconds": 0.03500000000000014,
+        "registry_block_index": 1,
+        "registry_block_start_seconds": 30.0,
+        "score": 0.9999999545694571,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 33.5,
+        "nearest_boundary_error_seconds": 0.4650000000000034,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999131141087,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 34.5,
+        "nearest_boundary_error_seconds": 0.5349999999999966,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999013720744,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 3.5,
+        "nearest_boundary_error_seconds": 0.46499999999999986,
+        "registry_block_index": 1,
+        "registry_block_start_seconds": 30.0,
+        "score": 0.9999998447149946,
+        "useful_boundary_hit": true
+      }
+    ],
+    "08. Gutta Bitch.wav|90.0|56.664": [
+      {
+        "crop_window_start_seconds": 3.5,
+        "nearest_boundary_error_seconds": 0.16400000000000148,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.999999992254669,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 33.5,
+        "nearest_boundary_error_seconds": 0.16400000000000148,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999999509957642,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 3.0,
+        "nearest_boundary_error_seconds": 0.3359999999999985,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999509638493,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 3.0,
+        "nearest_boundary_error_seconds": 0.3359999999999985,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999999509638493,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 4.0,
+        "nearest_boundary_error_seconds": 0.6640000000000015,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999998445031671,
+        "useful_boundary_hit": true
+      }
+    ],
+    "08. Gutta Bitch.wav|90.0|81.168": [
+      {
+        "crop_window_start_seconds": 9.0,
+        "nearest_boundary_error_seconds": 0.16800000000000637,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999999488033714,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 8.5,
+        "nearest_boundary_error_seconds": 0.33199999999999363,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999998476166646,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 39.0,
+        "nearest_boundary_error_seconds": 0.16800000000000637,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999998159185296,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 38.5,
+        "nearest_boundary_error_seconds": 0.33199999999999363,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.999999306615584,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 9.5,
+        "nearest_boundary_error_seconds": 0.6680000000000064,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.999999248214157,
+        "useful_boundary_hit": true
+      }
+    ],
+    "10. Lovers Rock.wav|120.0|22.871": [
+      {
+        "crop_window_start_seconds": 37.0,
+        "nearest_boundary_error_seconds": 0.1290000000000049,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999998393168209,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 7.0,
+        "nearest_boundary_error_seconds": 0.12900000000000134,
+        "registry_block_index": 1,
+        "registry_block_start_seconds": 30.0,
+        "score": 0.9999996810134989,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 7.0,
+        "nearest_boundary_error_seconds": 0.12900000000000134,
+        "registry_block_index": 1,
+        "registry_block_start_seconds": 30.0,
+        "score": 0.9999996810134989,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 7.5,
+        "nearest_boundary_error_seconds": 0.37099999999999866,
+        "registry_block_index": 1,
+        "registry_block_start_seconds": 30.0,
+        "score": 0.9999996789271226,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 7.5,
+        "nearest_boundary_error_seconds": 0.37099999999999866,
+        "registry_block_index": 1,
+        "registry_block_start_seconds": 30.0,
+        "score": 0.9999996789271226,
+        "useful_boundary_hit": true
+      }
+    ],
+    "10. Lovers Rock.wav|120.0|49.777": [
+      {
+        "crop_window_start_seconds": 10.0,
+        "nearest_boundary_error_seconds": 0.22299999999999898,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999997784420793,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 70.5,
+        "nearest_boundary_error_seconds": 0.277000000000001,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999995028248415,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 70.0,
+        "nearest_boundary_error_seconds": 0.22299999999999898,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999993723571181,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 10.5,
+        "nearest_boundary_error_seconds": 0.277000000000001,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999993679165167,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 40.0,
+        "nearest_boundary_error_seconds": 0.22299999999999898,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999992928000214,
+        "useful_boundary_hit": true
+      }
+    ],
+    "10. Lovers Rock.wav|120.0|71.303": [
+      {
+        "crop_window_start_seconds": 78.5,
+        "nearest_boundary_error_seconds": 0.19700000000000273,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999997999685065,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 48.5,
+        "nearest_boundary_error_seconds": 0.19700000000000273,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.99999949036167,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 79.0,
+        "nearest_boundary_error_seconds": 0.30299999999999727,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.999999459325588,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 49.0,
+        "nearest_boundary_error_seconds": 0.30299999999999727,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999994045326187,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 18.5,
+        "nearest_boundary_error_seconds": 0.19700000000000273,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999993456915908,
+        "useful_boundary_hit": true
+      }
+    ],
+    "10. Lovers Rock.wav|60.0|103.103": [
+      {
+        "crop_window_start_seconds": 17.0,
+        "nearest_boundary_error_seconds": 0.10299999999999443,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999999232335985,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 17.0,
+        "nearest_boundary_error_seconds": 0.10299999999999443,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999999232335985,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 16.5,
+        "nearest_boundary_error_seconds": 0.39700000000000557,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.999998201756065,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 17.5,
+        "nearest_boundary_error_seconds": 0.6029999999999944,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999977206878178,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 17.5,
+        "nearest_boundary_error_seconds": 0.6029999999999944,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999977206878178,
+        "useful_boundary_hit": true
+      }
+    ],
+    "10. Lovers Rock.wav|60.0|33.071": [
+      {
+        "crop_window_start_seconds": 27.0,
+        "nearest_boundary_error_seconds": 0.07099999999999795,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999997599639289,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 27.0,
+        "nearest_boundary_error_seconds": 0.07099999999999795,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999997599639289,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 26.5,
+        "nearest_boundary_error_seconds": 0.42900000000000205,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999994375403869,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 27.5,
+        "nearest_boundary_error_seconds": 0.570999999999998,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999982400061428,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 27.5,
+        "nearest_boundary_error_seconds": 0.570999999999998,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999982400061428,
+        "useful_boundary_hit": true
+      }
+    ],
+    "10. Lovers Rock.wav|60.0|71.977": [
+      {
+        "crop_window_start_seconds": 18.0,
+        "nearest_boundary_error_seconds": 0.022999999999996135,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.999999445003246,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 18.0,
+        "nearest_boundary_error_seconds": 0.022999999999996135,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.999999445003246,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 17.5,
+        "nearest_boundary_error_seconds": 0.5229999999999961,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999979788690208,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 17.5,
+        "nearest_boundary_error_seconds": 0.5229999999999961,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999979788690208,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 18.5,
+        "nearest_boundary_error_seconds": 0.47700000000000387,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999972198559097,
+        "useful_boundary_hit": true
+      }
+    ],
+    "10. Lovers Rock.wav|90.0|27.971": [
+      {
+        "crop_window_start_seconds": 32.0,
+        "nearest_boundary_error_seconds": 0.028999999999996362,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999998358428114,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 32.0,
+        "nearest_boundary_error_seconds": 0.028999999999996362,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999998358428114,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 2.0,
+        "nearest_boundary_error_seconds": 0.028999999999999915,
+        "registry_block_index": 1,
+        "registry_block_start_seconds": 30.0,
+        "score": 0.9999997804894415,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 2.0,
+        "nearest_boundary_error_seconds": 0.028999999999999915,
+        "registry_block_index": 1,
+        "registry_block_start_seconds": 30.0,
+        "score": 0.9999997804894415,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 2.5,
+        "nearest_boundary_error_seconds": 0.4710000000000001,
+        "registry_block_index": 1,
+        "registry_block_start_seconds": 30.0,
+        "score": 0.9999995316356561,
+        "useful_boundary_hit": true
+      }
+    ],
+    "10. Lovers Rock.wav|90.0|60.877": [
+      {
+        "crop_window_start_seconds": 59.0,
+        "nearest_boundary_error_seconds": 0.12299999999999756,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999997514266357,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 29.0,
+        "nearest_boundary_error_seconds": 0.12299999999999756,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999994423026818,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 59.5,
+        "nearest_boundary_error_seconds": 0.37700000000000244,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999990790583005,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 29.5,
+        "nearest_boundary_error_seconds": 0.37700000000000244,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999979659334333,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 28.5,
+        "nearest_boundary_error_seconds": 0.6229999999999976,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999972586134868,
+        "useful_boundary_hit": true
+      }
+    ],
+    "10. Lovers Rock.wav|90.0|87.203": [
+      {
+        "crop_window_start_seconds": 33.0,
+        "nearest_boundary_error_seconds": 0.20300000000000296,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999997340799973,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 2.5,
+        "nearest_boundary_error_seconds": 0.29699999999999704,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999990884474396,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 2.5,
+        "nearest_boundary_error_seconds": 0.29699999999999704,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999990884474396,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 32.5,
+        "nearest_boundary_error_seconds": 0.29699999999999704,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999989575235785,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 3.0,
+        "nearest_boundary_error_seconds": 0.20300000000000296,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999989042274099,
+        "useful_boundary_hit": true
+      }
+    ],
+    "19. Get Low.wav|120.0|113.455": [
+      {
+        "crop_window_start_seconds": 6.5,
+        "nearest_boundary_error_seconds": 0.045000000000001705,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999998440341219,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 6.0,
+        "nearest_boundary_error_seconds": 0.5450000000000017,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999997790352101,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 36.5,
+        "nearest_boundary_error_seconds": 0.045000000000001705,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999997603846423,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 7.0,
+        "nearest_boundary_error_seconds": 0.4549999999999983,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.999999509992964,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 7.0,
+        "nearest_boundary_error_seconds": 0.4549999999999983,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.999999509992964,
+        "useful_boundary_hit": true
+      }
+    ],
+    "19. Get Low.wav|120.0|36.391": [
+      {
+        "crop_window_start_seconds": 83.5,
+        "nearest_boundary_error_seconds": 0.10900000000000887,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999998579458588,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 24.0,
+        "nearest_boundary_error_seconds": 0.39099999999999824,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999998247796883,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 23.5,
+        "nearest_boundary_error_seconds": 0.10900000000000176,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.999999820873007,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 83.0,
+        "nearest_boundary_error_seconds": 0.6090000000000089,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999997420330067,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 83.0,
+        "nearest_boundary_error_seconds": 0.6090000000000089,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999997420330067,
+        "useful_boundary_hit": true
+      }
+    ],
+    "19. Get Low.wav|120.0|79.205": [
+      {
+        "crop_window_start_seconds": 40.5,
+        "nearest_boundary_error_seconds": 0.2950000000000017,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999998612741506,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 41.0,
+        "nearest_boundary_error_seconds": 0.2049999999999983,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999997269940355,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 71.0,
+        "nearest_boundary_error_seconds": 0.2049999999999983,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999996128078753,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 40.0,
+        "nearest_boundary_error_seconds": 0.7950000000000017,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.999999597756361,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 41.5,
+        "nearest_boundary_error_seconds": 0.7049999999999983,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.999999193277634,
+        "useful_boundary_hit": true
+      }
+    ],
+    "19. Get Low.wav|60.0|101.405": [
+      {
+        "crop_window_start_seconds": 18.5,
+        "nearest_boundary_error_seconds": 0.09499999999999886,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999998554640004,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 18.0,
+        "nearest_boundary_error_seconds": 0.5949999999999989,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999997506742416,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 18.0,
+        "nearest_boundary_error_seconds": 0.5949999999999989,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999997506742416,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 19.0,
+        "nearest_boundary_error_seconds": 0.40500000000000114,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999995614036712,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 17.5,
+        "nearest_boundary_error_seconds": 1.0949999999999989,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999992503160284,
+        "useful_boundary_hit": false
+      }
+    ],
+    "19. Get Low.wav|60.0|145.255": [
+      {
+        "crop_window_start_seconds": 5.0,
+        "nearest_boundary_error_seconds": 0.25499999999999545,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999994577033866,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 4.5,
+        "nearest_boundary_error_seconds": 0.24500000000000455,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999991980663625,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 4.0,
+        "nearest_boundary_error_seconds": 0.7450000000000045,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999957126783091,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 5.5,
+        "nearest_boundary_error_seconds": 0.7549999999999955,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999952831552703,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 3.5,
+        "nearest_boundary_error_seconds": 1.2450000000000045,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999902962789912,
+        "useful_boundary_hit": false
+      }
+    ],
+    "19. Get Low.wav|60.0|46.591": [
+      {
+        "crop_window_start_seconds": 13.5,
+        "nearest_boundary_error_seconds": 0.09100000000000108,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999998889503813,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 14.0,
+        "nearest_boundary_error_seconds": 0.5910000000000011,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.999999682599727,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 13.0,
+        "nearest_boundary_error_seconds": 0.4089999999999989,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999995279471624,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 13.0,
+        "nearest_boundary_error_seconds": 0.4089999999999989,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999995279471624,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 14.5,
+        "nearest_boundary_error_seconds": 1.091000000000001,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.99999902020385,
+        "useful_boundary_hit": false
+      }
+    ],
+    "19. Get Low.wav|90.0|129.355": [
+      {
+        "crop_window_start_seconds": 50.5,
+        "nearest_boundary_error_seconds": 0.14500000000001023,
+        "registry_block_index": 6,
+        "registry_block_start_seconds": 180.0,
+        "score": 0.9999996037305414,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 20.5,
+        "nearest_boundary_error_seconds": 0.14500000000001023,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999995490161137,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 21.0,
+        "nearest_boundary_error_seconds": 0.35499999999998977,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999990128890719,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 20.0,
+        "nearest_boundary_error_seconds": 0.6450000000000102,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999966055317719,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 51.0,
+        "nearest_boundary_error_seconds": 0.35499999999998977,
+        "registry_block_index": 6,
+        "registry_block_start_seconds": 180.0,
+        "score": 0.9999959807090754,
+        "useful_boundary_hit": true
+      }
+    ],
+    "19. Get Low.wav|90.0|41.491": [
+      {
+        "crop_window_start_seconds": 18.5,
+        "nearest_boundary_error_seconds": 0.009000000000000341,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999998667492189,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 19.0,
+        "nearest_boundary_error_seconds": 0.49099999999999966,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999997630704693,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 48.5,
+        "nearest_boundary_error_seconds": 0.009000000000000341,
+        "registry_block_index": 3,
+        "registry_block_start_seconds": 90.0,
+        "score": 0.9999993870949597,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 18.0,
+        "nearest_boundary_error_seconds": 0.5090000000000003,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999993736317864,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 18.0,
+        "nearest_boundary_error_seconds": 0.5090000000000003,
+        "registry_block_index": 2,
+        "registry_block_start_seconds": 60.0,
+        "score": 0.9999993736317864,
+        "useful_boundary_hit": true
+      }
+    ],
+    "19. Get Low.wav|90.0|90.305": [
+      {
+        "crop_window_start_seconds": 29.5,
+        "nearest_boundary_error_seconds": 0.19499999999999318,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999998663401838,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 29.0,
+        "nearest_boundary_error_seconds": 0.6949999999999932,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.9999996821280639,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 30.0,
+        "nearest_boundary_error_seconds": 0.3050000000000068,
+        "registry_block_index": 4,
+        "registry_block_start_seconds": 120.0,
+        "score": 0.99999965217402,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 59.5,
+        "nearest_boundary_error_seconds": 0.19499999999999318,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999993903516965,
+        "useful_boundary_hit": true
+      },
+      {
+        "crop_window_start_seconds": 60.0,
+        "nearest_boundary_error_seconds": 0.3050000000000068,
+        "registry_block_index": 5,
+        "registry_block_start_seconds": 150.0,
+        "score": 0.9999992581209068,
+        "useful_boundary_hit": true
+      }
+    ]
+  },
+  "top_final_count": 5,
+  "trials": {
+    "08. Gutta Bitch.wav": [
+      {
+        "best_error_seconds": 0.13500000000000156,
+        "crop_seconds": 60.0,
+        "crop_start_seconds": 31.135,
+        "elapsed_ms": 3384.193999998388,
+        "searched_coarse_windows": 7,
+        "source_file": "08. Gutta Bitch.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 1
+      },
+      {
+        "best_error_seconds": 0.2360000000000042,
+        "crop_seconds": 60.0,
+        "crop_start_seconds": 67.764,
+        "elapsed_ms": 3724.8221000045305,
+        "searched_coarse_windows": 7,
+        "source_file": "08. Gutta Bitch.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 1
+      },
+      {
+        "best_error_seconds": 0.06799999999999784,
+        "crop_seconds": 60.0,
+        "crop_start_seconds": 97.068,
+        "elapsed_ms": 3798.4476999990875,
+        "searched_coarse_windows": 7,
+        "source_file": "08. Gutta Bitch.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 1
+      },
+      {
+        "best_error_seconds": 0.03499999999999659,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 26.035,
+        "elapsed_ms": 4085.3169999900274,
+        "searched_coarse_windows": 13,
+        "source_file": "08. Gutta Bitch.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 2
+      },
+      {
+        "best_error_seconds": 0.16400000000000148,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 56.664,
+        "elapsed_ms": 4069.405400005053,
+        "searched_coarse_windows": 13,
+        "source_file": "08. Gutta Bitch.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 2
+      },
+      {
+        "best_error_seconds": 0.16800000000000637,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 81.168,
+        "elapsed_ms": 4082.4251000012737,
+        "searched_coarse_windows": 13,
+        "source_file": "08. Gutta Bitch.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 2
+      },
+      {
+        "best_error_seconds": 0.06499999999999773,
+        "crop_seconds": 120.0,
+        "crop_start_seconds": 20.935,
+        "elapsed_ms": 4934.936099991319,
+        "searched_coarse_windows": 19,
+        "source_file": "08. Gutta Bitch.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      },
+      {
+        "best_error_seconds": 0.06399999999999295,
+        "crop_seconds": 120.0,
+        "crop_start_seconds": 45.564,
+        "elapsed_ms": 4803.921500002616,
+        "searched_coarse_windows": 19,
+        "source_file": "08. Gutta Bitch.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      },
+      {
+        "best_error_seconds": 0.23199999999999932,
+        "crop_seconds": 120.0,
+        "crop_start_seconds": 65.268,
+        "elapsed_ms": 4448.631199993542,
+        "searched_coarse_windows": 19,
+        "source_file": "08. Gutta Bitch.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      }
+    ],
+    "10. Lovers Rock.wav": [
+      {
+        "best_error_seconds": 0.07099999999999795,
+        "crop_seconds": 60.0,
+        "crop_start_seconds": 33.071,
+        "elapsed_ms": 3391.265599988401,
+        "searched_coarse_windows": 7,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 1
+      },
+      {
+        "best_error_seconds": 0.022999999999996135,
+        "crop_seconds": 60.0,
+        "crop_start_seconds": 71.977,
+        "elapsed_ms": 3756.260599999223,
+        "searched_coarse_windows": 7,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 1
+      },
+      {
+        "best_error_seconds": 0.10299999999999443,
+        "crop_seconds": 60.0,
+        "crop_start_seconds": 103.103,
+        "elapsed_ms": 3747.05510000058,
+        "searched_coarse_windows": 7,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 1
+      },
+      {
+        "best_error_seconds": 0.028999999999996362,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 27.971,
+        "elapsed_ms": 3744.6525000123074,
+        "searched_coarse_windows": 13,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 2
+      },
+      {
+        "best_error_seconds": 0.12299999999999756,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 60.877,
+        "elapsed_ms": 3778.010299996822,
+        "searched_coarse_windows": 13,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 2
+      },
+      {
+        "best_error_seconds": 0.20300000000000296,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 87.203,
+        "elapsed_ms": 3744.135599990841,
+        "searched_coarse_windows": 13,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 2
+      },
+      {
+        "best_error_seconds": 0.12900000000000134,
+        "crop_seconds": 120.0,
+        "crop_start_seconds": 22.871,
+        "elapsed_ms": 4790.187700011302,
+        "searched_coarse_windows": 19,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      },
+      {
+        "best_error_seconds": 0.22299999999999898,
+        "crop_seconds": 120.0,
+        "crop_start_seconds": 49.777,
+        "elapsed_ms": 4977.459999994608,
+        "searched_coarse_windows": 19,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      },
+      {
+        "best_error_seconds": 0.19700000000000273,
+        "crop_seconds": 120.0,
+        "crop_start_seconds": 71.303,
+        "elapsed_ms": 4916.12759999407,
+        "searched_coarse_windows": 19,
+        "source_file": "10. Lovers Rock.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      }
+    ],
+    "19. Get Low.wav": [
+      {
+        "best_error_seconds": 0.09100000000000108,
+        "crop_seconds": 60.0,
+        "crop_start_seconds": 46.591,
+        "elapsed_ms": 3801.627399996505,
+        "searched_coarse_windows": 7,
+        "source_file": "19. Get Low.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 1
+      },
+      {
+        "best_error_seconds": 0.09499999999999886,
+        "crop_seconds": 60.0,
+        "crop_start_seconds": 101.405,
+        "elapsed_ms": 4201.425899998867,
+        "searched_coarse_windows": 7,
+        "source_file": "19. Get Low.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 1
+      },
+      {
+        "best_error_seconds": 0.24500000000000455,
+        "crop_seconds": 60.0,
+        "crop_start_seconds": 145.255,
+        "elapsed_ms": 3791.8175000086194,
+        "searched_coarse_windows": 7,
+        "source_file": "19. Get Low.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 1
+      },
+      {
+        "best_error_seconds": 0.009000000000000341,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 41.491,
+        "elapsed_ms": 4454.723900009412,
+        "searched_coarse_windows": 13,
+        "source_file": "19. Get Low.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 2
+      },
+      {
+        "best_error_seconds": 0.19499999999999318,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 90.305,
+        "elapsed_ms": 3825.0699000054738,
+        "searched_coarse_windows": 13,
+        "source_file": "19. Get Low.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 2
+      },
+      {
+        "best_error_seconds": 0.14500000000001023,
+        "crop_seconds": 90.0,
+        "crop_start_seconds": 129.355,
+        "elapsed_ms": 5084.411799994996,
+        "searched_coarse_windows": 13,
+        "source_file": "19. Get Low.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 2
+      },
+      {
+        "best_error_seconds": 0.10900000000000176,
+        "crop_seconds": 120.0,
+        "crop_start_seconds": 36.391,
+        "elapsed_ms": 5370.658800005913,
+        "searched_coarse_windows": 19,
+        "source_file": "19. Get Low.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      },
+      {
+        "best_error_seconds": 0.2049999999999983,
+        "crop_seconds": 120.0,
+        "crop_start_seconds": 79.205,
+        "elapsed_ms": 6745.0450000033015,
+        "searched_coarse_windows": 19,
+        "source_file": "19. Get Low.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      },
+      {
+        "best_error_seconds": 0.045000000000001705,
+        "crop_seconds": 120.0,
+        "crop_start_seconds": 113.455,
+        "elapsed_ms": 5169.477200004621,
+        "searched_coarse_windows": 19,
+        "source_file": "19. Get Low.wav",
+        "top1_hit": true,
+        "top5_hit": true,
+        "useful_boundaries": 3
+      }
+    ]
+  }
+}
