@@ -1,0 +1,1 @@
+{"block_record":{"block_records":[{"carrier_plan":{"carrier_bits":[0,1],"codeword_length":6,"payload_length":4},"handle":"01020304","replica_frame_indices":[[0,1],[2,3],[4,5],[6,7]],"sample_rate":16000}],"block_sample_count":480000,"handle":"01020304","sample_rate":16000,"total_sample_count":480000},"schema_version":1}
