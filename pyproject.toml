@@ -28,4 +28,7 @@ testpaths = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["stegosaurus*"]
+include = ["stegosaurus*", "saurus_app*", "saurus_style*"]
+
+[tool.setuptools.package-data]
+saurus_style = ["*.json", "*.css", "*.html", "assets/*.svg", "assets/*.png"]

@@ -78,7 +78,7 @@ Stegosaurus/
 |- GOALS.md                    # project goals, current assessment, and adversarial-evaluation workflow
 |- README.md
 |- pyproject.toml
-`- src/stegosaurus/
+|- src/stegosaurus/
    |- __init__.py
    `- audio/
       |- encoder.py      # WAV -> watermarked WAV public entry point
@@ -113,6 +113,8 @@ Stegosaurus/
       `- tests/
          |- application/             # current encoder, detector, schema, and benchmark APIs
          `- experiment_regressions/  # archived research-iteration reproducibility checks
+|- src/saurus_app/             # guided desktop encode/decode app
+`- src/saurus_style/           # shared tokens, CSS, brand assets, and visual guide
 ```
 
 ## Install And Run
@@ -125,7 +127,16 @@ python -m pip install -e ".[audio,test]"
 # Optional lab: block-waterfall controls plus V4 known-song clean leak demo,
 # playback, and WAV export.
 python -m stegosaurus.audio.demo_app
+
+# Simpler guided desktop handoff: encode WAV + private registry JSON,
+# then verify a suspicious WAV against that retained registry file.
+python -m saurus_app.app
 ```
+
+The [Saurus style guide](docs/style-guide.md) defines the shared identity and UI
+conventions. Open [the visual specimen](src/saurus_style/index.html) directly in a
+browser. The desktop reads the same tokens used by the reusable CSS; regenerate
+CSS and logo assets after token edits with `python -m saurus_style.build`.
 
 ```powershell
 # Fast current-application validation.
