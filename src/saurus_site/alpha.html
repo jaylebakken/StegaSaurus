@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; require-trusted-types-for 'script'"
+    >
+    <meta
+      name="description"
+      content="Saurus web alpha shell for account lifecycle, track registration, export review, and registry-backed attribution workflows."
+    >
+    <title>Saurus Alpha | Web Workflow</title>
+    <link rel="icon" href="../saurus_style/assets/mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="alpha.css">
+    <script src="alpha.js" defer></script>
+  </head>
+  <body>
+    <div class="alpha-shell">
+      <svg class="ambient-wave" viewBox="0 0 1000 250" preserveAspectRatio="none" focusable="false" aria-hidden="true">
+        <path class="wave-line" d="M-40 42C38 32 55 199 143 194C240 188 273 50 391 55C514 60 579 176 684 160C790 144 823 22 1040 34"/>
+        <path class="wave-line" d="M-40 56C35 48 62 211 150 205C246 198 281 65 399 68C523 71 585 186 692 170C798 154 833 37 1040 49"/>
+        <path class="wave-line" d="M-40 70C32 64 69 223 157 217C254 210 290 80 408 82C533 84 593 196 701 180C808 164 845 53 1040 65"/>
+        <path class="wave-line" d="M-40 84C29 80 76 235 164 229C262 222 299 95 417 96C543 97 601 206 710 190C818 174 857 69 1040 81"/>
+        <path class="wave-line" d="M-40 98C27 96 84 247 172 241C270 234 308 110 426 110C553 111 609 216 719 200C828 184 869 85 1040 97"/>
+      </svg>
+
+      <header class="topbar">
+        <a class="brand" href="index.html" aria-label="Back to Saurus home">
+          <img src="../saurus_style/assets/waveform-stegosaurus.svg" alt="">
+          <span>Saurus Alpha</span>
+        </a>
+        <div class="top-actions" aria-label="Alpha status">
+          <span class="status-pill">Registry gateway pending</span>
+          <span class="mode-pill">Internal alpha</span>
+        </div>
+      </header>
+
+      <div class="layout">
+        <aside class="side-panel" aria-label="Alpha navigation">
+          <nav class="nav-list">
+            <button class="nav-button is-active" type="button" data-view-target="public">
+              <span class="nav-icon">01</span>
+              <span><strong>Ad Page</strong><span>Public story</span></span>
+            </button>
+            <button class="nav-button" type="button" data-view-target="account">
+              <span class="nav-icon">02</span>
+              <span><strong>Account</strong><span>Login lifecycle</span></span>
+            </button>
+            <button class="nav-button" type="button" data-view-target="app">
+              <span class="nav-icon">03</span>
+              <span><strong>Application</strong><span>Add and verify</span></span>
+            </button>
+          </nav>
+          <p class="side-note">
+            Browser writes stay disabled until Cognito and the registry gateway
+            are live. This shell is the product path we can test today.
+          </p>
+        </aside>
+
+        <main class="workspace">
+          <section class="view is-active" id="public" data-view>
+            <div class="view-header">
+              <div>
+                <p class="eyebrow">Public alpha page</p>
+                <h1>Protect unreleased music without making the workflow weird.</h1>
+              </div>
+              <div class="button-row">
+                <a class="button secondary" href="index.html">Full site</a>
+                <button class="button tape" type="button" data-view-jump="account">Preview login</button>
+              </div>
+            </div>
+            <article class="card hero-card">
+              <div class="hero-copy">
+                <p class="lede">
+                  The public page should make one promise: register the clean
+                  track, create recipient-specific exports, and review evidence
+                  if a leaked copy comes back.
+                </p>
+                <div class="metric-row" aria-label="Public alpha pillars">
+                  <div class="metric"><strong>Private by default</strong><span>Source audio starts local.</span></div>
+                  <div class="metric"><strong>Registry backed</strong><span>Handles map to retained context.</span></div>
+                  <div class="metric"><strong>Careful language</strong><span>Matches can accept, reject, or abstain.</span></div>
+                </div>
+              </div>
+              <img src="../saurus_style/assets/waveform-stegosaurus.svg" alt="">
+            </article>
+            <div class="grid-3 spaced-grid">
+              <article class="card">
+                <h3>For artists and managers</h3>
+                <p class="lede">Send review copies without losing track of who received which export.</p>
+              </article>
+              <article class="card">
+                <h3>For labels</h3>
+                <p class="lede">Keep demo, promo, and partner deliveries tied to a reviewable registry.</p>
+              </article>
+              <article class="card">
+                <h3>For investigations</h3>
+                <p class="lede">Start from a suspected song and compare against known authorized exports.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="view" id="account" data-view>
+            <div class="view-header">
+              <div>
+                <p class="eyebrow">Login and account lifecycle</p>
+                <h2>Invite, verify, enroll, and audit before the app can write.</h2>
+              </div>
+              <button class="button primary" type="button" data-view-jump="app">Open app shell</button>
+            </div>
+            <div class="grid-2">
+              <article class="card">
+                <h3>Cognito managed login path</h3>
+                <ol class="timeline" aria-label="Account lifecycle checklist">
+                  <li class="is-ready"><strong>Invite alpha user</strong><span>Tenant and role are created server-side.</span></li>
+                  <li class="is-current"><strong>Verify email</strong><span>Managed login handles sign-up and password reset.</span></li>
+                  <li><strong>Enroll workspace</strong><span>Gateway maps user identity to tenant permissions.</span></li>
+                  <li><strong>Audit actions</strong><span>Song, export, verification, and sign-out events are recorded.</span></li>
+                  <li><strong>Close account</strong><span>Deletion requests follow retention policy before action.</span></li>
+                </ol>
+              </article>
+              <article class="card dark">
+                <h3>What the browser never gets</h3>
+                <p class="lede">
+                  The registry signing secret, KMS grant material, raw retained
+                  records, and tenant mapping rules stay on the server side.
+                </p>
+                <div class="registry-strip">
+                  <strong>Gateway required</strong>
+                  <span>Cognito JWT in, signed internal registry request out.</span>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="view" id="app" data-view>
+            <div class="view-header">
+              <div>
+                <p class="eyebrow">Application</p>
+                <h2>Add a track, attach registry context, and prepare exports.</h2>
+              </div>
+              <div class="button-row">
+                <button class="button secondary" type="button" data-reset-file>Reset file</button>
+                <button class="button tape" type="button" data-stage-package>Stage package</button>
+              </div>
+            </div>
+            <div class="grid-2">
+              <article class="card">
+                <div class="drop-zone" data-drop-zone>
+                  <div>
+                    <h3>Drop a clean WAV here</h3>
+                    <p class="lede">or select a file to start the alpha workflow.</p>
+                  </div>
+                  <label class="button primary" for="audio-file">Select file</label>
+                  <input class="hidden-input" id="audio-file" type="file" accept=".wav,audio/wav,audio/x-wav" data-file-input>
+                  <span class="file-name" data-file-name>No file selected</span>
+                </div>
+                <div class="field-grid">
+                  <label>
+                    Track title
+                    <input type="text" value="Night Drive Master" aria-label="Track title">
+                  </label>
+                  <label>
+                    Recipient or list name
+                    <input type="text" value="Atlas Mastering Review" aria-label="Recipient or list name">
+                  </label>
+                  <label>
+                    Delivery note
+                    <input type="text" value="Alpha demo export, do not redistribute" aria-label="Delivery note">
+                  </label>
+                </div>
+              </article>
+              <article class="card">
+                <h3>Registry package</h3>
+                <ol class="timeline" data-package-steps aria-label="Registry package status">
+                  <li class="is-ready"><strong>Clean source selected</strong><span data-source-status>Waiting for browser file selection.</span></li>
+                  <li><strong>Song record</strong><span>Will be created by authenticated gateway.</span></li>
+                  <li><strong>Export reservation</strong><span>Will receive opaque handle before encode.</span></li>
+                  <li><strong>Encode job</strong><span>Web alpha handoff to local encoder remains open.</span></li>
+                  <li><strong>Verification report</strong><span>Accepted, rejected, or abstained evidence only.</span></li>
+                </ol>
+                <div class="registry-strip">
+                  <strong data-package-title>Not staged yet</strong>
+                  <span data-package-caption>Choose a WAV file and stage the package when ready.</span>
+                </div>
+              </article>
+            </div>
+            <div class="song-list spaced-grid" aria-label="Example app records">
+              <div class="song-row">
+                <div><strong>Night Drive Master.wav</strong><span class="meta">3 exports reserved - last verification accepted with review</span></div>
+                <span class="tag">Demo record</span>
+              </div>
+              <div class="song-row">
+                <div><strong>Blue Room Rough Mix.wav</strong><span class="meta">1 export finalized - no leak investigation opened</span></div>
+                <span class="tag">Local-only</span>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <footer class="footer">
+        Saurus web alpha shell. Live customer data stays blocked until auth,
+        gateway, tenant isolation, image risk, and policy gates clear.
+      </footer>
+    </div>
+  </body>
+</html>

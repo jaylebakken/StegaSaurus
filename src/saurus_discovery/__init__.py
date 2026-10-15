@@ -26,6 +26,15 @@ from .fingerprint import (
 )
 from .gates import ConnectorGateResult, ConnectorQualityCase, evaluate_connector_gate
 from .incident import DiscoveryIncidentDrill, IncidentAction, IncidentDrillResult, IncidentStep
+from .live_gate import LiveCrawlGateDecision, evaluate_live_crawl_gate
+from .launch_readiness import (
+    DiscoveryLegalPolicyReviewRecord,
+    DiscoveryRecognitionEngineSelection,
+    DiscoveryThresholdCalibration,
+    PublicSourceSelection,
+    RepresentativeCorpusSummary,
+    record_discovery_threshold_calibration,
+)
 from .media import DecodedMedia, MediaLimits, decode_public_media
 from .media_cost import MediaCostRecord, MediaCostSnapshot, media_cost_snapshot
 from .models import (
@@ -67,6 +76,7 @@ __all__ = [
     "DiscoveryBaselineRun",
     "DiscoveryDashboardSnapshot",
     "DiscoveryIncidentDrill",
+    "DiscoveryLegalPolicyReviewRecord",
     "DiscoveryPilotDecision",
     "DiscoveryPilotDecisionRecord",
     "DiscoveryPilotMetrics",
@@ -74,6 +84,8 @@ __all__ = [
     "DiscoveryPilotThresholds",
     "DiscoveryScheduler",
     "DiscoveryTarget",
+    "DiscoveryRecognitionEngineSelection",
+    "DiscoveryThresholdCalibration",
     "ExternalActionApproval",
     "ExternalActionKind",
     "FetchDecision",
@@ -86,12 +98,15 @@ __all__ = [
     "IncidentStep",
     "JobState",
     "LabeledFingerprintExample",
+    "LiveCrawlGateDecision",
     "MediaLimits",
     "MediaCostRecord",
     "MediaCostSnapshot",
     "OptOutRequest",
     "OptOutResult",
     "PageCandidate",
+    "PublicSourceSelection",
+    "RepresentativeCorpusSummary",
     "ReviewState",
     "ReviewAction",
     "ReviewQueue",
@@ -114,6 +129,7 @@ __all__ = [
     "evaluate_discovery_pilot",
     "evaluate_fetch_url",
     "evaluate_connector_gate",
+    "evaluate_live_crawl_gate",
     "enroll_discovery_pilot",
     "feed_source_metrics_snapshot",
     "source_coverage_snapshot",
@@ -121,4 +137,5 @@ __all__ = [
     "review_external_action",
     "media_cost_snapshot",
     "record_discovery_pilot_decision",
+    "record_discovery_threshold_calibration",
 ]

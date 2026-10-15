@@ -74,6 +74,30 @@ class SignedVerificationReport:
             raise ValueError("report signature algorithm is not supported")
 
 
+@dataclass(frozen=True, slots=True)
+class VerificationReportSummary:
+    """Render report evidence as matched, rejected, and abstained statements."""
+
+    outcome: ReportOutcome
+    matched_statement: str
+    did_not_match_statement: str
+    abstention_statement: str
+    human_review_statement: str
+
+    def __post_init__(self) -> None:
+        """Validate user-visible report summary wording."""
+
+        for value, name in (
+            (self.outcome, "outcome"),
+            (self.matched_statement, "matched_statement"),
+            (self.did_not_match_statement, "did_not_match_statement"),
+            (self.abstention_statement, "abstention_statement"),
+            (self.human_review_statement, "human_review_statement"),
+        ):
+            _require_text(value, name)
+            _reject_unsafe_words(value)
+
+
 def build_watermark_report_payload(
     *,
     tenant_id: str,
@@ -102,6 +126,29 @@ def build_watermark_report_payload(
         result,
         f"Export event {export_id} has the user label {recipient_label.strip()}.",
         issued_utc,
+    )
+
+
+def summarize_verification_report(payload: VerificationReportPayload) -> VerificationReportSummary:
+    """Return explicit matched, rejected, and abstained report language."""
+
+    matched = f"No accepted watermark match was recorded for export event {payload.export_id} under profile {payload.profile_version}."
+    rejected = f"No selected-claim rejection was recorded for export event {payload.export_id} under profile {payload.profile_version}."
+    abstained = f"Saurus did not abstain for verification event {payload.verification_event_id}."
+    if payload.outcome == "accepted":
+        matched = payload.result_statement
+    elif payload.outcome == "rejected":
+        rejected = payload.result_statement
+        abstained = f"Saurus did not reach an accepted match for export event {payload.export_id} under profile {payload.profile_version}."
+    else:
+        rejected = f"The selected export claim was not accepted for export event {payload.export_id} under profile {payload.profile_version}."
+        abstained = payload.result_statement
+    return VerificationReportSummary(
+        payload.outcome,
+        matched,
+        rejected,
+        abstained,
+        "External client alerts, attribution handoffs, notices, or legal workflows require human review before action.",
     )
 
 

@@ -10,13 +10,22 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import json
+import os
 
 import pytest
 
 from saurus_app.credentials import DesktopCredentialManager, DeviceCredential, MemoryCredentialStore
+from saurus_app.local_registry import LocalRegistryConfig, local_registry_backend, local_registry_health
 from saurus_app.pending import PendingEncodeLog, PendingEncodeStatus, pending_record_for_encode
-from saurus_app.registry import RegistryFields, decode_claims, decode_claims_measured, decode_file, default_output_paths, encode_file
+from saurus_app.packaging import build_desktop_zipapp
+from saurus_app.privacy import scan_text_artifacts
+from saurus_app.protected_credentials import ProtectedFileCredentialStore, default_credential_store
+from saurus_app.recovery import encode_with_pending_log, pending_summary
+from saurus_app.release import launch_check
+from saurus_app.registry import RegistryFields, decode_claims, decode_claims_measured, decode_file, default_output_paths, encode_file, inspect_registry_file
 from saurus_app.remote_registry import ApiRegistryBackend
+from saurus_app.security import review_desktop_secret_posture
+from saurus_app.smoke import run_alpha_contract_smoke, run_local_registry_smoke
 from saurus_registry import ExportState, HmacBearerAuthenticator, InMemoryRegistryRepository, RegistryApi, RegistryService
 from stegosaurus.audio.demo_samples import music_like_sample
 from stegosaurus.audio.pilot import write_pcm16_wav
@@ -57,6 +66,16 @@ def test_guided_saurus_encode_decode_round_trip(tmp_path) -> None:
     assert decoded.project == "release candidate"
 
 
+def test_desktop_secret_posture_marks_local_demo_secret_as_not_production_ready() -> None:
+    """Keep the shared desktop watermark secret out of production posture."""
+
+    posture = review_desktop_secret_posture()
+
+    assert posture.scope == "local-demo-only"
+    assert not posture.has_shared_production_secret
+    assert not posture.production_ready
+
+
 def test_guided_saurus_remote_backend_round_trip_uses_recovery_receipt(tmp_path) -> None:
     """Reserve a server handle, finalize remotely, and avoid private receipt records."""
 
@@ -86,6 +105,177 @@ def test_guided_saurus_remote_backend_round_trip_uses_recovery_receipt(tmp_path)
     assert decoded.accepted
     assert decoded.recipient == "northline api"
     assert decoded.project == "remote release"
+
+
+def test_guided_saurus_local_registry_backend_persists_desktop_workflow(tmp_path) -> None:
+    """Use the desktop's local SQLite registry connection across restarts."""
+
+    source_path = tmp_path / "source.wav"
+    database_path = tmp_path / "desktop-registry.sqlite"
+    write_pcm16_wav(source_path, music_like_sample(30))
+    output_wav, registry_json = default_output_paths(source_path)
+    config = LocalRegistryConfig(database_path)
+    backend = local_registry_backend(config)
+
+    encoded = encode_file(
+        source_path,
+        output_wav,
+        registry_json,
+        RegistryFields("local registry release", "alpha recipient", "registry-backed desktop"),
+        backend=backend,
+    )
+    restarted_backend = local_registry_backend(config)
+    decoded = decode_file(encoded.output_wav, encoded.registry_json, backend=restarted_backend)
+    event_id = restarted_backend.report_verification_result(encoded.registry_json, decoded)
+    summary = inspect_registry_file(encoded.registry_json, backend=restarted_backend)
+
+    assert database_path.exists()
+    assert decoded.accepted
+    assert decoded.recipient == "alpha recipient"
+    assert event_id
+    assert summary.project == "local registry release"
+    assert summary.recipient == "alpha recipient"
+    assert summary.handle_hex == encoded.handle_hex
+
+
+def test_guided_saurus_local_registry_health_summarizes_operator_state(tmp_path) -> None:
+    """Summarize local registry health without opening the desktop UI."""
+
+    source_path = tmp_path / "source.wav"
+    database_path = tmp_path / "desktop-registry.sqlite"
+    write_pcm16_wav(source_path, music_like_sample(30))
+    output_wav, registry_json = default_output_paths(source_path)
+    config = LocalRegistryConfig(database_path)
+
+    missing = local_registry_health(config)
+    backend = local_registry_backend(config)
+    encode_file(
+        source_path,
+        output_wav,
+        registry_json,
+        RegistryFields("health release", "health recipient", ""),
+        backend=backend,
+    )
+    health = local_registry_health(config)
+
+    assert not missing.exists
+    assert health.exists
+    assert health.tenant_registered
+    assert health.schema_version is not None
+    assert health.database_bytes > 0
+    assert health.song_count == 1
+    assert health.active_count == 1
+    assert health.export_count >= health.active_count
+    assert health.failed_count == health.export_count - health.active_count
+    assert health.audit_event_count >= 3
+
+
+def test_guided_saurus_registry_encode_updates_visible_pending_log(tmp_path) -> None:
+    """Mark registry-backed encodes completed or retryable for recovery UI."""
+
+    source_path = tmp_path / "source.wav"
+    database_path = tmp_path / "desktop-registry.sqlite"
+    write_pcm16_wav(source_path, music_like_sample(30))
+    output_wav, registry_json = default_output_paths(source_path)
+    backend = local_registry_backend(LocalRegistryConfig(database_path))
+    log = PendingEncodeLog(tmp_path / "pending.json")
+    fields = RegistryFields("pending release", "pending recipient", "private note excluded")
+
+    encoded = encode_with_pending_log(source_path, output_wav, registry_json, fields, backend, log)
+    completed = log.list_records()[0]
+
+    assert encoded.output_wav.exists()
+    assert completed.status is PendingEncodeStatus.COMPLETED
+    assert log.pending() == ()
+    assert pending_summary(log) == "No pending registry-backed encodes need recovery."
+
+    broken_backend = local_registry_backend(LocalRegistryConfig(database_path))
+    broken_output = tmp_path / "missing" / "broken.wav"
+    broken_receipt = tmp_path / "missing" / "broken.saurus.json"
+    with pytest.raises(FileNotFoundError):
+        encode_with_pending_log(source_path, broken_output, broken_receipt, fields, broken_backend, log)
+    summary = pending_summary(log)
+
+    assert "retryable" in summary
+    assert "pending release / pending recipient" in summary
+    assert "private note" not in summary
+
+
+def test_guided_saurus_local_registry_smoke_script(tmp_path) -> None:
+    """Exercise the scripted desktop release-check workflow."""
+
+    result = run_local_registry_smoke(tmp_path / "smoke")
+
+    assert result.source_wav.exists()
+    assert result.encoded_wav.exists()
+    assert result.registry_receipt.exists()
+    assert result.registry_database.exists()
+    assert result.project == "desktop smoke release"
+    assert result.recipient == "alpha smoke recipient"
+    assert len(result.handle_hex) == 8
+
+
+def test_guided_saurus_alpha_contract_smoke_enrolls_device_and_reports_event(tmp_path) -> None:
+    """Exercise the pre-AWS alpha credential registry contract."""
+
+    result = run_alpha_contract_smoke(tmp_path / "alpha-smoke")
+    receipt_text = result.registry_receipt.read_text(encoding="utf-8")
+    scan = scan_text_artifacts(
+        {"receipt": receipt_text, "event": result.verification_event_id},
+        {"bearer_token": "Bearer ", "private_note": "token must not appear"},
+    )
+
+    assert result.encoded_wav.exists()
+    assert result.registry_receipt.exists()
+    assert result.project == "alpha contract smoke"
+    assert result.recipient == "alpha credential recipient"
+    assert result.verification_event_id
+    assert scan.passed
+
+
+def test_guided_saurus_desktop_launch_check_builds_hidden_workspace() -> None:
+    """Verify the release launch path without showing the desktop window."""
+
+    result = launch_check()
+
+    assert result.ok
+    assert result.title == "Saurus | Audio Workspace"
+    assert result.tab_count == 3
+    assert result.credential_status == "NO DEVICE"
+
+
+def test_guided_saurus_desktop_zipapp_package_launches(tmp_path: Path) -> None:
+    """Build a lightweight desktop package and run its launch check."""
+
+    result = build_desktop_zipapp(tmp_path / "saurus-desktop.pyz")
+
+    assert result.output_path.exists()
+    assert result.size_bytes > 0
+    assert result.launch_check_passed
+    assert result.release_channel == "alpha"
+    assert "saurus_app" in result.package_names
+
+
+def test_guided_saurus_desktop_blocks_production_package_with_demo_secret(tmp_path: Path) -> None:
+    """Prevent production package labels while local-demo watermark secrets remain."""
+
+    with pytest.raises(ValueError, match="KMS-backed watermark grants"):
+        build_desktop_zipapp(tmp_path / "saurus-production.pyz", launch_check=False, release_channel="production")
+
+
+def test_guided_saurus_privacy_scan_finds_forbidden_text() -> None:
+    """Detect accidental private snippets in text artifacts."""
+
+    result = scan_text_artifacts(
+        {"status": "Device enrolled without displaying a token"},
+        {"token": "secret-token", "safe_empty": ""},
+    )
+    failed = scan_text_artifacts({"receipt": "secret-token"}, {"token": "secret-token"})
+
+    assert result.passed
+    assert not failed.passed
+    assert failed.findings[0].label == "receipt"
+    assert failed.findings[0].forbidden_name == "token"
 
 
 def test_guided_saurus_remote_backend_uses_enrolled_bearer_credential(tmp_path) -> None:
@@ -127,6 +317,39 @@ def test_guided_saurus_remote_backend_uses_enrolled_bearer_credential(tmp_path) 
     assert decoded.recipient == "bearer recipient"
     assert credential.bearer_token not in receipt_text
     assert repository.events(tenant.tenant_id)[-1].actor_id == "device-1"
+
+
+def test_protected_file_credential_store_keeps_token_out_of_plaintext(tmp_path) -> None:
+    """Persist desktop credentials only through an explicit byte protector."""
+
+    store = ProtectedFileCredentialStore(
+        tmp_path / "credentials",
+        lambda value: b"sealed:" + value[::-1],
+        lambda value: value.removeprefix(b"sealed:")[::-1],
+    )
+    credential = DeviceCredential("https://registry.saurus.example", "tenant-1", "device-1", "secret-token")
+
+    store.save(credential)
+    loaded = store.load("https://registry.saurus.example", "tenant-1")
+    blob = next((tmp_path / "credentials").glob("*.saurus-credential"))
+
+    assert loaded == credential
+    assert b"secret-token" not in blob.read_bytes()
+    assert "https://registry.saurus.example" not in blob.read_text(encoding="latin-1")
+
+    store.delete("https://registry.saurus.example", "tenant-1")
+
+    with pytest.raises(ValueError, match="not enrolled"):
+        store.load("https://registry.saurus.example", "tenant-1")
+
+
+def test_default_credential_store_uses_os_protection_when_available() -> None:
+    """Prefer the OS-backed credential adapter on supported desktop platforms."""
+
+    _store, info = default_credential_store()
+
+    assert info.os_backed == (os.name == "nt")
+    assert info.backend in {"windows-dpapi", "memory-fallback"}
 
 
 def test_guided_saurus_remote_receipt_contains_only_recovery_routing_fields(tmp_path) -> None:

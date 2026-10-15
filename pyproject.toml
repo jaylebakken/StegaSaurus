@@ -18,6 +18,9 @@ audio = [
     "scipy>=1.14,<2",
 ]
 test = ["pytest>=8"]
+aws-alpha = [
+    "psycopg[binary]>=3.2,<4",
+]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
@@ -28,7 +31,7 @@ testpaths = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["stegosaurus*", "saurus_app*", "saurus_registry*", "saurus_discovery*", "saurus_style*"]
+include = ["stegosaurus*", "saurus_app*", "saurus_gateway*", "saurus_registry*", "saurus_discovery*", "saurus_infra*", "saurus_pilot*", "saurus_style*"]
 
 [tool.setuptools.package-data]
 saurus_style = ["*.json", "*.css", "*.html", "assets/*.svg", "assets/*.png"]

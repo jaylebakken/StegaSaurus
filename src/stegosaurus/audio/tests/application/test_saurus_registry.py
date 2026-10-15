@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from base64 import b64encode
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import replace
+from dataclasses import asdict, replace
 from datetime import datetime, timedelta, timezone
 from itertools import count
 import json
@@ -20,38 +20,61 @@ from threading import Event
 
 import pytest
 
+import saurus_registry.container as container_module
 from saurus_registry import (
+    AWS_KMS_DATA_KEY_GRANT,
     CURRENT_HANDLE_BYTES,
     CURRENT_SCHEMA_VERSION,
+    ENCODE_GRANT_ISSUED_ACTION,
+    REGISTRY_DELETION_REQUESTED_ACTION,
     ApiRequest,
+    ApiResponse,
+    AwsKmsClientConfig,
+    AwsKmsEncodeGrantProvider,
     ExportRecord,
     ExportState,
+    EncodeGrant,
+    EncodeGrantAuditRecord,
+    EncodeGrantScope,
+    EvidenceCopyReview,
     HandleCapacityReview,
     HandleConflictError,
     HmacBearerAuthenticator,
     InMemoryRegistryRepository,
+    KmsIssuedEncodeGrant,
     LocalHmacStreamCipher,
+    LocalKmsKeyring,
+    PostgresConnectionSettings,
     RegistryAccessProbe,
     RegistryAccessProbeKind,
     RegistryAccessReviewSnapshot,
+    RegistryDeletionApproval,
     RegistryService,
     RegistryApi,
     RegistryApiMetricsSnapshot,
     RegistryApiObservation,
+    RegistryRequestLogRecord,
     RegistryLaunchDecisionRecord,
     RegistryLaunchThresholds,
     RegistryMetricsSnapshot,
     RegistryRetentionPolicy,
     RetentionAction,
+    POSTGRES_SCHEMA_VERSION,
     ScheduledRegistryOperation,
     SQLiteRegistryRepository,
     StoredAttributionRecord,
     TenantExportManifest,
     BackupRestoreRehearsalResult,
+    Boto3KmsDataKeyClient,
+    DeletionApprovalStatus,
+    VerificationReportSummary,
     build_tenant_export_manifest,
     build_watermark_report_payload,
     default_registry_operations,
     due_registry_operations,
+    encode_grant_audit_digest,
+    encode_grant_audit_record,
+    encode_grant_context_digest,
     evaluate_registry_launch,
     expire_stale_reserved_exports,
     mark_registry_operation_run,
@@ -59,14 +82,32 @@ from saurus_registry import (
     rotate_sqlite_record_key,
     registry_api_metrics_snapshot,
     registry_metrics_snapshot,
+    registry_request_log_record,
     record_registry_launch_decision,
+    record_encode_grant_issuance,
+    record_registry_deletion_request,
     registry_access_review_snapshot,
     rehearse_sqlite_backup_restore,
+    render_postgres_migration_plan,
     review_handle_capacity,
+    review_evidence_copy,
     review_registry_retention,
     sign_verification_report,
+    summarize_verification_report,
     verify_signed_report,
 )
+from saurus_registry.container import (
+    RegistryContainerConfig,
+    RegistryPostgresConfig,
+    RegistryRuntimeSecrets,
+    build_registry_container_api,
+    build_registry_repository,
+    container_config_from_env,
+    database_credentials_from_env,
+    postgres_config_from_env,
+    runtime_secrets_from_env,
+)
+from saurus_registry.readiness import RegistryLaunchRehearsalResult, run_local_registry_launch_rehearsal
 from saurus_registry.serialization import (
     RECORD_SCHEMA_VERSION,
     deserialize_block_record,
@@ -213,6 +254,181 @@ def test_registry_handle_capacity_review_validates_inputs() -> None:
         review_handle_capacity(1, handle_bytes=0)
     with pytest.raises(ValueError, match="handle_bytes"):
         review_handle_capacity(1, handle_bytes=True)
+
+
+def test_local_kms_keyring_issues_scoped_expiring_encode_grants() -> None:
+    """Model server-owned key custody with short-lived desktop working keys."""
+
+    scope = EncodeGrantScope("tenant-1", "song-1", "export-1", "device-1", "actor-1", "profile-v1", NOW, NOW + timedelta(minutes=10), "request-1")
+    keyring = LocalKmsKeyring("tenant-root-2026-10", b"r" * 32, identifier_factory=lambda: "grant-1", clock=lambda: NOW)
+    grant = keyring.issue_encode_grant(scope, b"d" * 32)
+
+    working_key = keyring.unwrap_encode_grant(grant, b"d" * 32, NOW + timedelta(minutes=1))
+    replayed = keyring.unwrap_encode_grant(grant, b"d" * 32, NOW + timedelta(minutes=2))
+
+    assert isinstance(grant, EncodeGrant)
+    assert grant.root_key_id == "tenant-root-2026-10"
+    assert grant.scope == scope
+    assert len(working_key) == 32
+    assert working_key == replayed
+    assert b"r" * 32 not in repr(grant).encode("utf-8")
+    with pytest.raises(ValueError, match="expired"):
+        keyring.unwrap_encode_grant(grant, b"d" * 32, NOW + timedelta(minutes=10))
+    with pytest.raises(ValueError, match="root_key_id"):
+        LocalKmsKeyring("tenant-root-rotated", b"n" * 32).unwrap_encode_grant(grant, b"d" * 32, NOW + timedelta(minutes=1))
+    with pytest.raises(ValueError, match="device authentication"):
+        keyring.unwrap_encode_grant(grant, b"x" * 32, NOW + timedelta(minutes=1))
+
+
+def test_encode_grant_audit_record_excludes_key_material() -> None:
+    """Project grant issuance into durable JSON-safe metadata only."""
+
+    scope = EncodeGrantScope("tenant-1", "song-1", "export-1", "device-1", "actor-1", "profile-v1", NOW, NOW + timedelta(minutes=10), "request-1")
+    grant = LocalKmsKeyring("tenant-root-2026-10", b"r" * 32, identifier_factory=lambda: "grant-1").issue_encode_grant(scope, b"d" * 32)
+
+    audit = encode_grant_audit_record(grant)
+    payload = json.dumps(asdict(audit), sort_keys=True)
+
+    assert isinstance(audit, EncodeGrantAuditRecord)
+    assert audit.grant_id == "grant-1"
+    assert audit.root_key_id == "tenant-root-2026-10"
+    assert audit.tenant_id == "tenant-1"
+    assert audit.song_id == "song-1"
+    assert audit.export_id == "export-1"
+    assert audit.device_id == "device-1"
+    assert audit.actor_id == "actor-1"
+    assert audit.profile_version == "profile-v1"
+    assert audit.request_id == "request-1"
+    assert audit.expires_utc == scope.expires_utc.isoformat()
+    assert audit.context_digest == grant.context_digest
+    assert "wrapped_working_key" not in payload
+    assert "wrap_tag" not in payload
+    assert "dddd" not in payload
+    assert "rrrr" not in payload
+
+
+def test_aws_kms_encode_grant_provider_uses_scoped_encryption_context() -> None:
+    """Issue a managed KMS-shaped grant without retaining plaintext in the grant."""
+
+    class FakeKmsClient:
+        """Capture one GenerateDataKey call for the provider contract."""
+
+        def __init__(self) -> None:
+            """Initialize an empty call log."""
+
+            self.calls: list[dict[str, object]] = []
+
+        def generate_data_key(self, **kwargs: object) -> dict[str, object]:
+            """Return a deterministic KMS data-key response."""
+
+            self.calls.append(kwargs)
+            return {"KeyId": "arn:aws:kms:region:acct:key/encode", "Plaintext": b"w" * 32, "CiphertextBlob": b"kms-ciphertext"}
+
+    client = FakeKmsClient()
+    scope = EncodeGrantScope("tenant-1", "song-1", "export-1", "device-1", "actor-1", "profile-v1", NOW, NOW + timedelta(minutes=10), "request-1")
+    provider = AwsKmsEncodeGrantProvider("alias/saurus/alpha/encode-grants", client, identifier_factory=lambda: "grant-aws-1")
+
+    issued = provider.issue_encode_grant(scope)
+    audit = encode_grant_audit_record(issued.grant)
+    call = client.calls[0]
+    context = call["EncryptionContext"]
+
+    assert isinstance(issued, KmsIssuedEncodeGrant)
+    assert issued.working_key == b"w" * 32
+    assert issued.grant.algorithm == AWS_KMS_DATA_KEY_GRANT
+    assert issued.grant.wrapped_working_key == b"kms-ciphertext"
+    assert issued.grant.wrap_tag
+    assert issued.grant.context_digest == encode_grant_context_digest(scope)
+    assert call["KeyId"] == "alias/saurus/alpha/encode-grants"
+    assert call["KeySpec"] == "AES_256"
+    assert context["tenant_id"] == "tenant-1"
+    assert context["request_id"] == "request-1"
+    assert context["context_digest"] == issued.grant.context_digest
+    assert audit.root_key_id == "arn:aws:kms:region:acct:key/encode"
+    assert "wwww" not in repr(issued)
+    with pytest.raises(ValueError, match="Plaintext"):
+        AwsKmsEncodeGrantProvider("alias/saurus/alpha/encode-grants", type("BadClient", (), {"generate_data_key": lambda self, **kwargs: {"CiphertextBlob": b"x"}})()).issue_encode_grant(scope)
+
+
+def test_boto3_kms_data_key_client_adapts_session_without_importing_aws() -> None:
+    """Wire a boto3-shaped KMS client into scoped encode-grant issuance."""
+
+    class FakeKmsService:
+        """Capture generated data-key requests."""
+
+        def __init__(self) -> None:
+            """Initialize an empty request log."""
+
+            self.calls: list[dict[str, object]] = []
+
+        def generate_data_key(self, **kwargs: object) -> dict[str, object]:
+            """Return a deterministic AWS-shaped response."""
+
+            self.calls.append(kwargs)
+            return {"KeyId": "arn:aws:kms:region:acct:key/encode", "Plaintext": b"k" * 32, "CiphertextBlob": b"ciphertext"}
+
+    class FakeSession:
+        """Capture boto3 client construction."""
+
+        def __init__(self, service: FakeKmsService) -> None:
+            """Bind the fake service returned for KMS."""
+
+            self.service = service
+            self.calls: list[tuple[str, dict[str, str]]] = []
+
+        def client(self, service_name: str, **kwargs: str) -> FakeKmsService:
+            """Return the fake KMS service and remember settings."""
+
+            self.calls.append((service_name, kwargs))
+            return self.service
+
+    service = FakeKmsService()
+    session = FakeSession(service)
+    client = Boto3KmsDataKeyClient.from_session(session, AwsKmsClientConfig("us-west-2", "https://kms.local"))
+    scope = EncodeGrantScope("tenant-1", "song-1", "export-1", "device-1", "actor-1", "profile-v1", NOW, NOW + timedelta(minutes=10), "request-1")
+    provider = AwsKmsEncodeGrantProvider("alias/saurus/alpha/encode-grants", client, identifier_factory=lambda: "grant-aws-1")
+
+    issued = provider.issue_encode_grant(scope)
+
+    assert session.calls == [("kms", {"region_name": "us-west-2", "endpoint_url": "https://kms.local"})]
+    assert service.calls[0]["EncryptionContext"]["context_digest"] == issued.grant.context_digest
+    assert issued.working_key == b"k" * 32
+    with pytest.raises(TypeError, match="generate_data_key"):
+        Boto3KmsDataKeyClient(object())
+
+
+def test_encode_grant_issuance_persists_digest_only_audit_event(tmp_path: Path) -> None:
+    """Persist KMS-backed grant issuance without retaining key artifacts."""
+
+    repository = SQLiteRegistryRepository(tmp_path / "registry.sqlite")
+    service = RegistryService(repository, clock=lambda: NOW, identifier_factory=lambda: "tenant-1")
+    tenant = service.register_tenant("Grant Audit Tenant", "ops-owner", "request-tenant")
+    scope = EncodeGrantScope(tenant.tenant_id, "song-1", "export-1", "device-1", "actor-1", "profile-v1", NOW, NOW + timedelta(minutes=10), "request-grant")
+    grant = LocalKmsKeyring("tenant-root-2026-10", b"r" * 32, identifier_factory=lambda: "grant-1").issue_encode_grant(scope, b"d" * 32)
+
+    event = record_encode_grant_issuance(repository, grant, event_id_factory=lambda: "event-grant-1", clock=lambda: NOW)
+    persisted = tuple(item for item in SQLiteRegistryRepository(tmp_path / "registry.sqlite").events(tenant.tenant_id) if item.action == ENCODE_GRANT_ISSUED_ACTION)
+    payload = repr(event)
+
+    assert persisted == (event,)
+    assert event.object_id == "grant-1"
+    assert event.request_id == "request-grant"
+    assert event.detail_digest == encode_grant_audit_digest(encode_grant_audit_record(grant))
+    assert "wrapped_working_key" not in payload
+    assert "wrap_tag" not in payload
+    assert "dddd" not in payload
+    assert "rrrr" not in payload
+
+
+def test_encode_grant_scope_validates_lifetime_and_secret_inputs() -> None:
+    """Reject key grants that would behave like standing desktop secrets."""
+
+    with pytest.raises(ValueError, match="expires_utc"):
+        EncodeGrantScope("tenant-1", "song-1", "export-1", "device-1", "actor-1", "profile-v1", NOW, NOW)
+    with pytest.raises(ValueError, match="root_secret"):
+        LocalKmsKeyring("root", b"short")
+    with pytest.raises(ValueError, match="device_secret"):
+        LocalKmsKeyring("root", b"r" * 32).issue_encode_grant(EncodeGrantScope("tenant-1", "song-1", "export-1", "device-1", "actor-1", "profile-v1", NOW, NOW + timedelta(minutes=1)), b"short")
 
 
 def test_registry_finalizes_lineage_and_preserves_revoked_verification_record() -> None:
@@ -455,6 +671,39 @@ def test_registry_retention_review_validates_policy_and_scope() -> None:
         review_registry_retention(repository, tenant_a, (song_b,), NOW, RegistryRetentionPolicy(1, 1))
 
 
+def test_registry_deletion_request_requires_counsel_approval_and_retention_review() -> None:
+    """Audit deletion requests only after policy approval without deleting records."""
+
+    service, repository = _service([b"\x11\x22\x33\x44"])
+    tenant_id, song_id = _tenant_and_song(service)
+    reserved = service.reserve_export(tenant_id, song_id, "Recipient", "actor-1", "request-reserve")
+    service.fail_export(tenant_id, reserved.export_id, "clean gate failed", "actor-1", "request-fail")
+    decision = review_registry_retention(repository, tenant_id, (song_id,), NOW + timedelta(days=2), RegistryRetentionPolicy(31, 1))[0]
+    draft = RegistryDeletionApproval("retention-v0", "owner-1", "counsel-1", NOW, DeletionApprovalStatus.DRAFT, "draft only")
+    approved = RegistryDeletionApproval("retention-v1", "owner-1", "counsel-1", NOW, DeletionApprovalStatus.COUNSEL_APPROVED, "approved test policy")
+
+    with pytest.raises(ValueError, match="counsel approved"):
+        record_registry_deletion_request(repository, tenant_id, decision, draft, "privacy-ops", "delete-1", "approved retention request", NOW)
+
+    event = record_registry_deletion_request(
+        repository,
+        tenant_id,
+        decision,
+        approved,
+        "privacy-ops",
+        "delete-2",
+        "approved retention request",
+        NOW,
+        event_id_factory=lambda: "event-delete-1",
+    )
+
+    assert event.action == REGISTRY_DELETION_REQUESTED_ACTION
+    assert event.object_id == reserved.export_id
+    assert event.detail_digest
+    assert repository.export(tenant_id, reserved.export_id) is not None
+    assert repository.events(tenant_id)[-1] == event
+
+
 def test_registry_metrics_snapshot_tracks_launch_gate_values() -> None:
     """Compute registry metrics from tenant exports and audit events."""
 
@@ -643,6 +892,20 @@ def test_registry_launch_decision_uses_declared_metrics() -> None:
         record_registry_launch_decision(passing_metrics, passing_access, passing_api, passing_backup, thresholds, "ops-reviewer", NOW, "")
 
 
+def test_local_registry_launch_rehearsal_records_go_decision(tmp_path: Path) -> None:
+    """Run the local alpha launch-gate review as release evidence."""
+
+    result = run_local_registry_launch_rehearsal(tmp_path / "launch")
+
+    assert isinstance(result, RegistryLaunchRehearsalResult)
+    assert result.database_path.exists()
+    assert result.decision_record.decision.go
+    assert result.decision_record.metrics.finalize_rate == 1.0
+    assert result.decision_record.access_review.failed_count == 0
+    assert result.decision_record.api_metrics.error_rate == 0.0
+    assert result.decision_record.backup_restore.total_elapsed_ms <= 2_000.0
+
+
 def test_sqlite_registry_migrates_and_persists_records(tmp_path: Path) -> None:
     """Reopen a durable registry and retain active exports, records, and events."""
 
@@ -668,6 +931,23 @@ def test_sqlite_registry_migrates_and_persists_records(tmp_path: Path) -> None:
         "export.reserved",
         "export.finalized",
     ]
+
+
+def test_postgres_migration_plan_tracks_current_registry_schema() -> None:
+    """Keep hosted alpha PostgreSQL SQL aligned with the local schema contract."""
+
+    plan = render_postgres_migration_plan()
+
+    assert POSTGRES_SCHEMA_VERSION == CURRENT_SCHEMA_VERSION
+    assert f"PostgreSQL schema v{CURRENT_SCHEMA_VERSION}" in plan
+    assert "CREATE TABLE tenants" in plan
+    assert "CREATE TABLE exports" in plan
+    assert "handle BYTEA NOT NULL" in plan
+    assert "UNIQUE (tenant_id, handle)" in plan
+    assert "CREATE TABLE idempotency_records" in plan
+    assert "response_body BYTEA NOT NULL" in plan
+    assert "INSERT INTO schema_migrations(version, applied_utc)" in plan
+    assert "BLOB" not in plan
 
 
 def test_sqlite_registry_encrypts_private_records_with_key_metadata(tmp_path: Path) -> None:
@@ -1033,6 +1313,124 @@ def test_sqlite_registry_replays_idempotency_after_api_restart(tmp_path: Path) -
     assert reopened.schema_version() == CURRENT_SCHEMA_VERSION
 
 
+def test_registry_container_config_builds_launchable_api(tmp_path: Path) -> None:
+    """Wire alpha container environment settings into a real registry API."""
+
+    config = container_config_from_env(
+        {
+            "SAURUS_REGISTRY_DATABASE_PATH": str(tmp_path / "container.sqlite3"),
+            "SAURUS_REGISTRY_HOST": "127.0.0.1",
+            "SAURUS_REGISTRY_PORT": "9000",
+            "SAURUS_API_SIGNING_SECRET": "s" * 32,
+        }
+    )
+    api = build_registry_container_api(config)
+    response = api.handle(ApiRequest("GET", "/v1/not-real", {"X-Request-ID": "request-container"}))
+
+    assert isinstance(config, RegistryContainerConfig)
+    assert config.database_path == tmp_path / "container.sqlite3"
+    assert config.host == "127.0.0.1"
+    assert config.port == 9000
+    assert response.status == 404
+    with pytest.raises(ValueError, match="SAURUS_REGISTRY_PORT"):
+        container_config_from_env({"SAURUS_REGISTRY_PORT": "nope"})
+    with pytest.raises(ValueError, match="api_signing_secret"):
+        container_config_from_env({"SAURUS_API_SIGNING_SECRET": "short"})
+
+
+def test_registry_container_runtime_secrets_parse_without_exposure() -> None:
+    """Validate injected alpha secrets without retaining secret values."""
+
+    secrets = runtime_secrets_from_env(
+        {
+            "SAURUS_DATABASE_SECRET_JSON": '{"username":"saurus_alpha","password":"database-secret"}',
+            "SAURUS_BOOTSTRAP_ADMIN_SECRET": "b" * 32,
+            "SAURUS_DEVICE_ENROLLMENT_SECRET": "d" * 32,
+        }
+    )
+    rendered = repr(secrets)
+
+    assert isinstance(secrets, RegistryRuntimeSecrets)
+    assert secrets.database_username == "saurus_alpha"
+    assert secrets.database_password_present
+    assert secrets.bootstrap_admin_secret_present
+    assert secrets.device_enrollment_secret_present
+    assert "database-secret" not in rendered
+    assert "bbbb" not in rendered
+    assert "dddd" not in rendered
+    with pytest.raises(ValueError, match="valid JSON"):
+        runtime_secrets_from_env({"SAURUS_DATABASE_SECRET_JSON": "not-json"})
+    with pytest.raises(ValueError, match="password"):
+        runtime_secrets_from_env({"SAURUS_DATABASE_SECRET_JSON": '{"username":"saurus_alpha"}'})
+    with pytest.raises(ValueError, match="SAURUS_BOOTSTRAP_ADMIN_SECRET"):
+        runtime_secrets_from_env({"SAURUS_BOOTSTRAP_ADMIN_SECRET": "short"})
+
+
+def test_registry_container_postgres_repository_wiring_uses_private_credentials(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Select the PostgreSQL adapter only when endpoint and credentials are present."""
+
+    observed: list[PostgresConnectionSettings] = []
+    sqlite_config = RegistryContainerConfig(tmp_path / "registry.sqlite3")
+    postgres_config = RegistryPostgresConfig("db.alpha.example", 5432, "saurus_alpha")
+    credentials = database_credentials_from_env(
+        {"SAURUS_DATABASE_SECRET_JSON": '{"username":"saurus_alpha","password":"database-secret"}'}
+    )
+
+    def fake_from_settings(settings: PostgresConnectionSettings) -> InMemoryRegistryRepository:
+        """Capture PostgreSQL settings without opening a network connection."""
+
+        observed.append(settings)
+        return InMemoryRegistryRepository()
+
+    monkeypatch.setattr(container_module.PostgresRegistryRepository, "from_settings", fake_from_settings)
+
+    sqlite_repository = build_registry_repository(sqlite_config)
+    postgres_repository = build_registry_repository(sqlite_config, postgres_config, credentials)
+
+    assert isinstance(sqlite_repository, SQLiteRegistryRepository)
+    assert isinstance(postgres_repository, InMemoryRegistryRepository)
+    assert observed == [
+        PostgresConnectionSettings(
+            "db.alpha.example",
+            5432,
+            "saurus_alpha",
+            "saurus_alpha",
+            "database-secret",
+        )
+    ]
+    assert "database-secret" not in repr(credentials)
+    with pytest.raises(ValueError, match="SAURUS_DATABASE_SECRET_JSON"):
+        build_registry_repository(sqlite_config, postgres_config, None)
+
+
+def test_registry_container_postgres_config_parses_endpoint_without_secrets() -> None:
+    """Validate managed PostgreSQL endpoint metadata for alpha launch checks."""
+
+    config = postgres_config_from_env(
+        {
+            "SAURUS_POSTGRES_HOST": "saurus-alpha.abc123.us-west-2.rds.amazonaws.com",
+            "SAURUS_POSTGRES_PORT": "5432",
+            "SAURUS_POSTGRES_DATABASE": "saurus_alpha",
+        }
+    )
+
+    assert isinstance(config, RegistryPostgresConfig)
+    assert config.host == "saurus-alpha.abc123.us-west-2.rds.amazonaws.com"
+    assert config.port == 5432
+    assert config.database == "saurus_alpha"
+    assert postgres_config_from_env({}) is None
+    with pytest.raises(ValueError, match="set together"):
+        postgres_config_from_env({"SAURUS_POSTGRES_HOST": "db.example"})
+    with pytest.raises(ValueError, match="SAURUS_POSTGRES_PORT"):
+        postgres_config_from_env(
+            {
+                "SAURUS_POSTGRES_HOST": "db.example",
+                "SAURUS_POSTGRES_DATABASE": "saurus_alpha",
+                "SAURUS_POSTGRES_PORT": "nope",
+            }
+        )
+
+
 def test_registry_api_returns_structured_validation_errors() -> None:
     """Report missing headers, unknown routes, and invalid payloads as JSON errors."""
 
@@ -1149,6 +1547,37 @@ def test_registry_api_authenticates_and_authorizes_bearer_tokens() -> None:
     assert (tenant_mismatch.status, _json_response(tenant_mismatch)["error"]["code"]) == (403, "authorization")
 
 
+def test_registry_request_log_projection_excludes_sensitive_material() -> None:
+    """Project API logs without bearer tokens, bodies, retained records, or notes."""
+
+    request = ApiRequest(
+        "POST",
+        "/v1/exports/export-1:finalize?debug=true",
+        {
+            "Authorization": "Bearer secret-token",
+            "Idempotency-Key": "request-finalize",
+            "X-Saurus-Tenant": "tenant-1",
+        },
+        _api_body(payload_b64="private-record", recipient_note="client private note"),
+    )
+    response = ApiResponse(200, {"Content-Type": "application/json"}, b'{"ok":true}')
+
+    record = registry_request_log_record(request, response, 12.5)
+    rendered = repr(record)
+
+    assert isinstance(record, RegistryRequestLogRecord)
+    assert record.method == "POST"
+    assert record.path == "/v1/exports/export-1:finalize"
+    assert record.status == 200
+    assert record.request_id == "request-finalize"
+    assert record.tenant_hint == "tenant-1"
+    assert record.response_bytes == len(response.body)
+    assert "secret-token" not in rendered
+    assert "private-record" not in rendered
+    assert "client private note" not in rendered
+    assert "Authorization" not in rendered
+
+
 def test_registry_api_returns_authorized_bounded_song_verification_bundle() -> None:
     """Return only active retained records for a known song under verify authorization."""
 
@@ -1232,3 +1661,97 @@ def test_signed_verification_report_uses_safe_wording_and_detects_tampering() ->
             "label",
             NOW,
         )
+
+
+def test_verification_report_summary_names_match_rejection_and_abstention() -> None:
+    """Force reports to show accepted, rejected, and abstained evidence lanes."""
+
+    accepted = build_watermark_report_payload(
+        tenant_id="tenant-1",
+        export_id="export-1",
+        verification_event_id="event-1",
+        profile_version="profile-v1",
+        outcome="accepted",
+        recipient_label="Mixer preview",
+        issued_utc=NOW,
+    )
+    rejected = build_watermark_report_payload(
+        tenant_id="tenant-1",
+        export_id="export-2",
+        verification_event_id="event-2",
+        profile_version="profile-v1",
+        outcome="rejected",
+        recipient_label="Mixer preview",
+        issued_utc=NOW,
+    )
+    abstained = build_watermark_report_payload(
+        tenant_id="tenant-1",
+        export_id="export-3",
+        verification_event_id="event-3",
+        profile_version="profile-v1",
+        outcome="abstained",
+        recipient_label="Mixer preview",
+        issued_utc=NOW,
+    )
+
+    accepted_summary = summarize_verification_report(accepted)
+    rejected_summary = summarize_verification_report(rejected)
+    abstained_summary = summarize_verification_report(abstained)
+
+    assert isinstance(accepted_summary, VerificationReportSummary)
+    assert "matched registered export event export-1" in accepted_summary.matched_statement
+    assert "No selected-claim rejection" in accepted_summary.did_not_match_statement
+    assert "did not abstain" in accepted_summary.abstention_statement
+    assert "did not match the available evidence" in rejected_summary.did_not_match_statement
+    assert "No accepted watermark match" in rejected_summary.matched_statement
+    assert "not accepted" in abstained_summary.did_not_match_statement
+    assert "could not reach an accepted result" in abstained_summary.abstention_statement
+    assert all("human review" in summary.human_review_statement.lower() for summary in (accepted_summary, rejected_summary, abstained_summary))
+
+
+def test_evidence_copy_review_flags_unsafe_wording() -> None:
+    """Catch copy that turns evidence into certainty, blame, or broad claims."""
+
+    review = review_evidence_copy(
+        {
+            "ok": "Audio evidence matched registered export event export-1 under profile profile-v1.",
+            "bad": "This definitely proves that the recipient leaked the song.",
+        }
+    )
+
+    assert isinstance(review, EvidenceCopyReview)
+    assert not review.passed
+    assert {finding.phrase.lower() for finding in review.findings} >= {"definitely", "proves that", "recipient leaked"}
+
+
+def test_current_product_copy_passes_evidence_language_review() -> None:
+    """Review app, README, report, and sales copy for unsafe evidence language."""
+
+    root = Path(__file__).resolve().parents[5]
+    report_payload = build_watermark_report_payload(
+        tenant_id="tenant-1",
+        export_id="export-1",
+        verification_event_id="event-1",
+        profile_version="profile-v1",
+        outcome="accepted",
+        recipient_label="Mixer preview",
+        issued_utc=NOW,
+    )
+    report_summary = summarize_verification_report(report_payload)
+    artifacts = {
+        "README.md": (root / "README.md").read_text(encoding="utf-8"),
+        "Marketing.md": (root / "Marketing.md").read_text(encoding="utf-8"),
+        "saurus_app": "\n".join(path.read_text(encoding="utf-8") for path in sorted((root / "src" / "saurus_app").glob("*.py"))),
+        "reports": "\n".join(
+            (
+                report_summary.matched_statement,
+                report_summary.did_not_match_statement,
+                report_summary.abstention_statement,
+                report_summary.human_review_statement,
+            )
+        ),
+    }
+
+    review = review_evidence_copy(artifacts)
+
+    assert review.passed, tuple((finding.label, finding.line_number, finding.phrase, finding.reason) for finding in review.findings)

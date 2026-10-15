@@ -31,7 +31,8 @@ from stegosaurus.audio.pilot import PcmAudio, read_pcm16_wav, write_pcm16_wav
 from .backend import LocalSidecarRegistryBackend, RegistryBackend, RegistryClaim, RegistryFields, RegistryReservation
 
 
-MASTER_SECRET = b"saurus-guided-desktop-app-v1"
+LOCAL_DEMO_WATERMARK_SECRET = b"saurus-guided-desktop-app-local-demo-v1"
+WATERMARK_SECRET_SCOPE = "local-demo-only"
 
 
 @dataclass(frozen=True, slots=True)
@@ -70,6 +71,17 @@ class FanoutDecodeResult:
     exceeded_time_budget: bool
 
 
+@dataclass(frozen=True, slots=True)
+class AttributionSummary:
+    """Summarize retained registry attribution context for display."""
+
+    project: str
+    recipient: str
+    notes: str
+    handle_hex: str
+    block_count: int
+
+
 def encode_file(
     source_wav: Path,
     output_wav: Path,
@@ -85,7 +97,7 @@ def encode_file(
     if isinstance(maximum_attempts, bool) or maximum_attempts < 1:
         raise ValueError("maximum_attempts must be a positive integer")
     source = read_pcm16_wav(source_wav)
-    codec = BlockAttributionCodec(MASTER_SECRET)
+    codec = BlockAttributionCodec(LOCAL_DEMO_WATERMARK_SECRET)
     policy = RepeatedBlockWaterfallPolicy()
     active_backend = backend or LocalSidecarRegistryBackend()
     active_backend.begin_encode(source_wav, output_wav, registry_json, fields)
@@ -117,6 +129,19 @@ def decode_file(received_wav: Path, registry_json: Path, backend: RegistryBacken
 
     claim = (backend or LocalSidecarRegistryBackend()).load_claim(registry_json)
     return decode_claims(received_wav, (claim,))[0]
+
+
+def inspect_registry_file(registry_json: Path, backend: RegistryBackend | None = None) -> AttributionSummary:
+    """Load retained registry context without verifying a received audio file."""
+
+    claim = (backend or LocalSidecarRegistryBackend()).load_claim(registry_json)
+    return AttributionSummary(
+        claim.fields.project,
+        claim.fields.recipient,
+        claim.fields.notes,
+        claim.record.handle.hex().upper(),
+        len(claim.record.block_records),
+    )
 
 
 def decode_claims(
@@ -158,7 +183,7 @@ def _decode_claim(audio: PcmAudio, claim: RegistryClaim) -> DecodeResult:
     """Verify loaded PCM audio against one retained claim."""
 
     record = claim.record
-    verification = BlockAttributionCodec(MASTER_SECRET).verify(audio, record)
+    verification = BlockAttributionCodec(LOCAL_DEMO_WATERMARK_SECRET).verify(audio, record)
     decision = RepeatedBlockWaterfallPolicy().decide(verification)
     return DecodeResult(
         decision.accepted,

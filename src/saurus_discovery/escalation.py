@@ -25,6 +25,7 @@ class ExternalActionKind(str, Enum):
     CLIENT_ALERT = "client alert"
     ATTRIBUTION_HANDOFF = "attribution handoff"
     EXTERNAL_NOTICE = "external notice"
+    LEGAL_WORKFLOW = "legal workflow"
 
 
 @dataclass(frozen=True, slots=True)
@@ -85,9 +86,9 @@ def review_external_action(
         reasons.append("candidate must be accepted by human review before follow-up")
     if _contains_accusation(language_summary):
         reasons.append("language summary must stay neutral and avoid accusations")
-    if action_kind in (ExternalActionKind.ATTRIBUTION_HANDOFF, ExternalActionKind.EXTERNAL_NOTICE):
+    if action_kind in (ExternalActionKind.ATTRIBUTION_HANDOFF, ExternalActionKind.EXTERNAL_NOTICE, ExternalActionKind.LEGAL_WORKFLOW):
         if evidence_decision.evidence_class is not CandidateEvidenceClass.ATTRIBUTION_ELIGIBLE:
-            reasons.append("song-match-only evidence cannot support attribution or external notice")
+            reasons.append("song-match-only evidence cannot support attribution, external notice, or legal workflow")
 
     return ExternalActionApproval(
         candidate.candidate_id,

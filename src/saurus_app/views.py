@@ -1,4 +1,4 @@
-"""Lay out the Encode and Decode views with shared Saurus components.
+"""Lay out the Encode, Decode, and Attribution views with shared components.
 
 Each view is a short sequence of input sections and a fixed command footer.
 The existing controller owns variables and operations, while these functions
@@ -18,7 +18,7 @@ from .widgets import ScrollForm, field, file_row, note, section, wrapped_label
 if TYPE_CHECKING:
     from .app import SaurusApp
 
-__all__ = ["build_header", "build_encode", "build_decode"]
+__all__ = ["build_header", "build_registry_bar", "build_encode", "build_decode", "build_attribution"]
 
 
 def build_header(root: tk.Tk) -> tk.PhotoImage:
@@ -36,6 +36,32 @@ def build_header(root: tk.Tk) -> tk.PhotoImage:
     tape.pack(fill="x")
     tape.bind("<Configure>", lambda event: _draw_tape(tape, event.width))
     return logo
+
+
+def build_registry_bar(app: SaurusApp, parent: ttk.Frame) -> None:
+    """Place the local registry alpha controls above the workflow tabs."""
+
+    bar = tk.Frame(parent, background=COLORS["subtle"], padx=12, pady=8)
+    bar.pack(fill="x", pady=(0, SPACE["sm"]))
+    check = ttk.Checkbutton(bar, text="Use local registry alpha", variable=app._registry_enabled)
+    check.pack(side="left", padx=(0, SPACE["md"]))
+    app._registry_status_label = tk.Label(bar, textvariable=app._registry_status, font=font("caption", True), padx=10, pady=5)
+    app._registry_status_label.pack(side="right", padx=(SPACE["sm"], 0))
+    health = ttk.Button(bar, text="Health", command=app._show_registry_health, width=8)
+    health.pack(side="right", padx=(0, SPACE["sm"]))
+    pending = ttk.Button(bar, text="Pending", command=app._show_pending_encodes, width=9)
+    pending.pack(side="right", padx=(0, SPACE["sm"]))
+    app._credential_status_label = tk.Label(bar, textvariable=app._credential_status, font=font("caption", True), padx=10, pady=5)
+    app._credential_status_label.pack(side="right", padx=(0, SPACE["sm"]))
+    sign_out = ttk.Button(bar, text="Sign out", command=app._sign_out_device, width=9)
+    sign_out.pack(side="right", padx=(0, SPACE["sm"]))
+    enroll = ttk.Button(bar, text="Enroll...", command=app._enroll_device_credential, width=10)
+    enroll.pack(side="right", padx=(0, SPACE["sm"]))
+    button = ttk.Button(bar, text="Browse...", command=app._choose_database, width=10)
+    button.pack(side="right")
+    entry = ttk.Entry(bar, textvariable=app._registry_db, width=1)
+    entry.pack(side="left", fill="x", expand=True, padx=(0, SPACE["sm"]))
+    app._controls.extend((check, entry, button, enroll, sign_out, health, pending))
 
 
 def _draw_tape(canvas: tk.Canvas, width: int) -> None:
@@ -76,7 +102,8 @@ def _footer(app: SaurusApp, parent: ttk.Frame, mode: str, text: str) -> None:
     ttk.Separator(parent).pack(fill="x")
     footer = ttk.Frame(parent, padding=(SPACE["xl"], SPACE["lg"]))
     footer.pack(fill="x")
-    button = ttk.Button(footer, text=text, style="Primary.TButton", command=app._encode if mode == "encode" else app._decode)
+    commands = {"encode": app._encode, "decode": app._decode, "attribution": app._attribution}
+    button = ttk.Button(footer, text=text, style="Primary.TButton", command=commands[mode])
     button.pack(side="right", padx=(16, 0))
     prompt = wrapped_label(footer, "")
     prompt.pack(side="left", fill="x", expand=True)
@@ -135,6 +162,62 @@ def build_decode(app: SaurusApp, parent: ttk.Frame) -> None:
     form.bind_inputs()
     app._forms.append(form)
     _footer(app, parent, "decode", "Decode / verify")
+
+
+def build_attribution(app: SaurusApp, parent: ttk.Frame) -> None:
+    """Compose a sleek retained-record inspection view."""
+
+    form = _view(parent, "Attribution record", "Review the private registry context saved for one encoded copy.")
+    body = section(form.body, "01", "Select a private registry")
+    _input(app, body, "Private registry JSON", app._attribution_registry, ".json")
+    note(body, "This view reads the retained registry record. It summarizes who the copy was registered for, but it does not verify suspicious audio or assign blame.")
+    body = section(form.body, "02", "Evidence summary")
+    _attribution_panel(app, body)
+    form.bind_inputs()
+    app._forms.append(form)
+    _footer(app, parent, "attribution", "Load attribution")
+
+
+def _attribution_panel(app: SaurusApp, parent: ttk.Frame) -> None:
+    """Create the read-only attribution cards updated by the controller."""
+
+    panel = tk.Frame(parent, background=COLORS["signal_navy"], padx=18, pady=16)
+    panel.pack(fill="x", pady=(0, SPACE["md"]))
+    header = tk.Frame(panel, background=COLORS["signal_navy"])
+    header.pack(fill="x")
+    tk.Label(header, text="REGISTRY ATTRIBUTION", font=font("caption", True),
+             background=COLORS["signal_navy"], foreground=COLORS["muted_on_dark"]).pack(anchor="w")
+    project = tk.Label(panel, textvariable=app._attribution_project, font=font("subtitle", True),
+                       background=COLORS["signal_navy"], foreground=COLORS["on_dark"],
+                       anchor="w", justify="left", wraplength=520)
+    project.pack(fill="x", pady=(6, 2))
+    recipient = tk.Label(panel, textvariable=app._attribution_recipient, font=font("body", True),
+                         background=COLORS["signal_navy"], foreground=COLORS["tape"],
+                         anchor="w", justify="left", wraplength=520)
+    recipient.pack(fill="x")
+    facts = ttk.Frame(parent)
+    facts.pack(fill="x", pady=(SPACE["md"], 0))
+    _fact(app, facts, "Handle", app._attribution_handle, 0, 0)
+    _fact(app, facts, "Retained blocks", app._attribution_blocks, 0, 1)
+    notes = ttk.Frame(parent)
+    notes.pack(fill="x", pady=(SPACE["lg"], 0))
+    ttk.Label(notes, text="Notes", style="Field.TLabel").pack(anchor="w")
+    label = wrapped_label(notes, "", "Help.TLabel")
+    label.configure(textvariable=app._attribution_notes)
+    label.pack(fill="x", pady=(SPACE["sm"], 0))
+
+
+def _fact(app: SaurusApp, parent: ttk.Frame, label: str, variable: tk.StringVar, row: int, column: int) -> None:
+    """Place one compact attribution fact in a stable grid cell."""
+
+    parent.columnconfigure(column, weight=1, uniform="facts")
+    card = tk.Frame(parent, background=COLORS["subtle"], padx=14, pady=12)
+    card.grid(row=row, column=column, sticky="new", padx=(0 if column == 0 else 8, 8 if column == 0 else 0))
+    tk.Label(card, text=label.upper(), font=font("caption", True), background=COLORS["subtle"],
+             foreground=COLORS["muted"], anchor="w").pack(fill="x")
+    value = tk.Label(card, textvariable=variable, font=font("body", True), background=COLORS["subtle"],
+                     foreground=COLORS["ink"], anchor="w", justify="left", wraplength=260)
+    value.pack(fill="x", pady=(4, 0))
 
 
 def _input(app: SaurusApp, parent: ttk.Frame, label: str, variable: tk.StringVar, extension: str, save: bool = False) -> None:

@@ -43,6 +43,9 @@ class CredentialStore(Protocol):
     def load(self, registry_url: str, tenant_id: str) -> DeviceCredential:
         """Return one stored desktop device credential."""
 
+    def delete(self, registry_url: str, tenant_id: str) -> None:
+        """Remove one stored desktop device credential."""
+
 
 class MemoryCredentialStore:
     """Keep desktop credentials in memory for tests and local prototypes."""
@@ -65,6 +68,11 @@ class MemoryCredentialStore:
         except KeyError as error:
             raise ValueError("device credential is not enrolled") from error
 
+    def delete(self, registry_url: str, tenant_id: str) -> None:
+        """Forget one credential if it exists."""
+
+        self._credentials.pop((registry_url, tenant_id), None)
+
 
 @dataclass(slots=True)
 class DesktopCredentialManager:
@@ -82,3 +90,8 @@ class DesktopCredentialManager:
         """Return one enrolled credential."""
 
         return self.store.load(registry_url, tenant_id)
+
+    def sign_out(self, registry_url: str, tenant_id: str) -> None:
+        """Remove one enrolled credential from the current store."""
+
+        self.store.delete(registry_url, tenant_id)

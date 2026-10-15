@@ -16,10 +16,12 @@ import sys
 from threading import Event
 import time
 import tkinter as tk
+from tkinter import simpledialog
 
 import pytest
 
 from saurus_app.app import SaurusApp
+from saurus_app.credentials import MemoryCredentialStore
 from saurus_app.registry import DecodeResult, EncodeResult
 from saurus_app.theme import COLORS
 
@@ -33,7 +35,7 @@ def desktop() -> Iterator[SaurusApp]:
     except tk.TclError as error:
         pytest.skip(f"Tk display unavailable: {error}")
     root.withdraw()
-    app = SaurusApp(root)
+    app = SaurusApp(root, credential_store=MemoryCredentialStore())
     yield app
     app._executor.shutdown(wait=True)
     root.destroy()
@@ -110,6 +112,28 @@ def test_failed_job_restores_the_form(desktop: SaurusApp) -> None:
     assert "16-bit PCM WAV" in desktop._status.get()
     assert desktop._status_label.cget("background") == COLORS["error_surface"]
     assert all(control.instate(["!disabled"]) for control in desktop._controls)
+
+
+def test_device_enrollment_controls_store_and_clear_session_credential(desktop: SaurusApp, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Expose alpha credential enrollment without writing tokens to status text."""
+
+    answers = iter(("https://registry.saurus.test", "tenant-1", "device-1", "secret-token"))
+    monkeypatch.setattr(simpledialog, "askstring", lambda *args, **kwargs: next(answers))
+
+    desktop._enroll_device_credential()
+    credential = desktop._credential_manager.credential("https://registry.saurus.test", "tenant-1")
+
+    assert credential.actor_id == "device-1"
+    assert desktop._credential_key == ("https://registry.saurus.test", "tenant-1")
+    assert desktop._credential_status.get() == "DEVICE ENROLLED"
+    assert "secret-token" not in desktop._status.get()
+
+    desktop._sign_out_device()
+
+    assert desktop._credential_key is None
+    assert desktop._credential_status.get() == "NO DEVICE"
+    with pytest.raises(ValueError, match="not enrolled"):
+        desktop._credential_manager.credential("https://registry.saurus.test", "tenant-1")
 
 
 def test_compact_window_keeps_commands_visible(desktop: SaurusApp) -> None:

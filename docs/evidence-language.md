@@ -2,6 +2,10 @@
 
 Saurus keeps technical evidence, registry context, and conclusions separate.
 These phrases are product contracts for desktop, API, review, and reports.
+Production legal/policy readiness is recorded separately in
+`src/saurus_pilot/legal_policy.py`; it requires counsel approval across
+evidence language, discovery source policy, client alerts/notices, opt-out and
+corrections, and retention/deletion before the production gate can pass.
 
 | Evidence class | Supported wording | Unsupported wording |
 | --- | --- | --- |

@@ -1,0 +1,1163 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Saurus slim AWS alpha registry skeleton."
+Metadata:
+  AWSToolsMetrics:
+    AWSAgentToolkit: aws-cloudformation@3
+
+Parameters:
+  Owner:
+    Type: String
+    Description: "Human owner for alpha resources."
+  AlertEmail:
+    Type: String
+    Description: "Email for budget and operational notifications."
+  ContainerImage:
+    Type: String
+    Default: ""
+    AllowedPattern: "^$|^[0-9]{12}\\.dkr\\.ecr\\.[a-z0-9-]+\\.amazonaws\\.com/saurus-alpha-registry:alpha-[A-Za-z0-9_.-]+$"
+    ConstraintDescription: "Leave empty for bootstrap, or use the alpha ECR repository URI with an immutable alpha-* tag."
+    Description: "Registry service ECR image URI pinned to an immutable alpha tag after bootstrap."
+  DeployRegistryService:
+    Type: String
+    Default: "false"
+    AllowedValues:
+      - "false"
+      - "true"
+    Description: "Set true only after pushing the alpha registry image."
+  DeployWebGateway:
+    Type: String
+    Default: "false"
+    AllowedValues:
+      - "false"
+      - "true"
+    Description: "Set true only after uploading the packaged gateway Lambda artifact."
+  WebGatewayLambdaS3Bucket:
+    Type: String
+    Default: ""
+    Description: "S3 bucket containing the packaged Saurus web gateway Lambda artifact."
+  WebGatewayLambdaS3Key:
+    Type: String
+    Default: ""
+    Description: "S3 key for the packaged Saurus web gateway Lambda artifact."
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: "Existing VPC for the disposable alpha stack."
+  PublicSubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+    Description: "Public subnets for the HTTPS load balancer and no-NAT alpha task."
+  CertificateArn:
+    Type: String
+    Default: ""
+    Description: "ACM certificate ARN for the alpha HTTPS listener; leave empty while DeployRegistryService=false."
+  AllowedIngressCidr:
+    Type: String
+    Default: "127.0.0.1/32"
+    AllowedPattern: "^([0-9]{1,3}\\.){3}[0-9]{1,3}/[0-9]{1,2}$"
+    ConstraintDescription: "Use an IPv4 CIDR such as 203.0.113.10/32 for the internal alpha smoke window."
+    Description: "IPv4 CIDR allowed to reach the alpha HTTPS load balancer."
+  DesiredCount:
+    Type: Number
+    Default: 1
+    MinValue: 1
+    MaxValue: 2
+    Description: "Registry service task count for alpha."
+  MonthlyBudgetUsd:
+    Type: Number
+    Default: 25
+    MinValue: 1
+    Description: "Alpha monthly budget alert threshold in USD."
+  DatabaseName:
+    Type: String
+    Default: saurus_alpha
+  DatabaseUsername:
+    Type: String
+    Default: saurus_alpha
+    NoEcho: true
+  WebAlphaCallbackUrls:
+    Type: CommaDelimitedList
+    Default: "https://saurus-audio.com/alpha.html,http://localhost:8000/alpha.html"
+    Description: "Allowed OAuth callback URLs for the web alpha public client."
+  WebAlphaLogoutUrls:
+    Type: CommaDelimitedList
+    Default: "https://saurus-audio.com/alpha.html,http://localhost:8000/alpha.html"
+    Description: "Allowed OAuth logout URLs for the web alpha public client."
+
+Conditions:
+  ShouldDeployRegistryService: !Equals [!Ref DeployRegistryService, "true"]
+  ShouldDeployWebGateway: !Equals [!Ref DeployWebGateway, "true"]
+
+Resources:
+  RegistryRecordsKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "Saurus alpha retained registry record encryption key."
+      EnableKeyRotation: true
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryRecordsKeyAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/saurus/alpha/registry-records
+      TargetKeyId: !Ref RegistryRecordsKey
+
+  EncodeGrantsKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "Saurus alpha encode grant root key."
+      EnableKeyRotation: true
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  EncodeGrantsKeyAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/saurus/alpha/encode-grants
+      TargetKeyId: !Ref EncodeGrantsKey
+
+  ReportsKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "Saurus alpha signed report custody key."
+      EnableKeyRotation: true
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  ReportsKeyAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/saurus/alpha/reports
+      TargetKeyId: !Ref ReportsKey
+
+  BackupsKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "Saurus alpha backup and support artifact encryption key."
+      EnableKeyRotation: true
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  BackupsKeyAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/saurus/alpha/backups
+      TargetKeyId: !Ref BackupsKey
+
+  RegistryApiSigningSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: "Saurus alpha API signing secret."
+      KmsKeyId: !Ref ReportsKey
+      GenerateSecretString:
+        PasswordLength: 48
+        ExcludePunctuation: true
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  BootstrapAdminSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: "Saurus alpha bootstrap admin credential."
+      KmsKeyId: !Ref ReportsKey
+      GenerateSecretString:
+        PasswordLength: 48
+        ExcludePunctuation: true
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  DeviceEnrollmentSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: "Saurus alpha device enrollment signing secret."
+      KmsKeyId: !Ref ReportsKey
+      GenerateSecretString:
+        PasswordLength: 48
+        ExcludePunctuation: true
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  GatewayTenantMappingSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: "Saurus alpha web gateway tenant allow-list mapping."
+      KmsKeyId: !Ref ReportsKey
+      SecretString: '{"records":[]}'
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  DatabaseSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: "Saurus alpha PostgreSQL credential."
+      KmsKeyId: !Ref RegistryRecordsKey
+      GenerateSecretString:
+        SecretStringTemplate: !Sub '{"username":"${DatabaseUsername}"}'
+        GenerateStringKey: password
+        PasswordLength: 32
+        ExcludePunctuation: true
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  BackupBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: aws:kms
+              KMSMasterKeyID: !Ref BackupsKey
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryImageRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: saurus-alpha-registry
+      ImageTagMutability: IMMUTABLE
+      ImageScanningConfiguration:
+        ScanOnPush: true
+      EncryptionConfiguration:
+        EncryptionType: KMS
+        KmsKey: !GetAtt BackupsKey.Arn
+      LifecyclePolicy:
+        LifecyclePolicyText: |
+          {
+            "rules": [
+              {
+                "rulePriority": 1,
+                "description": "Keep the ten newest alpha registry images.",
+                "selection": {
+                  "tagStatus": "tagged",
+                  "tagPrefixList": ["alpha"],
+                  "countType": "imageCountMoreThan",
+                  "countNumber": 10
+                },
+                "action": {"type": "expire"}
+              }
+            ]
+          }
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      RetentionInDays: 14
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  WebGatewayLogGroup:
+    Type: AWS::Logs::LogGroup
+    Condition: ShouldDeployWebGateway
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::StackName}-web-gateway"
+      RetentionInDays: 14
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  WebGatewayAccessLogGroup:
+    Type: AWS::Logs::LogGroup
+    Condition: ShouldDeployWebGateway
+    Properties:
+      RetentionInDays: 14
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  AlphaUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: saurus-alpha-users
+      AutoVerifiedAttributes:
+        - email
+      UsernameAttributes:
+        - email
+      MfaConfiguration: OPTIONAL
+      EnabledMfas:
+        - SOFTWARE_TOKEN_MFA
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: verified_email
+            Priority: 1
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: true
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 12
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: true
+          RequireUppercase: true
+          TemporaryPasswordValidityDays: 7
+      UserPoolTags:
+        project: saurus
+        env: alpha
+        owner: !Ref Owner
+
+  WebAlphaUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: saurus-alpha-web
+      UserPoolId: !Ref AlphaUserPool
+      GenerateSecret: false
+      SupportedIdentityProviders:
+        - COGNITO
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthFlows:
+        - code
+      AllowedOAuthScopes:
+        - openid
+        - email
+        - profile
+      CallbackURLs: !Ref WebAlphaCallbackUrls
+      LogoutURLs: !Ref WebAlphaLogoutUrls
+      ExplicitAuthFlows:
+        - ALLOW_USER_SRP_AUTH
+      EnableTokenRevocation: true
+      PreventUserExistenceErrors: ENABLED
+      RefreshTokenRotation:
+        Feature: ENABLED
+        RetryGracePeriodSeconds: 30
+      AccessTokenValidity: 60
+      IdTokenValidity: 60
+      RefreshTokenValidity: 7
+      TokenValidityUnits:
+        AccessToken: minutes
+        IdToken: minutes
+        RefreshToken: days
+
+  AlphaUserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: !Sub "saurus-alpha-${AWS::AccountId}-${AWS::Region}"
+      ManagedLoginVersion: 2
+      UserPoolId: !Ref AlphaUserPool
+
+  WebAlphaManagedLoginBranding:
+    Type: AWS::Cognito::ManagedLoginBranding
+    DependsOn:
+      - AlphaUserPoolDomain
+    Properties:
+      ClientId: !Ref WebAlphaUserPoolClient
+      UserPoolId: !Ref AlphaUserPool
+      UseCognitoProvidedValues: true
+
+  RegistryDatabase:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceClass: db.t4g.micro
+      Engine: postgres
+      DBName: !Ref DatabaseName
+      AllocatedStorage: 20
+      StorageEncrypted: true
+      KmsKeyId: !Ref RegistryRecordsKey
+      MasterUsername: !Sub "{{resolve:secretsmanager:${DatabaseSecret}:SecretString:username}}"
+      MasterUserPassword: !Sub "{{resolve:secretsmanager:${DatabaseSecret}:SecretString:password}}"
+      DBSubnetGroupName: !Ref RegistryDatabaseSubnetGroup
+      VPCSecurityGroups:
+        - !Ref RegistryDatabaseSecurityGroup
+      BackupRetentionPeriod: 1
+      DeletionProtection: false
+      PubliclyAccessible: false
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryLoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Saurus alpha HTTPS ingress."
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: !Ref AllowedIngressCidr
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryServiceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Saurus alpha registry service task access."
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          SourceSecurityGroupId: !Ref RegistryLoadBalancerSecurityGroup
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryDatabaseSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Saurus alpha database access from registry task only."
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          SourceSecurityGroupId: !Ref RegistryServiceSecurityGroup
+        - !If
+          - ShouldDeployWebGateway
+          - IpProtocol: tcp
+            FromPort: 5432
+            ToPort: 5432
+            SourceSecurityGroupId: !Ref WebGatewaySecurityGroup
+          - !Ref AWS::NoValue
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  WebGatewaySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Condition: ShouldDeployWebGateway
+    Properties:
+      GroupDescription: "Saurus alpha web gateway database access."
+      VpcId: !Ref VpcId
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          DestinationSecurityGroupId: !Ref RegistryDatabaseSecurityGroup
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryDatabaseSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: "Saurus alpha database subnet group."
+      SubnetIds: !Ref PublicSubnetIds
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryTaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryTaskAccessPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: saurus-alpha-registry-access
+      Roles:
+        - !Ref RegistryTaskRole
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: ReadManagedSecrets
+            Effect: Allow
+            Action:
+              - secretsmanager:GetSecretValue
+            Resource:
+              - !Ref DatabaseSecret
+              - !Ref RegistryApiSigningSecret
+              - !Ref BootstrapAdminSecret
+              - !Ref DeviceEnrollmentSecret
+          - Sid: UseRegistrySecretKeys
+            Effect: Allow
+            Action:
+              - kms:Decrypt
+              - kms:DescribeKey
+            Resource:
+              - !GetAtt RegistryRecordsKey.Arn
+              - !GetAtt ReportsKey.Arn
+          - Sid: IssueEncodeGrantDataKeys
+            Effect: Allow
+            Action:
+              - kms:GenerateDataKey
+              - kms:DescribeKey
+            Resource: !GetAtt EncodeGrantsKey.Arn
+          - Sid: WriteBackupArtifacts
+            Effect: Allow
+            Action:
+              - s3:GetObject
+              - s3:ListBucket
+              - s3:PutObject
+            Resource:
+              - !GetAtt BackupBucket.Arn
+              - !Sub "${BackupBucket.Arn}/*"
+          - Sid: UseBackupArtifactKey
+            Effect: Allow
+            Action:
+              - kms:Decrypt
+              - kms:DescribeKey
+              - kms:Encrypt
+              - kms:GenerateDataKey
+            Resource: !GetAtt BackupsKey.Arn
+
+  RegistryTaskExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryTaskExecutionSecretPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: saurus-alpha-registry-secret-injection
+      Roles:
+        - !Ref RegistryTaskExecutionRole
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: InjectApiSigningSecret
+            Effect: Allow
+            Action:
+              - secretsmanager:GetSecretValue
+            Resource:
+              - !Ref RegistryApiSigningSecret
+              - !Ref DatabaseSecret
+              - !Ref BootstrapAdminSecret
+              - !Ref DeviceEnrollmentSecret
+          - Sid: DecryptInjectedSecrets
+            Effect: Allow
+            Action:
+              - kms:Decrypt
+              - kms:DescribeKey
+            Resource:
+              - !GetAtt RegistryRecordsKey.Arn
+              - !GetAtt ReportsKey.Arn
+
+  WebGatewayExecutionRole:
+    Type: AWS::IAM::Role
+    Condition: ShouldDeployWebGateway
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  WebGatewaySecretPolicy:
+    Type: AWS::IAM::Policy
+    Condition: ShouldDeployWebGateway
+    Properties:
+      PolicyName: saurus-alpha-web-gateway-secrets
+      Roles:
+        - !Ref WebGatewayExecutionRole
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: ReadGatewaySecrets
+            Effect: Allow
+            Action:
+              - secretsmanager:GetSecretValue
+            Resource:
+              - !Ref RegistryApiSigningSecret
+              - !Ref DatabaseSecret
+              - !Ref GatewayTenantMappingSecret
+          - Sid: DecryptGatewaySecrets
+            Effect: Allow
+            Action:
+              - kms:Decrypt
+              - kms:DescribeKey
+            Resource:
+              - !GetAtt RegistryRecordsKey.Arn
+              - !GetAtt ReportsKey.Arn
+
+  WebGatewayFunction:
+    Type: AWS::Lambda::Function
+    Condition: ShouldDeployWebGateway
+    Properties:
+      FunctionName: !Sub "${AWS::StackName}-web-gateway"
+      Description: "Saurus alpha browser-to-registry gateway."
+      Runtime: python3.12
+      Handler: saurus_gateway.runtime.lambda_handler
+      Role: !GetAtt WebGatewayExecutionRole.Arn
+      Timeout: 20
+      MemorySize: 512
+      Code:
+        S3Bucket: !Ref WebGatewayLambdaS3Bucket
+        S3Key: !Ref WebGatewayLambdaS3Key
+      VpcConfig:
+        SecurityGroupIds:
+          - !Ref WebGatewaySecurityGroup
+        SubnetIds: !Ref PublicSubnetIds
+      Environment:
+        Variables:
+          SAURUS_ENV: alpha
+          SAURUS_POSTGRES_HOST: !GetAtt RegistryDatabase.Endpoint.Address
+          SAURUS_POSTGRES_PORT: !GetAtt RegistryDatabase.Endpoint.Port
+          SAURUS_POSTGRES_DATABASE: !Ref DatabaseName
+          SAURUS_API_SIGNING_SECRET: !Sub "{{resolve:secretsmanager:${RegistryApiSigningSecret}:SecretString}}"
+          SAURUS_DATABASE_SECRET_JSON: !Sub "{{resolve:secretsmanager:${DatabaseSecret}:SecretString}}"
+          SAURUS_GATEWAY_TENANT_MAPPINGS_JSON: !Sub "{{resolve:secretsmanager:${GatewayTenantMappingSecret}:SecretString}}"
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Condition: ShouldDeployRegistryService
+    Properties:
+      Family: saurus-alpha-registry
+      Cpu: "256"
+      Memory: "512"
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      ExecutionRoleArn: !GetAtt RegistryTaskExecutionRole.Arn
+      TaskRoleArn: !GetAtt RegistryTaskRole.Arn
+      ContainerDefinitions:
+        - Name: registry
+          Image: !Ref ContainerImage
+          Essential: true
+          PortMappings:
+            - ContainerPort: 8080
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref RegistryLogGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: registry
+          Environment:
+            - Name: SAURUS_ENV
+              Value: alpha
+            - Name: SAURUS_REGISTRY_HOST
+              Value: 0.0.0.0
+            - Name: SAURUS_REGISTRY_PORT
+              Value: "8080"
+            - Name: SAURUS_REGISTRY_DATABASE_PATH
+              Value: /tmp/saurus-alpha/registry.sqlite3
+            - Name: SAURUS_POSTGRES_HOST
+              Value: !GetAtt RegistryDatabase.Endpoint.Address
+            - Name: SAURUS_POSTGRES_PORT
+              Value: !GetAtt RegistryDatabase.Endpoint.Port
+            - Name: SAURUS_POSTGRES_DATABASE
+              Value: !Ref DatabaseName
+            - Name: SAURUS_BACKUP_BUCKET
+              Value: !Ref BackupBucket
+            - Name: SAURUS_ENCODE_GRANTS_KEY_ID
+              Value: !Ref EncodeGrantsKeyAlias
+          Secrets:
+            - Name: SAURUS_API_SIGNING_SECRET
+              ValueFrom: !Ref RegistryApiSigningSecret
+            - Name: SAURUS_DATABASE_SECRET_JSON
+              ValueFrom: !Ref DatabaseSecret
+            - Name: SAURUS_BOOTSTRAP_ADMIN_SECRET
+              ValueFrom: !Ref BootstrapAdminSecret
+            - Name: SAURUS_DEVICE_ENROLLMENT_SECRET
+              ValueFrom: !Ref DeviceEnrollmentSecret
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: saurus-alpha-registry
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Scheme: internet-facing
+      Type: application
+      Subnets: !Ref PublicSubnetIds
+      SecurityGroups:
+        - !Ref RegistryLoadBalancerSecurityGroup
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      VpcId: !Ref VpcId
+      Port: 8080
+      Protocol: HTTP
+      TargetType: ip
+      HealthCheckPath: /health
+      Matcher:
+        HttpCode: "200"
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryHttpsListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Condition: ShouldDeployRegistryService
+    Properties:
+      LoadBalancerArn: !Ref RegistryLoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      Certificates:
+        - CertificateArn: !Ref CertificateArn
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref RegistryTargetGroup
+
+  RegistryService:
+    Type: AWS::ECS::Service
+    Condition: ShouldDeployRegistryService
+    DependsOn:
+      - RegistryHttpsListener
+    Properties:
+      Cluster: !Ref RegistryCluster
+      DesiredCount: !Ref DesiredCount
+      LaunchType: FARGATE
+      TaskDefinition: !Ref RegistryTaskDefinition
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          SecurityGroups:
+            - !Ref RegistryServiceSecurityGroup
+          Subnets: !Ref PublicSubnetIds
+      LoadBalancers:
+        - ContainerName: registry
+          ContainerPort: 8080
+          TargetGroupArn: !Ref RegistryTargetGroup
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  WebGatewayHttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Condition: ShouldDeployWebGateway
+    Properties:
+      Name: !Sub "${AWS::StackName}-web-gateway"
+      ProtocolType: HTTP
+      CorsConfiguration:
+        AllowHeaders:
+          - Authorization
+          - Content-Type
+          - Idempotency-Key
+          - X-Request-ID
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        AllowOrigins:
+          - https://saurus-audio.com
+          - http://localhost:8000
+        MaxAge: 300
+      Tags:
+        project: saurus
+        env: alpha
+        owner: !Ref Owner
+
+  WebGatewayJwtAuthorizer:
+    Type: AWS::ApiGatewayV2::Authorizer
+    Condition: ShouldDeployWebGateway
+    Properties:
+      ApiId: !Ref WebGatewayHttpApi
+      AuthorizerType: JWT
+      Name: saurus-alpha-cognito-jwt
+      IdentitySource:
+        - "$request.header.Authorization"
+      JwtConfiguration:
+        Audience:
+          - !Ref WebAlphaUserPoolClient
+        Issuer: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${AlphaUserPool}"
+
+  WebGatewayIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Condition: ShouldDeployWebGateway
+    Properties:
+      ApiId: !Ref WebGatewayHttpApi
+      IntegrationType: AWS_PROXY
+      IntegrationMethod: POST
+      IntegrationUri: !Sub "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${WebGatewayFunction.Arn}/invocations"
+      PayloadFormatVersion: "2.0"
+      TimeoutInMillis: 20000
+
+  WebGatewayDefaultRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Condition: ShouldDeployWebGateway
+    Properties:
+      ApiId: !Ref WebGatewayHttpApi
+      RouteKey: "$default"
+      AuthorizationType: JWT
+      AuthorizerId: !Ref WebGatewayJwtAuthorizer
+      Target: !Sub "integrations/${WebGatewayIntegration}"
+
+  WebGatewayDefaultStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Condition: ShouldDeployWebGateway
+    Properties:
+      ApiId: !Ref WebGatewayHttpApi
+      StageName: "$default"
+      AutoDeploy: true
+      AccessLogSettings:
+        DestinationArn: !GetAtt WebGatewayAccessLogGroup.Arn
+        Format: '{"requestId":"$context.requestId","routeKey":"$context.routeKey","status":"$context.status","integrationStatus":"$context.integration.status","error":"$context.error.message"}'
+      Tags:
+        project: saurus
+        env: alpha
+        owner: !Ref Owner
+
+  WebGatewayInvokePermission:
+    Type: AWS::Lambda::Permission
+    Condition: ShouldDeployWebGateway
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref WebGatewayFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${WebGatewayHttpApi}/*/*"
+
+  OperationsAlertTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: "Saurus alpha operations alerts"
+      Subscription:
+        - Protocol: email
+          Endpoint: !Ref AlertEmail
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryAlb5xxAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: "Saurus alpha registry ALB returned 5xx responses."
+      Namespace: AWS/ApplicationELB
+      MetricName: HTTPCode_ELB_5XX_Count
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      Dimensions:
+        - Name: LoadBalancer
+          Value: !GetAtt RegistryLoadBalancer.LoadBalancerFullName
+      AlarmActions:
+        - !Ref OperationsAlertTopic
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryUnhealthyTargetsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: "Saurus alpha registry has unhealthy ALB targets."
+      Namespace: AWS/ApplicationELB
+      MetricName: UnHealthyHostCount
+      Statistic: Maximum
+      Period: 60
+      EvaluationPeriods: 2
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      Dimensions:
+        - Name: TargetGroup
+          Value: !GetAtt RegistryTargetGroup.TargetGroupFullName
+        - Name: LoadBalancer
+          Value: !GetAtt RegistryLoadBalancer.LoadBalancerFullName
+      AlarmActions:
+        - !Ref OperationsAlertTopic
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryEcsCpuAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Condition: ShouldDeployRegistryService
+    Properties:
+      AlarmDescription: "Saurus alpha registry ECS CPU is high."
+      Namespace: AWS/ECS
+      MetricName: CPUUtilization
+      Statistic: Average
+      Period: 300
+      EvaluationPeriods: 2
+      Threshold: 80
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      Dimensions:
+        - Name: ClusterName
+          Value: !Ref RegistryCluster
+        - Name: ServiceName
+          Value: !GetAtt RegistryService.Name
+      AlarmActions:
+        - !Ref OperationsAlertTopic
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  RegistryDatabaseStorageAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: "Saurus alpha registry database free storage is low."
+      Namespace: AWS/RDS
+      MetricName: FreeStorageSpace
+      Statistic: Minimum
+      Period: 300
+      EvaluationPeriods: 2
+      Threshold: 2147483648
+      ComparisonOperator: LessThanThreshold
+      TreatMissingData: breaching
+      Dimensions:
+        - Name: DBInstanceIdentifier
+          Value: !Ref RegistryDatabase
+      AlarmActions:
+        - !Ref OperationsAlertTopic
+      Tags:
+        - Key: project
+          Value: saurus
+        - Key: env
+          Value: alpha
+        - Key: owner
+          Value: !Ref Owner
+
+  AlphaBudget:
+    Type: AWS::Budgets::Budget
+    Properties:
+      Budget:
+        BudgetName: saurus-alpha-monthly
+        BudgetLimit:
+          Amount: !Ref MonthlyBudgetUsd
+          Unit: USD
+        TimeUnit: MONTHLY
+        BudgetType: COST
+        CostFilters:
+          TagKeyValue:
+            - user:project$saurus
+            - user:env$alpha
+      NotificationsWithSubscribers:
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 80
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: EMAIL
+              Address: !Ref AlertEmail
+
+Outputs:
+  RegistryImageRepositoryUri:
+    Value: !GetAtt RegistryImageRepository.RepositoryUri
+  BackupBucketName:
+    Value: !Ref BackupBucket
+  RegistryRecordsKeyAlias:
+    Value: !Ref RegistryRecordsKeyAlias
+  EncodeGrantsKeyAlias:
+    Value: !Ref EncodeGrantsKeyAlias
+  ReportsKeyAlias:
+    Value: !Ref ReportsKeyAlias
+  BackupsKeyAlias:
+    Value: !Ref BackupsKeyAlias
+  RegistryTaskDefinitionArn:
+    Condition: ShouldDeployRegistryService
+    Value: !Ref RegistryTaskDefinition
+  RegistryTaskRoleArn:
+    Value: !GetAtt RegistryTaskRole.Arn
+  RegistryTaskExecutionRoleArn:
+    Value: !GetAtt RegistryTaskExecutionRole.Arn
+  RegistryLoadBalancerDnsName:
+    Value: !GetAtt RegistryLoadBalancer.DNSName
+  RegistryServiceName:
+    Condition: ShouldDeployRegistryService
+    Value: !GetAtt RegistryService.Name
+  WebGatewayApiEndpoint:
+    Condition: ShouldDeployWebGateway
+    Value: !GetAtt WebGatewayHttpApi.ApiEndpoint
+  WebGatewayFunctionName:
+    Condition: ShouldDeployWebGateway
+    Value: !Ref WebGatewayFunction
+  GatewayTenantMappingSecretArn:
+    Value: !Ref GatewayTenantMappingSecret
+  AlphaUserPoolId:
+    Value: !Ref AlphaUserPool
+  WebAlphaUserPoolClientId:
+    Value: !Ref WebAlphaUserPoolClient
+  WebAlphaManagedLoginDomain:
+    Value: !Sub "https://${AlphaUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com"

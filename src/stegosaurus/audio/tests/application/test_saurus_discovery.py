@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from io import BytesIO
+from pathlib import Path
 import wave
 
 import pytest
@@ -39,16 +40,22 @@ from saurus_discovery import (
     ExternalActionKind,
     FeedEntry,
     FeedSourceMetricsSnapshot,
+    DiscoveryLegalPolicyReviewRecord,
+    DiscoveryRecognitionEngineSelection,
+    DiscoveryThresholdCalibration,
     FingerprintMatcher,
     IncidentStep,
     JobState,
     LabeledFingerprintExample,
+    LiveCrawlGateDecision,
     MediaCostRecord,
     MediaCostSnapshot,
     MediaLimits,
     OptOutRequest,
     PageCandidate,
+    PublicSourceSelection,
     ReviewQueue,
+    RepresentativeCorpusSummary,
     ReviewMetricsSnapshot,
     ReviewState,
     ReviewedFeedConnector,
@@ -68,12 +75,32 @@ from saurus_discovery import (
     evaluate_discovery_pilot,
     evaluate_connector_gate,
     evaluate_fetch_url,
+    evaluate_live_crawl_gate,
     media_cost_snapshot,
     feed_source_metrics_snapshot,
+    record_discovery_threshold_calibration,
     record_discovery_pilot_decision,
     review_metrics_snapshot,
     review_external_action,
     source_coverage_snapshot,
+)
+from saurus_discovery.readiness import DiscoveryBaselineRehearsalResult, run_no_notification_baseline_rehearsal
+from saurus_pilot import (
+    REQUIRED_SECURITY_REVIEW_AREAS,
+    PilotGoNoGoDecisionRecord,
+    PilotOwnerAssignments,
+    SecurityReviewArea,
+    SecurityReviewSignoff,
+    record_pilot_go_no_go,
+    record_security_review_signoff,
+)
+from saurus_registry import (
+    BackupRestoreRehearsalResult,
+    RegistryAccessReviewSnapshot,
+    RegistryApiMetricsSnapshot,
+    RegistryLaunchThresholds,
+    RegistryMetricsSnapshot,
+    record_registry_launch_decision,
 )
 
 
@@ -496,6 +523,40 @@ def test_discovery_baseline_run_requires_no_client_notifications() -> None:
         DiscoveryBaselineRun("baseline-3", "pilot-reviewer", NOW, NOW + timedelta(hours=2), (), adjudication)
 
 
+def test_live_crawl_gate_defaults_to_disabled_until_pilot_evidence_exists() -> None:
+    """Keep live crawling off until enrollment, baseline, corpus, legal, and engine gates pass."""
+
+    source_metrics = FeedSourceMetricsSnapshot("public-feed", 5, 4, 2, 1, 1)
+    adjudication = CandidateAdjudicationSnapshot(2, 1, 1, 0, 0, 0, ())
+    baseline = DiscoveryBaselineRun("baseline-1", "pilot-reviewer", NOW, NOW + timedelta(hours=2), (source_metrics,), adjudication)
+    enrollment = DiscoveryPilotEnrollment("enrollment-1", "ops-owner", NOW, (_target(),), ("public-feed",))
+
+    blocked = evaluate_live_crawl_gate(None, (), 0, legal_policy_approved=False, recognition_engine_name="")
+    enabled = evaluate_live_crawl_gate(enrollment, (baseline,), 12, legal_policy_approved=True, recognition_engine_name="licensed-song-match-v1")
+
+    assert isinstance(enabled, LiveCrawlGateDecision)
+    assert not blocked.enabled
+    assert "approved target and source enrollment is missing" in blocked.blockers
+    assert "no-notification baseline has not run" in blocked.blockers
+    assert enabled.enabled
+    assert enabled.blockers == ()
+    with pytest.raises(ValueError, match="representative_corpus_case_count"):
+        evaluate_live_crawl_gate(enrollment, (baseline,), -1, legal_policy_approved=True, recognition_engine_name="engine")
+
+
+def test_discovery_no_notification_baseline_rehearsal_keeps_live_crawl_disabled() -> None:
+    """Run the local discovery baseline rehearsal without client notifications."""
+
+    result = run_no_notification_baseline_rehearsal()
+
+    assert isinstance(result, DiscoveryBaselineRehearsalResult)
+    assert result.baseline.client_notification_count == 0
+    assert result.baseline.emitted_candidate_count >= 1
+    assert result.baseline.adjudication.unlabeled_candidate_ids == ()
+    assert not result.live_gate.enabled
+    assert "legal and source-policy approval is missing" in result.live_gate.blockers
+
+
 def test_candidate_evidence_marks_short_public_preview_as_song_match_only() -> None:
     """Keep short public matches out of attribution follow-up."""
 
@@ -543,7 +604,7 @@ def test_external_action_approval_records_human_and_counsel_gate() -> None:
     decision = classify_candidate_evidence(accepted, minimum_attribution_seconds=15.0)
     pending_decision = classify_candidate_evidence(pending, minimum_attribution_seconds=15.0)
 
-    approval = review_external_action(accepted, decision, ExternalActionKind.EXTERNAL_NOTICE, "reviewer-1", "counsel-1", "client-policy-1", "Public audio is a candidate match for registered song song-1.", NOW)
+    approval = review_external_action(accepted, decision, ExternalActionKind.LEGAL_WORKFLOW, "reviewer-1", "counsel-1", "client-policy-1", "Public audio is a candidate match for registered song song-1.", NOW)
     blocked_state = review_external_action(pending, pending_decision, ExternalActionKind.EXTERNAL_NOTICE, "reviewer-1", "counsel-1", "client-policy-1", "Public audio is a candidate match for registered song song-1.", NOW)
     blocked_language = review_external_action(accepted, decision, ExternalActionKind.EXTERNAL_NOTICE, "reviewer-1", "counsel-1", "client-policy-1", "The recipient leaked the song.", NOW)
 
@@ -565,10 +626,13 @@ def test_external_action_approval_blocks_song_match_only_attribution_steps() -> 
 
     client_alert = review_external_action(candidate, decision, ExternalActionKind.CLIENT_ALERT, "reviewer-1", "counsel-1", "client-policy-1", "Public audio is a candidate match for registered song song-1.", NOW)
     external_notice = review_external_action(candidate, decision, ExternalActionKind.EXTERNAL_NOTICE, "reviewer-1", "counsel-1", "client-policy-1", "Public audio is a candidate match for registered song song-1.", NOW)
+    legal_workflow = review_external_action(candidate, decision, ExternalActionKind.LEGAL_WORKFLOW, "reviewer-1", "counsel-1", "client-policy-1", "Public audio is a candidate match for registered song song-1.", NOW)
 
     assert client_alert.allowed
     assert not external_notice.allowed
     assert "song-match-only" in external_notice.reasons[0]
+    assert not legal_workflow.allowed
+    assert "legal workflow" in legal_workflow.reasons[0]
     assert not hasattr(external_notice, "recipient_label")
     with pytest.raises(ValueError, match="identifiers"):
         review_external_action(CandidateRecord("other", "tenant-1", "song-1", "public-feed", "https://example.com/b", 0.9, 20.0, ReviewState.ACCEPTED, NOW, NOW + timedelta(days=7)), decision, ExternalActionKind.CLIENT_ALERT, "reviewer-1", "counsel-1", "client-policy-1", "Public audio is a candidate match.", NOW)
@@ -865,3 +929,133 @@ def test_discovery_pilot_go_no_go_uses_declared_metrics() -> None:
         DiscoveryPilotMetrics(-1, 0, 0, 0, 0, 0, 0, 0.0, 0.0, 0, 0, 0, 0, 0, 0.0, 0, 0)
     with pytest.raises(ValueError, match="summary"):
         record_discovery_pilot_decision(passing, thresholds, "pilot-reviewer", NOW, "")
+
+
+def test_discovery_launch_readiness_records_source_engine_corpus_and_thresholds() -> None:
+    """Record real-source, legal, engine, corpus, and threshold evidence."""
+
+    source = PublicSourceSelection("public-feed", "terms-and-robots-review-1", "source-owner", NOW)
+    legal = DiscoveryLegalPolicyReviewRecord(
+        "source-policy-1",
+        "retention-policy-1",
+        "notice-policy-1",
+        "opt-out-policy-1",
+        "counsel-1",
+        NOW,
+        True,
+    )
+    engine = DiscoveryRecognitionEngineSelection("licensed-song-match", "v1", "engine-license-1", NOW)
+    corpus = RepresentativeCorpusSummary(5, 7, 3, 4, 2, "corpus-manifest-1")
+    evaluation = evaluate_matcher(
+        StaticMatcher("licensed-song-match-v1", {"positive:fp-1": 0.91, "negative:fp-1": 0.2}),
+        (
+            LabeledFingerprintExample(DecodedMedia("audio/wav", "positive", 16_000, 1, 2, 16_000, 1.0), "fp-1", True),
+            LabeledFingerprintExample(DecodedMedia("audio/wav", "negative", 16_000, 1, 2, 16_000, 1.0), "fp-1", False),
+        ),
+        0.8,
+    )
+    calibration = record_discovery_threshold_calibration(evaluation, 0.0, 0.0, "pilot-reviewer", NOW)
+
+    assert source.access_reference == "terms-and-robots-review-1"
+    assert isinstance(legal, DiscoveryLegalPolicyReviewRecord)
+    assert legal.approved
+    assert isinstance(engine, DiscoveryRecognitionEngineSelection)
+    assert corpus.codec_variant_count == 2
+    assert isinstance(calibration, DiscoveryThresholdCalibration)
+    assert calibration.ready
+    assert calibration.blockers == ()
+    with pytest.raises(ValueError, match="maximum_miss_rate"):
+        record_discovery_threshold_calibration(evaluation, 0.0, -0.1, "pilot-reviewer", NOW)
+    with pytest.raises(ValueError, match="access_reference"):
+        PublicSourceSelection("public-feed", "", "source-owner", NOW)
+    with pytest.raises(ValueError, match="positive_count"):
+        RepresentativeCorpusSummary(0, 1, 1, 1, 1, "corpus")
+
+
+def test_pilot_go_no_go_blocks_notifications_until_registry_and_discovery_pass() -> None:
+    """Require registry, discovery, owner, and counsel gates before notification."""
+
+    owners = PilotOwnerAssignments("registry-owner", "desktop-owner", "discovery-owner", "security-owner", "policy-owner")
+    registry_record = record_registry_launch_decision(
+        RegistryMetricsSnapshot("tenant-1", 1, 10, 0, 9, 1, 0, 0.9, 0.0, 20, 1.0, 0, 10, 10 / 9),
+        RegistryAccessReviewSnapshot(2, 2, 0, 1, 1, 1.0, ()),
+        RegistryApiMetricsSnapshot(3, 12.0, 40.0, 1_200, 5, 0, 0.0),
+        BackupRestoreRehearsalResult(Path("backup.sqlite3"), Path("restored.sqlite3"), 50.0, 70.0, 120.0),
+        RegistryLaunchThresholds(0.9, 0.1, 1.0, 1.0, 0, 0, 1.25, 100.0, 0.0, 2_000, 10, 0, 500.0),
+        "ops-reviewer",
+        NOW,
+        "registry gates pass",
+    )
+    discovery_thresholds = DiscoveryPilotThresholds(0.8, 0.1, 0.0, 24.0, 15.0, 0, 48.0)
+    discovery_go = record_discovery_pilot_decision(
+        DiscoveryPilotMetrics(8, 6, 5, 0, 1, 0, 0, 12.0, 10.0, 10_000, 500, 5, 0, 1, 24.0, 2, 3),
+        discovery_thresholds,
+        "pilot-reviewer",
+        NOW,
+        "discovery gates pass",
+    )
+    discovery_no_go = record_discovery_pilot_decision(
+        DiscoveryPilotMetrics(8, 6, 4, 2, 0, 0, 1, 12.0, 10.0, 10_000, 500, 4, 0, 1, 24.0, 2, 2),
+        discovery_thresholds,
+        "pilot-reviewer",
+        NOW,
+        "discovery gates fail",
+    )
+
+    go = record_pilot_go_no_go(owners, registry_record, discovery_go, "pilot-owner", "counsel-1", "client-review-1", NOW, "pilot gates pass", request_client_notifications=True)
+    blocked = record_pilot_go_no_go(owners, registry_record, discovery_no_go, "pilot-owner", "counsel-1", "client-review-1", NOW, "pilot gates blocked", request_client_notifications=True)
+
+    assert isinstance(go, PilotGoNoGoDecisionRecord)
+    assert go.go
+    assert go.client_notifications_allowed
+    assert not blocked.go
+    assert not blocked.client_notifications_allowed
+    assert blocked.blockers == ("discovery pilot decision is not go",)
+    with pytest.raises(ValueError, match="policy_owner_id"):
+        PilotOwnerAssignments("registry-owner", "desktop-owner", "discovery-owner", "security-owner", "")
+
+
+def test_security_review_signoff_blocks_production_until_scope_and_findings_clear() -> None:
+    """Require external review coverage and severe-finding closure for production."""
+
+    incomplete = record_security_review_signoff(
+        "external-reviewer",
+        "security-report-1",
+        NOW,
+        (SecurityReviewArea.API_AUTHORIZATION, SecurityReviewArea.KEY_MANAGEMENT),
+        0,
+        1,
+        3,
+        "review started",
+    )
+    ready = record_security_review_signoff(
+        "external-reviewer",
+        "security-report-2",
+        NOW,
+        REQUIRED_SECURITY_REVIEW_AREAS,
+        0,
+        0,
+        2,
+        "required areas reviewed; medium follow-ups accepted by owner",
+    )
+
+    assert isinstance(incomplete, SecurityReviewSignoff)
+    assert not incomplete.production_ready
+    assert "tenant_isolation" in incomplete.blockers[0]
+    assert incomplete.blockers[-1] == "1 high finding(s) remain open"
+    assert ready.production_ready
+    assert ready.blockers == ()
+    assert ready.medium_open_count == 2
+    with pytest.raises(ValueError, match="critical_open_count"):
+        record_security_review_signoff(
+            "external-reviewer",
+            "security-report-3",
+            NOW,
+            REQUIRED_SECURITY_REVIEW_AREAS,
+            -1,
+            0,
+            0,
+            "invalid finding count",
+        )
+    with pytest.raises(TypeError, match="SecurityReviewArea"):
+        record_security_review_signoff("external-reviewer", "security-report-4", NOW, ("api",), 0, 0, 0, "invalid area")

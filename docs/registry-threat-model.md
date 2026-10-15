@@ -16,8 +16,9 @@
 
 1. **Authorized desktop:** trusted to encode during the first server-backed
    release, but assumed recoverable by a motivated local administrator. It must
-   receive only tenant-scoped material and store credentials in the OS
-   credential store.
+   receive only short-lived, export-scoped working key grants and store
+   credentials in the OS credential store. Tenant/root watermark material must
+   not live in the desktop binary or profile.
 2. **Registry service:** trusted with business context and encrypted retained
    records. Authorization is enforced in application services as well as HTTP.
 3. **Database and backups:** not trusted with plaintext attribution payloads or
@@ -33,7 +34,7 @@
 | Threat | Effect | Required control |
 | --- | --- | --- |
 | Cross-tenant object reference | Private labels or records exposed | Tenant-scoped repository calls and negative authorization tests |
-| Extracted desktop secret | Forged or decoded tenant exports | No global embedded secret; tenant/device scope, rotation, and revocation |
+| Extracted desktop secret | Forged or decoded tenant exports | No global embedded secret; short-lived export-scoped grants, tenant/device scope, rotation, and revocation |
 | Handle collision or reuse | Ambiguous export claim | Tenant-wide atomic uniqueness, retry, UUID primary identity, collision telemetry |
 | Partial reserve/finalize | Active record without valid audio, or orphan | Explicit states, idempotency, expiry, and reconciliation |
 | Record tampering or downgrade | False verification behavior | Canonical versioned bytes, digest, encryption, and allowed-version policy |
@@ -45,11 +46,20 @@
 
 ## Initial Architecture Decisions
 
-- **Encoding model:** trusted-local for the first registry-backed release. The
-  authorized desktop performs audio work; the server owns issuance and durable
-  registry state. This preserves the current local workflow but does not make a
-  desktop secret tamper-proof. Server-assisted or server-side encoding remains
-  a later option if the threat model requires stronger key custody.
+- **Encoding model:** trusted-local with server-owned key custody for the first
+  registry-backed release. The authorized desktop performs audio work so source
+  audio stays local, but the server owns issuance, durable registry state, and
+  tenant/root watermark material. The desktop receives only short-lived,
+  export-scoped working key grants bound to tenant, song, export, device,
+  actor, profile, and expiry. Server-side encoding remains an option for
+  customers willing to upload source audio, but it is not the default custody
+  model.
+- **Key custody:** the first managed provider is AWS KMS customer-managed
+  symmetric keys, with separate alias paths for retained records, encode grants,
+  reports, and backups. Local encode grants are working-key capabilities, not
+  standing tenant secrets. Key versions must remain available for verification
+  after rotation, and every grant issuance must be auditable by actor, device,
+  export, and request. See `docs/key-custody-decision.md`.
 - **Handle scope:** four-byte handles are unique within a tenant, checked
   atomically at reservation time. Database identity remains a UUID. Verification
   still requires song/export context; the handle is not a public lookup key.
@@ -75,7 +85,8 @@ before use.
 
 ## Residual Risks And Required Review
 
-- A trusted-local encoder exposes scoped key material to an authorized endpoint.
+- A trusted-local encoder exposes scoped working key material to an authorized
+  endpoint for the grant lifetime.
 - Four bytes limit namespace capacity and do not authenticate registry context.
 - Local clean self-verification does not prove platform or recorded-audio
   robustness.
@@ -85,7 +96,13 @@ before use.
 ## Security Gates
 
 - Two-tenant tests demonstrate no cross-tenant read, mutation, or lineage path.
+- Production tenant-isolation readiness requires passing evidence for registry
+  API authorization, registry repository scope, KMS grant scope, backup/export
+  scope, discovery projection, and crawler network separation. The executable
+  launch gate lives in `src/saurus_pilot/tenant_isolation.py`.
 - Interrupted reserve/finalize operations reconcile without duplicate active exports.
 - Key rotation and backup restore are rehearsed against versioned records.
+- Encode grants are scoped, expiring, auditable, and unwrap only for the
+  intended device.
 - Crawler workers cannot address registry networks or private IP ranges.
 - User-visible results follow `docs/evidence-language.md`.

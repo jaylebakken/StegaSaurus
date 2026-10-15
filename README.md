@@ -131,6 +131,15 @@ python -m stegosaurus.audio.demo_app
 # Simpler guided desktop handoff: encode WAV + private registry JSON,
 # then verify a suspicious WAV against that retained registry file.
 python -m saurus_app.app
+
+# Scripted local-registry desktop smoke check for release validation.
+python -m saurus_app.smoke
+
+# Pre-AWS alpha contract smoke with signed bearer device enrollment.
+python -m saurus_app.smoke --mode alpha-contract
+
+# Build and hidden-launch-check the lightweight Windows-friendly desktop alpha package.
+python -m saurus_app.packaging --output dist/saurus-desktop.pyz
 ```
 
 The [Saurus style guide](docs/style-guide.md) defines the shared identity and UI
