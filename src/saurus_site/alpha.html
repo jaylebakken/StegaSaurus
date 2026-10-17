@@ -32,77 +32,31 @@
           <span>Saurus Alpha</span>
         </a>
         <div class="top-actions" aria-label="Alpha status">
-          <span class="status-pill">Registry gateway pending</span>
-          <span class="mode-pill">Internal alpha</span>
+          <span class="status-pill">Gateway preview</span>
+          <span class="mode-pill">Alpha studio</span>
         </div>
       </header>
 
       <div class="layout">
         <aside class="side-panel" aria-label="Alpha navigation">
           <nav class="nav-list">
-            <button class="nav-button is-active" type="button" data-view-target="public">
+            <button class="nav-button is-active" type="button" data-view-target="account">
               <span class="nav-icon">01</span>
-              <span><strong>Ad Page</strong><span>Public story</span></span>
-            </button>
-            <button class="nav-button" type="button" data-view-target="account">
-              <span class="nav-icon">02</span>
               <span><strong>Account</strong><span>Login lifecycle</span></span>
             </button>
             <button class="nav-button" type="button" data-view-target="app">
-              <span class="nav-icon">03</span>
-              <span><strong>Application</strong><span>Add and verify</span></span>
+              <span class="nav-icon">02</span>
+              <span><strong>Workspace</strong><span>Add and verify</span></span>
             </button>
           </nav>
           <p class="side-note">
-            Browser writes stay disabled until Cognito and the registry gateway
-            are live. This shell is the product path we can test today.
+            A guided web alpha for registering music, preparing exports, and
+            reviewing attribution evidence without hiding the handoffs.
           </p>
         </aside>
 
         <main class="workspace">
-          <section class="view is-active" id="public" data-view>
-            <div class="view-header">
-              <div>
-                <p class="eyebrow">Public alpha page</p>
-                <h1>Protect unreleased music without making the workflow weird.</h1>
-              </div>
-              <div class="button-row">
-                <a class="button secondary" href="index.html">Full site</a>
-                <button class="button tape" type="button" data-view-jump="account">Preview login</button>
-              </div>
-            </div>
-            <article class="card hero-card">
-              <div class="hero-copy">
-                <p class="lede">
-                  The public page should make one promise: register the clean
-                  track, create recipient-specific exports, and review evidence
-                  if a leaked copy comes back.
-                </p>
-                <div class="metric-row" aria-label="Public alpha pillars">
-                  <div class="metric"><strong>Private by default</strong><span>Source audio starts local.</span></div>
-                  <div class="metric"><strong>Registry backed</strong><span>Handles map to retained context.</span></div>
-                  <div class="metric"><strong>Careful language</strong><span>Matches can accept, reject, or abstain.</span></div>
-                </div>
-              </div>
-              <img src="../saurus_style/assets/waveform-stegosaurus.svg" alt="">
-            </article>
-            <div class="grid-3 spaced-grid">
-              <article class="card">
-                <h3>For artists and managers</h3>
-                <p class="lede">Send review copies without losing track of who received which export.</p>
-              </article>
-              <article class="card">
-                <h3>For labels</h3>
-                <p class="lede">Keep demo, promo, and partner deliveries tied to a reviewable registry.</p>
-              </article>
-              <article class="card">
-                <h3>For investigations</h3>
-                <p class="lede">Start from a suspected song and compare against known authorized exports.</p>
-              </article>
-            </div>
-          </section>
-
-          <section class="view" id="account" data-view>
+          <section class="view is-active" id="account" data-view>
             <div class="view-header">
               <div>
                 <p class="eyebrow">Login and account lifecycle</p>
@@ -122,6 +76,7 @@
                 </ol>
               </article>
               <article class="card dark">
+                <img class="dark-wave" src="assets/cc0-sound-wave.svg" alt="">
                 <h3>What the browser never gets</h3>
                 <p class="lede">
                   The registry signing secret, KMS grant material, raw retained
@@ -138,7 +93,7 @@
           <section class="view" id="app" data-view>
             <div class="view-header">
               <div>
-                <p class="eyebrow">Application</p>
+                <p class="eyebrow">Studio workspace</p>
                 <h2>Add a track, attach registry context, and prepare exports.</h2>
               </div>
               <div class="button-row">
@@ -174,6 +129,7 @@
               </article>
               <article class="card">
                 <h3>Registry package</h3>
+                <img class="package-wave" src="assets/cc0-sound-wave.svg" alt="">
                 <ol class="timeline" data-package-steps aria-label="Registry package status">
                   <li class="is-ready"><strong>Clean source selected</strong><span data-source-status>Waiting for browser file selection.</span></li>
                   <li><strong>Song record</strong><span>Will be created by authenticated gateway.</span></li>
@@ -203,7 +159,9 @@
 
       <footer class="footer">
         Saurus web alpha shell. Live customer data stays blocked until auth,
-        gateway, tenant isolation, image risk, and policy gates clear.
+        gateway, tenant isolation, image risk, and policy gates clear. Visual
+        assets: Hamilton/NIST public-domain oscilloscope trace and GDJ CC0
+        waveform.
       </footer>
     </div>
   </body>

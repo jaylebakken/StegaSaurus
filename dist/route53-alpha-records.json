@@ -1,0 +1,30 @@
+{
+  "Comment": "Saurus alpha ACM validation and registry alias.",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "_b6776ef416532d3eed22ff04e66d93a3.registry-alpha.saurus-audio.com.",
+        "Type": "CNAME",
+        "TTL": 300,
+        "ResourceRecords": [
+          {
+            "Value": "_b79db264054430dacd5b49364bf5ad60.wzccmgtwzk.acm-validations.aws."
+          }
+        ]
+      }
+    },
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "registry-alpha.saurus-audio.com.",
+        "Type": "A",
+        "AliasTarget": {
+          "HostedZoneId": "Z3AADJGX6KTTL2",
+          "DNSName": "saurus-Regis-TnFLqxZYeGWZ-2062067625.us-east-2.elb.amazonaws.com.",
+          "EvaluateTargetHealth": false
+        }
+      }
+    }
+  ]
+}

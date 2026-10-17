@@ -9,28 +9,17 @@
     >
     <meta
       name="description"
-      content="Saurus protects pre-release music with recipient-specific audio attribution and registry-backed leak investigation."
+      content="Saurus helps music teams send recipient-specific audio copies and trace leaked excerpts back to authorized deliveries."
     >
-    <title>Saurus | Protect your music. Trace every copy.</title>
+    <title>Saurus | Trace leaked music back to the copy</title>
     <link rel="icon" href="../saurus_style/assets/mark.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
     <script src="app.js" defer></script>
   </head>
   <body>
     <div class="page-ambient" aria-hidden="true">
-      <span class="ambient-band"></span>
       <span class="ambient-grid"></span>
-      <svg class="ambient-wave" viewBox="0 0 1000 250" preserveAspectRatio="none" focusable="false">
-        <path class="wave-line wave-01" d="M-40 42C38 32 55 199 143 194C240 188 273 50 391 55C514 60 579 176 684 160C790 144 823 22 1040 34"/>
-        <path class="wave-line wave-02" d="M-40 49C36 40 58 205 146 199C242 192 276 57 394 61C518 65 581 181 687 165C793 149 827 29 1040 41"/>
-        <path class="wave-line wave-03" d="M-40 56C35 48 62 211 150 205C246 198 281 65 399 68C523 71 585 186 692 170C798 154 833 37 1040 49"/>
-        <path class="wave-line wave-04" d="M-40 63C33 56 65 217 153 211C250 204 285 72 403 75C528 78 589 191 696 175C803 159 839 45 1040 57"/>
-        <path class="wave-line wave-05" d="M-40 70C32 64 69 223 157 217C254 210 290 80 408 82C533 84 593 196 701 180C808 164 845 53 1040 65"/>
-        <path class="wave-line wave-06" d="M-40 77C31 72 73 229 161 223C258 216 294 87 412 89C538 91 597 201 705 185C813 169 851 61 1040 73"/>
-        <path class="wave-line wave-07" d="M-40 84C29 80 76 235 164 229C262 222 299 95 417 96C543 97 601 206 710 190C818 174 857 69 1040 81"/>
-        <path class="wave-line wave-08" d="M-40 91C28 88 80 241 168 235C266 228 303 102 421 103C548 104 605 211 714 195C823 179 863 77 1040 89"/>
-        <path class="wave-line wave-09" d="M-40 98C27 96 84 247 172 241C270 234 308 110 426 110C553 111 609 216 719 200C828 184 869 85 1040 97"/>
-      </svg>
+      <img class="ambient-photo" src="assets/nist-oscilloscope-traces.jpg" alt="" data-parallax data-parallax-speed="-0.16">
     </div>
     <div class="scroll-meter" aria-hidden="true"></div>
 
@@ -41,281 +30,127 @@
       </a>
       <nav class="nav" aria-label="Primary navigation">
         <a href="#workflow">Workflow</a>
-        <a href="#proof">Attribution</a>
-        <a href="#platform">Platform</a>
-        <a href="alpha.html">Alpha</a>
-        <a class="nav-cta" href="#demo">Demo path</a>
+        <a href="#trust">Trust</a>
+        <a href="#fit">Fit</a>
+        <a class="nav-cta" href="alpha.html">Start alpha</a>
       </nav>
     </header>
 
-    <aside class="process-dock" data-process-dock data-stage="0" aria-label="Animated Saurus workflow">
-      <div class="process-card">
-        <div class="process-card-header">
-          <span>Attribution workflow</span>
-          <strong data-process-title>Register clean master</strong>
-        </div>
-        <div class="process-canvas" aria-hidden="true">
-          <div class="process-wave">
-            <i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <div class="process-flow">
-            <div class="process-path"><span></span></div>
-            <div class="process-node process-source" data-process-node="0">Source</div>
-            <div class="process-node process-export" data-process-node="1">Export</div>
-            <div class="process-node process-leak" data-process-node="2">Leak</div>
-            <div class="process-node process-match" data-process-node="3">Match</div>
-            <div class="process-registry" data-process-node="4">
-              <span>Registry</span>
-              <strong>Lineage</strong>
-            </div>
-          </div>
-        </div>
-        <ol class="process-steps">
-          <li class="is-active" data-process-step="0"><span>01</span>Register</li>
-          <li data-process-step="1"><span>02</span>Export</li>
-          <li data-process-step="2"><span>03</span>Localize</li>
-          <li data-process-step="3"><span>04</span>Verify</li>
-          <li data-process-step="4"><span>05</span>Lineage</li>
-        </ol>
-        <p class="process-caption" data-process-caption aria-live="polite">
-          The clean master becomes a private song record.
-        </p>
-      </div>
-    </aside>
-
     <main id="top">
-      <section class="hero" aria-labelledby="hero-title" data-story-stage="0">
-        <div class="hero-copy reveal" data-reveal>
-          <p class="eyebrow">Private attribution for modern music teams</p>
-          <h1 id="hero-title">
-            <span class="headline-line">Protect your</span>
-            <span class="headline-line">music. Trace</span>
-            <span class="headline-line">every copy.</span>
-          </h1>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy reveal" data-reveal data-parallax data-parallax-speed="0.04">
+          <p class="eyebrow">Private attribution for unreleased music</p>
+          <h1 id="hero-title">Know which copy leaked.</h1>
           <p class="hero-text">
-            Saurus creates recipient-specific audio exports and helps match leaked
-            excerpts back to the authorized delivery they came from.
+            Saurus creates recipient-specific audio exports for demos, masters,
+            and promos, then helps trace a leaked excerpt back to the authorized
+            delivery it came from.
           </p>
-          <div class="hero-signal" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
           <div class="hero-actions" aria-label="Hero actions">
-            <a class="button primary" href="#workflow">See the workflow</a>
-            <a class="button secondary" href="#proof">Why it works</a>
+            <a class="button primary" href="alpha.html">Create an alpha account</a>
+            <a class="button secondary" href="#workflow">See how it works</a>
           </div>
           <dl class="hero-stats" aria-label="Saurus product highlights">
             <div>
-              <dt>Known-song</dt>
-              <dd>Leak workflow</dd>
+              <dt>For</dt>
+              <dd>Artists, managers, labels</dd>
             </div>
             <div>
-              <dt>Registry</dt>
-              <dd>Backed identity</dd>
+              <dt>Protects</dt>
+              <dd>Review copies and promos</dd>
             </div>
             <div>
-              <dt>Lineage</dt>
-              <dd>Export history</dd>
+              <dt>Answers</dt>
+              <dd>Which export came back?</dd>
             </div>
           </dl>
         </div>
 
-        <div class="hero-visual reveal" data-reveal data-tilt aria-label="Saurus product workflow preview">
-          <div class="glass-shell">
-            <div class="shell-topbar">
-              <span></span><span></span><span></span>
-              <strong>Leak investigation</strong>
-            </div>
-            <div class="track-panel">
-              <div class="track-meta">
-                <span>Registered track</span>
-                <strong>Night Drive Master.wav</strong>
-              </div>
-              <div class="waveform" aria-hidden="true">
-                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-              </div>
-            </div>
-            <div class="trace-rail" aria-hidden="true">
-              <span class="trace-dot source-dot"></span>
-              <span class="trace-dot export-dot"></span>
-              <span class="trace-dot leak-dot"></span>
-            </div>
-            <div class="export-stack">
-              <article>
-                <span>Export A</span>
-                <strong>Northline Promo</strong>
-              </article>
-              <article class="active">
-                <span>Export B</span>
-                <strong>Atlas Mastering</strong>
-              </article>
-              <article>
-                <span>Export C</span>
-                <strong>Sync Preview</strong>
-              </article>
-            </div>
-            <div class="match-card">
-              <span class="status-pill">Matched</span>
-              <strong>Atlas Mastering</strong>
-              <span>Lineage: master -> promo copy</span>
-            </div>
+        <div class="signal-panel reveal" data-reveal data-tilt data-parallax data-parallax-speed="-0.06" aria-label="Example leak investigation result">
+          <img class="panel-wave" src="assets/cc0-sound-wave.svg" alt="">
+          <div class="panel-header">
+            <span>Leak investigation</span>
+            <strong>Night Drive Master.wav</strong>
+          </div>
+          <div class="signal-path" aria-hidden="true">
+            <span>Source</span>
+            <i></i>
+            <span>Exports</span>
+            <i></i>
+            <span>Leaked clip</span>
+          </div>
+          <div class="match-result">
+            <span>Accepted match</span>
+            <strong>Atlas Mastering Review</strong>
+            <p>Lineage: clean master to private review copy</p>
           </div>
         </div>
       </section>
 
-      <section class="problem banded-section reveal" data-reveal data-story-stage="1">
-        <div>
-          <p class="eyebrow">The gap</p>
-          <h2>Pre-release music moves faster than accountability.</h2>
-        </div>
-        <p>
-          Demos, masters, stems, and review copies move through collaborators,
-          managers, labels, distributors, and sync buyers. File names and metadata
-          are easy to lose. Saurus is designed for the moment after a leak appears:
-          you know the song, and you need to identify which authorized copy came
-          back.
-        </p>
-      </section>
-
-      <section id="workflow" class="workflow" aria-labelledby="workflow-title" data-story-stage="2">
+      <section id="workflow" class="workflow" aria-labelledby="workflow-title" data-story-stage="1">
         <div class="section-heading reveal" data-reveal>
           <p class="eyebrow">Workflow</p>
-          <h2 id="workflow-title">From clean master to investigated leak.</h2>
+          <h2 id="workflow-title">Three steps your team can understand immediately.</h2>
         </div>
         <div class="steps">
           <article class="reveal" data-reveal>
             <span>01</span>
-            <h3>Register the song</h3>
-            <p>Start from the clean source and create a private song record.</p>
+            <h3>Register the clean track</h3>
+            <p>Create a private song record before sending review copies.</p>
           </article>
           <article class="reveal" data-reveal>
             <span>02</span>
-            <h3>Create exports</h3>
-            <p>Generate recipient-specific WAV files tied to opaque registry handles.</p>
+            <h3>Send traced exports</h3>
+            <p>Each recipient gets an audio export tied to an opaque registry handle.</p>
           </article>
           <article class="reveal" data-reveal>
             <span>03</span>
-            <h3>Investigate a leak</h3>
-            <p>Localize the suspicious excerpt against the known registered source.</p>
+            <h3>Review a leak</h3>
+            <p>Compare a suspicious excerpt against known exports and inspect the match.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="trust" class="trust" aria-labelledby="trust-title" data-story-stage="2">
+        <div class="reveal" data-reveal>
+          <p class="eyebrow">Trust model</p>
+          <h2 id="trust-title">Built for evidence, not drama.</h2>
+        </div>
+        <div class="trust-grid">
+          <article class="reveal" data-reveal>
+            <h3>Recipient names stay in the registry</h3>
+            <p>The audio carries an opaque handle. Context lives server-side.</p>
           </article>
           <article class="reveal" data-reveal>
-            <span>04</span>
-            <h3>Review the match</h3>
-            <p>Verify candidate export records and inspect the registry lineage.</p>
+            <h3>Results can abstain</h3>
+            <p>Verification can accept, reject, or decline when evidence is not strong enough.</p>
+          </article>
+          <article class="reveal" data-reveal>
+            <h3>Known-song investigation</h3>
+            <p>The workflow starts with the suspected song, then checks which export fits.</p>
           </article>
         </div>
       </section>
 
-      <section id="proof" class="proof" aria-labelledby="proof-title" data-story-stage="3">
-        <div class="proof-inner">
-          <div class="section-heading reveal" data-reveal>
-            <p class="eyebrow">Attribution layer</p>
-            <h2 id="proof-title">Find the copy, not just the song.</h2>
-          </div>
-          <div class="proof-grid">
-            <article class="reveal" data-reveal>
-              <h3>Audio-carried evidence</h3>
-              <p>
-                Each export carries attribution evidence designed for controlled
-                verification against retained records.
-              </p>
-            </article>
-            <article class="reveal" data-reveal>
-              <h3>Registry-backed identity</h3>
-              <p>
-                The audio points to an opaque handle. Recipient names, delivery
-                notes, and custody history stay in the registry.
-              </p>
-            </article>
-            <article class="reveal" data-reveal>
-              <h3>Known-song search</h3>
-              <p>
-                The product workflow starts with the suspected track, then checks
-                which authorized export best matches the leak.
-              </p>
-            </article>
-            <article class="reveal" data-reveal>
-              <h3>Honest uncertainty</h3>
-              <p>
-                Verification can accept, reject, or abstain when the evidence is not
-                strong enough for a responsible match.
-              </p>
-            </article>
-          </div>
+      <section id="fit" class="fit" aria-labelledby="fit-title" data-story-stage="3">
+        <div class="reveal" data-reveal>
+          <p class="eyebrow">Best fit</p>
+          <h2 id="fit-title">For teams sharing unreleased music.</h2>
         </div>
-      </section>
-
-      <section id="platform" class="platform" aria-labelledby="platform-title" data-story-stage="4">
-        <div class="section-heading reveal" data-reveal>
-          <p class="eyebrow">Deployment shape</p>
-          <h2 id="platform-title">A simple product path today, a real platform tomorrow.</h2>
-        </div>
-        <div class="platform-grid">
-          <details open class="reveal" data-reveal>
-            <summary>Local desktop app</summary>
-            <p>
-              Import clean audio, create recipient exports, listen to results, and
-              run known-song leak checks from a private local workflow.
-            </p>
-          </details>
-          <details class="reveal" data-reveal>
-            <summary>Registry service</summary>
-            <p>
-              Store songs, opaque handles, recipient metadata, export history, and
-              parent-child lineage outside the audio itself.
-            </p>
-          </details>
-          <details class="reveal" data-reveal>
-            <summary>Verification reports</summary>
-            <p>
-              Turn accepted evidence, abstentions, crop position, and lineage into
-              a readable investigation result for music teams.
-            </p>
-          </details>
-        </div>
-      </section>
-
-      <section id="market" class="market banded-section reveal" data-reveal aria-labelledby="market-title" data-story-stage="4">
-        <div>
-          <p class="eyebrow">Built for</p>
-          <h2 id="market-title">Teams sharing unreleased music.</h2>
-        </div>
-        <ul class="audiences" aria-label="Saurus audiences">
-          <li>Producers and managers sending demos</li>
+        <ul class="audiences reveal" data-reveal aria-label="Saurus audiences">
+          <li>Artists and managers sending demos</li>
           <li>Independent labels issuing promo copies</li>
           <li>A&amp;R teams reviewing sensitive masters</li>
           <li>Sync and catalog teams sending previews</li>
         </ul>
       </section>
 
-      <section id="demo" class="demo" aria-labelledby="demo-title" data-story-stage="4">
-        <div class="demo-panel reveal" data-reveal>
-          <p class="eyebrow">Product promise</p>
-          <h2 id="demo-title">A leak investigation in one clear path.</h2>
-          <p>
-            Register a track, create exports, simulate a leaked excerpt, and verify
-            the matching recipient. The current Stegosaurus prototype demonstrates
-            this workflow locally under named evaluations; broader production
-            robustness requires further validation.
-          </p>
+      <section class="cta" aria-labelledby="cta-title" data-story-stage="4">
+        <div class="reveal" data-reveal>
+          <p class="eyebrow">Alpha path</p>
+          <h2 id="cta-title">Start with account creation, then register a track.</h2>
         </div>
-        <div class="status-panel reveal" data-reveal aria-label="Example investigation result">
-          <div>
-            <span>Status</span>
-            <strong>Export matched</strong>
-          </div>
-          <div>
-            <span>Recipient</span>
-            <strong>Northline Promo</strong>
-          </div>
-          <div>
-            <span>Evidence</span>
-            <strong>Block votes + pooled carrier</strong>
-          </div>
-          <div>
-            <span>Lineage</span>
-            <strong>Master -> review copy</strong>
-          </div>
-        </div>
+        <a class="button primary reveal" data-reveal href="alpha.html">Open Saurus Alpha</a>
       </section>
     </main>
 

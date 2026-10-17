@@ -5,6 +5,7 @@
   const header = document.querySelector(".site-header");
   const revealTargets = document.querySelectorAll("[data-reveal]");
   const tiltTargets = document.querySelectorAll("[data-tilt]");
+  const parallaxTargets = document.querySelectorAll("[data-parallax]");
   const storySections = Array.from(document.querySelectorAll("[data-story-stage]"));
   const processDock = document.querySelector("[data-process-dock]");
   const processTitle = document.querySelector("[data-process-title]");
@@ -95,10 +96,22 @@
     root.style.setProperty("--ambient-shift", `${Math.round(progress * 360)}px`);
     root.style.setProperty("--ambient-grid-shift", `${Math.round(progress * -86)}px`);
     root.style.setProperty(
+      "--ambient-photo-shift",
+      motionQuery.matches ? "0px" : `${Math.round(progress * -170)}px`,
+    );
+    root.style.setProperty(
       "--ambient-wave-shift",
       motionQuery.matches ? "0px" : `${Math.round(progress * -120)}px`,
     );
     root.style.setProperty("--shine-shift", `${Math.round(progress * 180)}%`);
+
+    parallaxTargets.forEach((target) => {
+      const speed = Number(target.dataset.parallaxSpeed || "0");
+      const rect = target.getBoundingClientRect();
+      const distanceFromCenter = rect.top + rect.height / 2 - window.innerHeight / 2;
+      const shift = motionQuery.matches ? 0 : clamp(distanceFromCenter * speed, -80, 80);
+      target.style.setProperty("--parallax-y", `${shift.toFixed(1)}px`);
+    });
 
     if (header) {
       header.classList.toggle("is-scrolled", window.scrollY > 18);
@@ -148,27 +161,17 @@
         return;
       }
 
-      const shell = target.querySelector(".glass-shell");
-      if (!shell) {
-        return;
-      }
-
       const rect = target.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width - 0.5;
       const y = (event.clientY - rect.top) / rect.height - 0.5;
 
-      shell.style.setProperty("--tilt-x", `${clamp(y * -7, -7, 7).toFixed(2)}deg`);
-      shell.style.setProperty("--tilt-y", `${clamp(x * 8, -8, 8).toFixed(2)}deg`);
+      target.style.setProperty("--tilt-x", `${clamp(y * -5, -5, 5).toFixed(2)}deg`);
+      target.style.setProperty("--tilt-y", `${clamp(x * 6, -6, 6).toFixed(2)}deg`);
     });
 
     target.addEventListener("pointerleave", () => {
-      const shell = target.querySelector(".glass-shell");
-      if (!shell) {
-        return;
-      }
-
-      shell.style.setProperty("--tilt-x", "0deg");
-      shell.style.setProperty("--tilt-y", "0deg");
+      target.style.setProperty("--tilt-x", "0deg");
+      target.style.setProperty("--tilt-y", "0deg");
     });
   });
 
