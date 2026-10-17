@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: stegosaurus
+Version: 0.1.0
+Summary: Local audio provenance watermarking prototype.
+Requires-Python: >=3.11
+Requires-Dist: reedsolo<2,>=1.7
+Provides-Extra: audio
+Requires-Dist: imageio-ffmpeg<1,>=0.6; extra == "audio"
+Requires-Dist: numpy<3,>=2; extra == "audio"
+Requires-Dist: scipy<2,>=1.14; extra == "audio"
+Provides-Extra: test
+Requires-Dist: pytest>=8; extra == "test"
+Provides-Extra: aws-alpha
+Requires-Dist: psycopg[binary]<4,>=3.2; extra == "aws-alpha"

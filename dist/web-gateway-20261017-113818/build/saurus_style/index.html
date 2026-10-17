@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Saurus | Style Guide</title>
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="guide.css">
+</head>
+<body class="saurus">
+  <header class="masthead">
+    <div class="wrap topbar">
+      <a class="guide-brand" href="#"><img src="assets/waveform-stegosaurus.svg" alt="" width="160" height="80"><span>Saurus</span></a>
+      <span>Design reference / v1</span>
+    </div>
+    <div class="saurus-tape" aria-hidden="true"></div>
+  </header>
+  <main>
+    <section class="intro wrap">
+      <p class="eyebrow">The Saurus ecosystem</p>
+      <h1>Saurus Style Guide</h1>
+      <p class="lead">Clear steps. Careful evidence. A little yellow tape.</p>
+      <p>A shared identity for the audio workspace, registry, and website.</p>
+      <nav aria-label="Guide sections"><a href="#identity">Identity</a><a href="#palette">Color</a><a href="#type">Type</a><a href="#components">Components</a><a href="#language">Language</a></nav>
+    </section>
+    <section id="identity" class="band">
+      <div class="wrap section-grid"><div><p class="eyebrow">01 / Identity</p><h2>A dinosaur in the signal.</h2><p>The stegosaurus silhouette and audio waveform are one continuous idea: a memorable creature built from the evidence Saurus reads.</p><p class="identity-note">Use the detailed mark where it has room to breathe. The compact three-bar symbol remains available only for tiny app icons and favicons.</p></div>
+        <div class="brand-examples"><figure class="logo-sample dark"><img src="assets/waveform-stegosaurus.svg" alt="A white line stegosaurus crossed by an audio waveform" width="720" height="360"><figcaption>Primary mark / deep navy</figcaption></figure><figure class="logo-sample light"><img src="assets/waveform-stegosaurus-line.svg" alt="A dark line stegosaurus crossed by an audio waveform" width="720" height="360"><figcaption>Monochrome line mark / light surface</figcaption></figure><div class="tape-sample"><div class="saurus-tape" aria-hidden="true"></div><p>Keep tape narrow. Keep text off the stripes.</p></div></div>
+      </div>
+    </section>
+    <section id="palette" class="wrap section">
+      <p class="eyebrow">02 / Color</p><h2>Quiet surfaces. Clear signals.</h2>
+      <div class="swatches">
+        <div><span class="swatch ink"></span><strong>Ink</strong><code>#1B2420</code></div>
+        <div><span class="swatch canvas"></span><strong>Canvas</strong><code>#F3F5F4</code></div>
+        <div><span class="swatch surface"></span><strong>Surface</strong><code>#FFFFFF</code></div>
+        <div><span class="swatch signal-navy"></span><strong>Signal navy</strong><code>#06283A</code></div>
+        <div><span class="swatch tape"></span><strong>Tape</strong><code>#F4D03F</code></div>
+        <div><span class="swatch forest"></span><strong>Forest</strong><code>#216247</code></div>
+        <div><span class="swatch copper"></span><strong>Copper</strong><code>#B86045</code></div>
+      </div>
+      <p class="saurus-help">Use ink on yellow. Pair every result color with an explicit outcome. Copper is an identity accent, not a status.</p>
+    </section>
+    <section id="type" class="band"><div class="wrap section-grid"><div><p class="eyebrow">03 / Typography</p><h2>Built for reading.</h2><p>Segoe UI, with system fallbacks. A fixed type scale, ordinary spacing, and short, direct labels.</p></div><div class="type-specimen"><div><span>28 / View title</span><strong class="title-sample">Create a registered copy</strong></div><div><span>20 / Section heading</span><strong class="subtitle-sample">Add registry details</strong></div><div><span>16 / Body</span><p>Keep the registry file private.</p></div><div><span>14 / Supporting text</span><p class="saurus-help">16-bit PCM WAV</p></div><div><span>12 / Caption</span><code>HANDLE / 7A21C490</code></div></div></div></section>
+    <section id="components" class="wrap section">
+      <p class="eyebrow">04 / Components</p><h2>A guided workspace.</h2>
+      <div class="component-grid">
+        <div class="component"><h3>Commands</h3><div class="button-row"><button class="saurus-button" type="button" disabled>Encode file</button><button class="saurus-button secondary" type="button" disabled>Choose WAV</button></div><p class="saurus-help">Disabled specimens. Yellow is reserved for the active primary command.</p><a class="saurus-button" href="../../docs/style-guide.md">Read the written guide</a></div>
+        <div class="component"><h3>Fields</h3><label class="saurus-field" for="recipient">Recipient<input class="saurus-input" id="recipient" value="Northline Records"><span class="saurus-help">Name the person or team receiving this copy.</span></label><label class="saurus-field" for="invalid">Project / song<input class="saurus-input" id="invalid" aria-invalid="true" aria-describedby="field-error"><span id="field-error" class="field-error">Add a project or song name.</span></label></div>
+        <div class="component"><h3>Sequence</h3><ol class="steps"><li><span class="saurus-step">01</span><div><strong>Choose source audio</strong><span class="saurus-help">16-bit PCM WAV</span></div></li><li><span class="saurus-step">02</span><div><strong>Add registry details</strong><span class="saurus-help">Project, recipient, optional notes</span></div></li><li><span class="saurus-step">03</span><div><strong>Save your files</strong><span class="saurus-help">Encoded WAV + private registry JSON</span></div></li></ol></div>
+        <div class="component"><h3>Feedback</h3><div class="saurus-note success"><strong>Registry claim verified</strong><br>This file matches the selected retained record.</div><div class="saurus-note"><strong>No accepted match</strong><br>This check could not verify the selected claim.</div><div class="saurus-note error"><strong>File could not be read</strong><br>Choose an existing 16-bit PCM WAV.</div></div>
+      </div>
+    </section>
+    <section id="language" class="band"><div class="wrap section-grid"><div><p class="eyebrow">05 / Language</p><h2>Say what the evidence says.</h2><p>Encoding, statistical detection, and attribution are different operations. Keep that distinction visible.</p></div><div class="language"><p><strong>Encode file</strong><br>Create a registered audio copy and retain its private verification file.</p><p><strong>Decode / verify</strong><br>Verify a selected registry claim. This prototype does not discover unknown identities.</p><p><strong>No accepted match</strong><br>An abstention is not proof that the audio is unmarked.</p></div></div></section>
+  </main>
+  <footer class="wrap"><span>Saurus / Design system v1</span><a href="../../docs/style-guide.md">Usage and implementation</a></footer>
+</body>
+</html>

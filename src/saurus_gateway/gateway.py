@@ -25,8 +25,10 @@ import json
 from typing import Protocol
 from urllib.parse import urlsplit
 
-from saurus_registry import ApiRequest, ApiResponse, HmacBearerAuthenticator, RegistryApi
+from saurus_registry.api.auth import HmacBearerAuthenticator
 from saurus_registry.api.auth import header_value
+from saurus_registry.api.contracts import ApiRequest, ApiResponse
+from saurus_registry.api.router import RegistryApi
 
 _JSON_HEADERS = {"Content-Type": "application/json"}
 _CORS_HEADERS = {
@@ -103,6 +105,7 @@ class RegistryGateway:
         tenant_resolver: TenantResolver,
         registry_authenticator: HmacBearerAuthenticator,
         *,
+        principal_hook: Callable[[GatewayPrincipal], None] | None = None,
         token_lifetime_seconds: int = 60,
         clock: Callable[[], datetime] | None = None,
     ) -> None:
@@ -114,6 +117,7 @@ class RegistryGateway:
         self._jwt_verifier = jwt_verifier
         self._tenant_resolver = tenant_resolver
         self._registry_authenticator = registry_authenticator
+        self._principal_hook = principal_hook or (lambda _principal: None)
         self._token_lifetime = timedelta(seconds=token_lifetime_seconds)
         self._clock = clock or (lambda: datetime.now(timezone.utc))
 
@@ -141,6 +145,7 @@ class RegistryGateway:
             role = _route_role(request.method, request.path)
             principal = self._tenant_resolver.resolve(claims)
             principal.require_role(role)
+            self._principal_hook(principal)
             forwarded = self._forward_request(request, principal)
             return _with_cors(self._registry_api.handle(forwarded))
         except PermissionError as error:

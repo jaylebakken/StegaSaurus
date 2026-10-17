@@ -1,0 +1,8 @@
+saurus_app
+saurus_discovery
+saurus_gateway
+saurus_infra
+saurus_pilot
+saurus_registry
+saurus_style
+stegosaurus

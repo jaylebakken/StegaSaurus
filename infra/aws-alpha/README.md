@@ -113,20 +113,31 @@ stack with `DeployRegistryService=true`, the pinned alpha image URI, and
 Current DNS/certificate values:
 
 ```text
-Hosted zone: Z0473553HH2GBFCD61DC / saurus-audio.com
+Hosted zone: Z096121512DYNH233EEDK / saurus-audio.com
 Alpha endpoint: https://registry-alpha.saurus-audio.com
-Certificate ARN: arn:aws:acm:us-east-2:753695657434:certificate/454af841-34e4-464b-85ad-38758b29d021
+Certificate ARN: arn:aws:acm:us-east-2:078901481167:certificate/4c78a25d-4268-4394-a5cf-5191c6ae0e54
+Frontend URLs:
+  https://saurus-audio.com
+  https://www.saurus-audio.com
+Frontend stack: saurus-alpha-frontend
+Frontend bucket: saurus-alpha-frontend-frontendbucket-sdiepnajfpqk
+Frontend CloudFront distribution: E18WZO2LQI1EH2 / d6trnuzea22zo.cloudfront.net
+Frontend certificate ARN: arn:aws:acm:us-east-1:078901481167:certificate/f03298e8-fa71-47f9-aa59-08baa42ce8db
 Route 53 nameservers:
-  ns-1547.awsdns-01.co.uk
-  ns-528.awsdns-02.net
-  ns-1111.awsdns-10.org
-  ns-463.awsdns-57.com
+  ns-11.awsdns-01.com
+  ns-1481.awsdns-57.org
+  ns-1676.awsdns-17.co.uk
+  ns-739.awsdns-28.net
 ```
 
 The ACM validation CNAME and alpha ALB alias record are already present in
 Route 53. Public DNS sees the Route 53 nameservers and validation CNAME, ACM
-has issued the certificate, and the service is enabled for restricted internal
-smoke with `AllowedIngressCidr=73.135.7.209/32`.
+has issued the certificate, and the registry service is enabled for restricted
+internal smoke with `AllowedIngressCidr=73.135.7.209/32` and image
+`078901481167.dkr.ecr.us-east-2.amazonaws.com/saurus-alpha-registry:alpha-20261017-001`.
+The static frontend is hosted from a private S3 bucket through CloudFront using
+OAC, managed security response headers, and Route 53 aliases for the apex and
+`www` names.
 
 For internal alpha smoke, set `AllowedIngressCidr` to the operator's current
 public IPv4 address with `/32`. The default is `127.0.0.1/32`, which keeps the

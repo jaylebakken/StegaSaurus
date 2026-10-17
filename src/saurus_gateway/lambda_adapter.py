@@ -18,7 +18,7 @@ from dataclasses import dataclass
 import json
 from typing import Any
 
-from saurus_registry import ApiRequest, ApiResponse
+from saurus_registry.api.contracts import ApiRequest, ApiResponse
 
 from .gateway import GatewayPrincipal, JwtClaims, RegistryGateway
 
@@ -129,6 +129,8 @@ def handle_http_api_event(event: dict[str, Any], gateway: RegistryGateway) -> di
 
     try:
         request = api_request_from_http_api_event(event)
+        if request.method.upper() == "OPTIONS":
+            return http_api_response_from_api_response(gateway.handle(request))
         claims = jwt_claims_from_http_api_event(event)
         return http_api_response_from_api_response(gateway.handle_verified(request, claims))
     except PermissionError as error:

@@ -39,6 +39,10 @@ Parameters:
     Type: String
     Default: ""
     Description: "S3 key for the packaged Saurus web gateway Lambda artifact."
+  WebGatewayTenantMappingsJson:
+    Type: String
+    Default: '{"records":[]}'
+    Description: "Alpha-only explicit web account to registry tenant mapping JSON."
   VpcId:
     Type: AWS::EC2::VPC::Id
     Description: "Existing VPC for the disposable alpha stack."
@@ -216,7 +220,7 @@ Resources:
     Properties:
       Description: "Saurus alpha web gateway tenant allow-list mapping."
       KmsKeyId: !Ref ReportsKey
-      SecretString: '{"records":[]}'
+      SecretString: !Ref WebGatewayTenantMappingsJson
       Tags:
         - Key: project
           Value: saurus
@@ -340,6 +344,12 @@ Resources:
 
   AlphaUserPool:
     Type: AWS::Cognito::UserPool
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: "Authenticates Saurus Studio users for the hosted web test path."
+        must:
+          - "Allow browser users to create and recover accounts with verified email."
+          - "Keep MFA available without blocking the first alpha signup smoke."
     Properties:
       UserPoolName: saurus-alpha-users
       AutoVerifiedAttributes:
@@ -354,7 +364,7 @@ Resources:
           - Name: verified_email
             Priority: 1
       AdminCreateUserConfig:
-        AllowAdminCreateUserOnly: true
+        AllowAdminCreateUserOnly: false
       Policies:
         PasswordPolicy:
           MinimumLength: 12
@@ -370,6 +380,12 @@ Resources:
 
   WebAlphaUserPoolClient:
     Type: AWS::Cognito::UserPoolClient
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: "Public no-secret OAuth client used by the static Saurus Studio frontend."
+        must:
+          - "Use authorization code grant with PKCE; never generate a browser client secret."
+          - "Keep callback and logout URLs explicit for the hosted Saurus domains and local testing."
     Properties:
       ClientName: saurus-alpha-web
       UserPoolId: !Ref AlphaUserPool
@@ -402,6 +418,11 @@ Resources:
 
   AlphaUserPoolDomain:
     Type: AWS::Cognito::UserPoolDomain
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: "Provides Cognito managed login pages for Saurus Studio account lifecycle tests."
+        must:
+          - "Use a deterministic alpha-only prefix to avoid colliding with future production auth."
     Properties:
       Domain: !Sub "saurus-alpha-${AWS::AccountId}-${AWS::Region}"
       ManagedLoginVersion: 2
@@ -501,13 +522,6 @@ Resources:
           FromPort: 5432
           ToPort: 5432
           SourceSecurityGroupId: !Ref RegistryServiceSecurityGroup
-        - !If
-          - ShouldDeployWebGateway
-          - IpProtocol: tcp
-            FromPort: 5432
-            ToPort: 5432
-            SourceSecurityGroupId: !Ref WebGatewaySecurityGroup
-          - !Ref AWS::NoValue
       Tags:
         - Key: project
           Value: saurus
@@ -515,6 +529,21 @@ Resources:
           Value: alpha
         - Key: owner
           Value: !Ref Owner
+
+  WebGatewayDatabaseIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Condition: ShouldDeployWebGateway
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: "Lets the web gateway Lambda reach the private PostgreSQL registry database."
+        must:
+          - "Reference the gateway security group only after both groups exist to avoid CloudFormation cycles."
+    Properties:
+      GroupId: !Ref RegistryDatabaseSecurityGroup
+      IpProtocol: tcp
+      FromPort: 5432
+      ToPort: 5432
+      SourceSecurityGroupId: !Ref WebGatewaySecurityGroup
 
   WebGatewaySecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -715,6 +744,12 @@ Resources:
   WebGatewayFunction:
     Type: AWS::Lambda::Function
     Condition: ShouldDeployWebGateway
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: "Bridges authenticated browser calls into the private registry API without exposing registry signing secrets."
+        must:
+          - "Run behind the HTTP API JWT authorizer."
+          - "Use the explicit tenant mapping secret before issuing internal registry credentials."
     Properties:
       FunctionName: !Sub "${AWS::StackName}-web-gateway"
       Description: "Saurus alpha browser-to-registry gateway."
@@ -738,7 +773,7 @@ Resources:
           SAURUS_POSTGRES_DATABASE: !Ref DatabaseName
           SAURUS_API_SIGNING_SECRET: !Sub "{{resolve:secretsmanager:${RegistryApiSigningSecret}:SecretString}}"
           SAURUS_DATABASE_SECRET_JSON: !Sub "{{resolve:secretsmanager:${DatabaseSecret}:SecretString}}"
-          SAURUS_GATEWAY_TENANT_MAPPINGS_JSON: !Sub "{{resolve:secretsmanager:${GatewayTenantMappingSecret}:SecretString}}"
+          SAURUS_GATEWAY_TENANT_MAPPINGS_JSON: !Ref WebGatewayTenantMappingsJson
       Tags:
         - Key: project
           Value: saurus
@@ -897,6 +932,12 @@ Resources:
   WebGatewayHttpApi:
     Type: AWS::ApiGatewayV2::Api
     Condition: ShouldDeployWebGateway
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: "Public HTTPS API surface for Saurus Studio browser requests."
+        must:
+          - "Only accept requests authorized by the Cognito JWT authorizer."
+          - "Limit browser CORS origins to the Saurus domain and local development."
     Properties:
       Name: !Sub "${AWS::StackName}-web-gateway"
       ProtocolType: HTTP
@@ -952,6 +993,20 @@ Resources:
       RouteKey: "$default"
       AuthorizationType: JWT
       AuthorizerId: !Ref WebGatewayJwtAuthorizer
+      Target: !Sub "integrations/${WebGatewayIntegration}"
+
+  WebGatewayOptionsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Condition: ShouldDeployWebGateway
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: "Lets browsers complete CORS preflight before sending authenticated Saurus Studio requests."
+        must:
+          - "Remain unauthenticated; it returns no registry data and only enables browser preflight."
+    Properties:
+      ApiId: !Ref WebGatewayHttpApi
+      RouteKey: "OPTIONS /{proxy+}"
+      AuthorizationType: NONE
       Target: !Sub "integrations/${WebGatewayIntegration}"
 
   WebGatewayDefaultStage:

@@ -4,14 +4,18 @@
   color-scheme: dark;
   --ink: #101815;
   --control: #07151d;
-  --panel: #f6f3ea;
-  --panel-ink: #17211d;
+  --panel: rgba(11, 28, 29, 0.74);
+  --panel-strong: rgba(229, 242, 233, 0.9);
+  --panel-ink: #f2f8f4;
+  --evidence-ink: #17211d;
   --muted: rgba(248, 245, 234, 0.7);
-  --muted-dark: #647168;
+  --muted-dark: rgba(229, 242, 233, 0.66);
   --line: rgba(246, 243, 234, 0.16);
-  --line-dark: rgba(23, 33, 29, 0.14);
-  --signal: #7fb7bf;
-  --green: #2f7b59;
+  --line-dark: rgba(229, 242, 233, 0.16);
+  --signal: #8fd9bb;
+  --green: #54b783;
+  --green-deep: #143a2d;
+  --green-soft: rgba(84, 183, 131, 0.16);
   --gold: var(--saurus-color-tape);
   --copper: #c06f4f;
   --white: #fffdf4;
@@ -36,10 +40,11 @@ body {
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(0deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-    radial-gradient(circle at 12% 8%, rgba(127, 183, 191, 0.22), transparent 32%),
+    radial-gradient(circle at 12% 8%, rgba(84, 183, 131, 0.23), transparent 32%),
+    radial-gradient(circle at 92% 30%, rgba(127, 183, 191, 0.14), transparent 30%),
     linear-gradient(145deg, #07151d 0%, #111916 46%, #1d241f 100%);
   background-attachment: fixed;
-  background-size: 48px 48px, 48px 48px, auto, auto;
+  background-size: 48px 48px, 48px 48px, auto, auto, auto;
   color: var(--white);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.55;
@@ -50,12 +55,12 @@ a { color: inherit; text-decoration: none; }
 
 a:focus-visible,
 summary:focus-visible {
-  outline: 3px solid var(--gold);
+  outline: 3px solid var(--green);
   outline-offset: 5px;
 }
 
 ::selection {
-  background: var(--gold);
+  background: var(--green);
   color: var(--ink);
 }
 
@@ -95,7 +100,7 @@ h1, h2, h3, p, dl, dd { margin: 0; }
 }
 
 .scroll-meter {
-  background: linear-gradient(90deg, var(--gold), var(--signal), var(--copper));
+  background: linear-gradient(90deg, var(--green), var(--signal), rgba(244, 208, 63, 0.7));
   height: 3px;
   inset: 0 0 auto;
   position: fixed;
@@ -156,7 +161,7 @@ h1, h2, h3, p, dl, dd { margin: 0; }
 .nav a:not(.nav-cta):hover { color: var(--white); }
 
 .nav-cta {
-  background: var(--gold);
+  background: var(--green);
   border-radius: 4px;
   color: var(--ink);
   padding: 8px 14px;
@@ -235,8 +240,8 @@ h3 {
 }
 
 .button.primary {
-  background: var(--gold);
-  border-color: var(--gold);
+  background: var(--green);
+  border-color: var(--green);
   color: var(--ink);
 }
 
@@ -267,11 +272,12 @@ h3 {
 }
 
 .signal-panel {
-  background: rgba(246, 243, 234, 0.97);
-  border: 1px solid rgba(246, 243, 234, 0.32);
+  background:
+    linear-gradient(180deg, rgba(246, 250, 247, 0.94), rgba(224, 237, 228, 0.9));
+  border: 1px solid rgba(143, 217, 187, 0.42);
   border-radius: 8px;
   box-shadow: var(--shadow);
-  color: var(--panel-ink);
+  color: var(--evidence-ink);
   min-width: 0;
   overflow: hidden;
   padding: 22px;
@@ -283,11 +289,11 @@ h3 {
 }
 
 .panel-wave {
-  filter: grayscale(1) contrast(1.28);
-  height: 54px;
+  filter: sepia(0.18) saturate(1.35) hue-rotate(86deg) contrast(1.45);
+  height: 62px;
   left: 22px;
   object-fit: cover;
-  opacity: 0.2;
+  opacity: 0.42;
   position: absolute;
   right: 22px;
   top: 76px;
@@ -303,7 +309,7 @@ h3 {
 
 .panel-header span,
 .match-result span {
-  color: var(--muted-dark);
+  color: #5a6b61;
   font-size: 0.76rem;
   font-weight: 750;
   text-transform: uppercase;
@@ -323,8 +329,8 @@ h3 {
 }
 
 .signal-path span {
-  background: #e7efe9;
-  border: 1px solid #c8d5ce;
+  background: #ddecdf;
+  border: 1px solid #adcaba;
   border-radius: 4px;
   font-size: 0.78rem;
   font-weight: 800;
@@ -333,7 +339,7 @@ h3 {
 }
 
 .signal-path i {
-  background: var(--signal);
+  background: var(--green);
   display: block;
   height: 2px;
 }
@@ -364,8 +370,10 @@ h3 {
 }
 
 .workflow {
-  background: #16211d;
+  background:
+    linear-gradient(180deg, rgba(12, 29, 25, 0.74), rgba(7, 21, 29, 0.38));
   border-top: 1px solid var(--line);
+  position: relative;
 }
 
 .section-heading {
@@ -390,7 +398,7 @@ h3 {
 }
 
 .steps article > span {
-  color: var(--gold);
+  color: var(--green);
   font-size: 0.75rem;
   font-weight: 850;
 }
@@ -404,7 +412,10 @@ h3 {
 .trust,
 .cta {
   align-items: start;
-  background: var(--panel);
+  background:
+    linear-gradient(135deg, rgba(84, 183, 131, 0.12), transparent 34%),
+    var(--panel);
+  border-top: 1px solid rgba(143, 217, 187, 0.18);
   color: var(--panel-ink);
   display: grid;
   gap: clamp(24px, 4vw, 56px);
@@ -414,7 +425,7 @@ h3 {
 .trust .eyebrow,
 .fit .eyebrow,
 .cta .eyebrow {
-  color: var(--copper);
+  color: var(--green);
 }
 
 .trust-grid article {
@@ -429,7 +440,9 @@ h3 {
 
 .fit {
   align-items: start;
-  background: #07151d;
+  background:
+    linear-gradient(90deg, rgba(84, 183, 131, 0.08), transparent 55%),
+    rgba(7, 21, 29, 0.78);
   border-top: 1px solid var(--line);
   display: grid;
   gap: clamp(24px, 4vw, 56px);

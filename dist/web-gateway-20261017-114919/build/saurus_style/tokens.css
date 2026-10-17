@@ -1,0 +1,47 @@
+/* Generated from tokens.json by python -m saurus_style.build. */
+:root {
+  --saurus-color-ink: #1B2420;
+  --saurus-color-muted: #536159;
+  --saurus-color-canvas: #F3F5F4;
+  --saurus-color-surface: #FFFFFF;
+  --saurus-color-subtle: #E9EEEB;
+  --saurus-color-border: #B6C1BA;
+  --saurus-color-signal-navy: #06283A;
+  --saurus-color-tape: #F4D03F;
+  --saurus-color-tape-hover: #FFE16B;
+  --saurus-color-tape-pressed: #DEBA29;
+  --saurus-color-forest: #216247;
+  --saurus-color-fern: #397354;
+  --saurus-color-copper: #B86045;
+  --saurus-color-on-dark: #F7FAF8;
+  --saurus-color-muted-on-dark: #BFCFC5;
+  --saurus-color-success: #216247;
+  --saurus-color-success-surface: #E5F2E9;
+  --saurus-color-warning: #674C00;
+  --saurus-color-warning-surface: #FFF7CE;
+  --saurus-color-error: #A32F36;
+  --saurus-color-error-surface: #FCECEE;
+  --saurus-color-disabled: #626F67;
+  --saurus-color-disabled-surface: #E2E7E4;
+  --saurus-space-xs: 4px;
+  --saurus-space-sm: 8px;
+  --saurus-space-md: 12px;
+  --saurus-space-lg: 16px;
+  --saurus-space-xl: 24px;
+  --saurus-space-xxl: 32px;
+  --saurus-space-section: 48px;
+  --saurus-type-caption: 12px;
+  --saurus-type-small: 14px;
+  --saurus-type-body: 16px;
+  --saurus-type-subtitle: 20px;
+  --saurus-type-title: 28px;
+  --saurus-type-display: 40px;
+  --saurus-font-ui: "Segoe UI";
+  --saurus-font-mono: "Consolas";
+  --saurus-radius-control: 4px;
+  --saurus-radius-item: 8px;
+  --saurus-control-height: 44px;
+  --saurus-control-icon: 20px;
+  --saurus-control-focus: 2px;
+  --saurus-control-tape: 6px;
+}

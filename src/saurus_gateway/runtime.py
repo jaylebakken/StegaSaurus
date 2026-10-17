@@ -19,13 +19,17 @@ without NAT.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime, timezone
 import json
 import os
 from typing import Any
 
-from saurus_registry import HmacBearerAuthenticator, RegistryApi, RegistryService
+from saurus_registry.api.auth import HmacBearerAuthenticator
+from saurus_registry.api.router import RegistryApi
+from saurus_registry.application import RegistryService
 from saurus_registry.container import build_registry_repository, container_config_from_env
 from saurus_registry.container_runtime import database_credentials_from_env, postgres_config_from_env
+from saurus_registry.domain import TenantRecord
 
 from .gateway import JwtClaims, RegistryGateway
 from .lambda_adapter import StaticTenantResolver, handle_http_api_event
@@ -87,11 +91,24 @@ def build_gateway_from_env(env: dict[str, str] | None = None) -> RegistryGateway
     authenticator = HmacBearerAuthenticator(container_config.api_signing_secret)
     registry_api = RegistryApi(service, repository, authenticator=authenticator)
     gateway_config = _gateway_config_from_env(values)
+    ensured_tenants: set[str] = set()
+
+    def ensure_tenant(principal: object) -> None:
+        """Create the mapped alpha tenant boundary if it is not present yet."""
+
+        tenant_id = str(getattr(principal, "tenant_id"))
+        if tenant_id in ensured_tenants:
+            return
+        if repository.tenant(tenant_id) is None:
+            repository.add_tenant(TenantRecord(tenant_id, f"Saurus workspace {tenant_id}", datetime.now(timezone.utc)))
+        ensured_tenants.add(tenant_id)
+
     return RegistryGateway(
         registry_api,
         _GatewayAuthorizerVerifier(),
         StaticTenantResolver.from_records(gateway_config.tenant_records),
         authenticator,
+        principal_hook=ensure_tenant,
         token_lifetime_seconds=gateway_config.token_lifetime_seconds,
     )
 

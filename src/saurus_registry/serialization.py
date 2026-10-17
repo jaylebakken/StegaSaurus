@@ -10,11 +10,11 @@ from __future__ import annotations
 
 import hashlib
 import json
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from stegosaurus.audio.attribution import BlockAttributionRecord
-from stegosaurus.audio.attribution_core.models import AttributionRecord
-from stegosaurus.audio.transport import CarrierPlan
+if TYPE_CHECKING:
+    from stegosaurus.audio.attribution import BlockAttributionRecord
+    from stegosaurus.audio.attribution_core.models import AttributionRecord
 
 
 RECORD_SCHEMA_VERSION = 1
@@ -64,6 +64,8 @@ def block_record_to_document(record: BlockAttributionRecord) -> dict[str, object
 def block_record_from_document(data: dict[str, Any]) -> BlockAttributionRecord:
     """Restore one repeated-block record from validated JSON-compatible values."""
 
+    from stegosaurus.audio.attribution import BlockAttributionRecord
+
     block_records = _required_list(data, "block_records")
     return BlockAttributionRecord(
         bytes.fromhex(_required_text(data, "handle")),
@@ -91,6 +93,9 @@ def _attribution_record_to_document(record: AttributionRecord) -> dict[str, obje
 
 def _attribution_record_from_document(data: dict[str, Any]) -> AttributionRecord:
     """Restore one private carrier map from JSON-compatible values."""
+
+    from stegosaurus.audio.attribution_core.models import AttributionRecord
+    from stegosaurus.audio.transport import CarrierPlan
 
     plan_data = _required_object(data.get("carrier_plan"))
     bits = _required_list(plan_data, "carrier_bits")

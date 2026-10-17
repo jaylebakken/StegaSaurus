@@ -1,0 +1,52 @@
+@import url("tokens.css");
+
+/* Opt-in primitives. Existing products can adopt tokens without global resets. */
+.saurus {
+  background: var(--saurus-color-canvas);
+  color: var(--saurus-color-ink);
+  font-family: var(--saurus-font-ui), system-ui, sans-serif;
+  font-size: var(--saurus-type-body);
+  line-height: 1.5;
+  letter-spacing: 0;
+  color-scheme: light;
+}
+.saurus *, .saurus *::before, .saurus *::after { box-sizing: border-box; }
+.saurus :is(button, input, select, textarea) { font: inherit; letter-spacing: 0; }
+.saurus :is(button, a, input, select, textarea):focus-visible {
+  outline: var(--saurus-control-focus) solid var(--saurus-color-forest);
+  outline-offset: 3px;
+}
+.saurus ::selection { background: var(--saurus-color-tape); color: var(--saurus-color-ink); }
+.saurus-brand { display: flex; gap: var(--saurus-space-md); align-items: center; font-weight: 700; font-size: var(--saurus-type-title); }
+.saurus-brand img { width: 48px; height: 48px; flex-shrink: 0; }
+.saurus-tape { height: var(--saurus-control-tape); background: var(--saurus-color-tape) url("assets/tape.svg") repeat-x; }
+.saurus-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--saurus-space-sm);
+  min-height: var(--saurus-control-height); padding: 8px 20px; border: 1px solid transparent;
+  border-radius: var(--saurus-radius-control); background: var(--saurus-color-tape);
+  color: var(--saurus-color-ink); font-weight: 600; cursor: pointer; text-decoration: none;
+}
+.saurus-button:hover { background: var(--saurus-color-tape-hover); }
+.saurus-button:active { background: var(--saurus-color-tape-pressed); }
+.saurus-button.secondary { background: var(--saurus-color-surface); border-color: var(--saurus-color-border); }
+.saurus-button.secondary:hover { background: var(--saurus-color-subtle); }
+.saurus-button:disabled { background: var(--saurus-color-disabled-surface); color: var(--saurus-color-disabled); cursor: default; }
+.saurus-field { display: grid; gap: var(--saurus-space-sm); font-size: var(--saurus-type-small); font-weight: 600; }
+.saurus-input {
+  width: 100%; min-width: 0; min-height: var(--saurus-control-height); padding: 10px 12px;
+  color: var(--saurus-color-ink); background: var(--saurus-color-surface);
+  border: 1px solid var(--saurus-color-border); border-radius: var(--saurus-radius-control);
+}
+.saurus-input[aria-invalid="true"] { border-color: var(--saurus-color-error); }
+.saurus-input:disabled { color: var(--saurus-color-disabled); background: var(--saurus-color-disabled-surface); }
+.saurus-help { color: var(--saurus-color-muted); font-size: var(--saurus-type-small); font-weight: 400; }
+.saurus-note { border-left: 4px solid var(--saurus-color-tape); padding: 12px 16px; background: var(--saurus-color-warning-surface); color: var(--saurus-color-warning); overflow-wrap: anywhere; }
+.saurus-note.success { border-color: var(--saurus-color-success); background: var(--saurus-color-success-surface); color: var(--saurus-color-success); }
+.saurus-note.error { border-color: var(--saurus-color-error); background: var(--saurus-color-error-surface); color: var(--saurus-color-error); }
+.saurus-modes { display: flex; gap: 0; border-bottom: 1px solid var(--saurus-color-border); }
+.saurus-mode { border: 0; border-bottom: 3px solid transparent; background: transparent; color: var(--saurus-color-muted); padding: 12px 24px; font-weight: 600; }
+.saurus-mode[aria-selected="true"] { border-color: var(--saurus-color-tape); color: var(--saurus-color-ink); background: var(--saurus-color-surface); }
+.saurus-step { display: inline-grid; place-items: center; width: 32px; height: 32px; flex-shrink: 0; background: var(--saurus-color-tape); color: var(--saurus-color-ink); font-size: var(--saurus-type-small); font-weight: 700; }
+@media (prefers-reduced-motion: reduce) {
+  .saurus *, .saurus *::before, .saurus *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}

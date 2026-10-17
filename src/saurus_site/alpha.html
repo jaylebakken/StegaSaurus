@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; require-trusted-types-for 'script'"
+      content="default-src 'self'; connect-src 'self' https://saurus-alpha-078901481167-us-east-2.auth.us-east-2.amazoncognito.com https://x8apwplzz6.execute-api.us-east-2.amazonaws.com; style-src 'self' 'unsafe-inline'; img-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self' https://saurus-alpha-078901481167-us-east-2.auth.us-east-2.amazoncognito.com; frame-ancestors 'none'; require-trusted-types-for 'script'"
     >
     <meta
       name="description"
-      content="Saurus web alpha shell for account lifecycle, track registration, export review, and registry-backed attribution workflows."
+      content="Saurus Studio workspace for protecting unreleased music and checking leaked copies."
     >
-    <title>Saurus Alpha | Web Workflow</title>
+    <title>Saurus Studio | Protect and Trace Music</title>
     <link rel="icon" href="../saurus_style/assets/mark.svg" type="image/svg+xml">
     <link rel="stylesheet" href="alpha.css">
+    <script src="config.js" defer></script>
     <script src="alpha.js" defer></script>
   </head>
   <body>
@@ -29,29 +30,33 @@
       <header class="topbar">
         <a class="brand" href="index.html" aria-label="Back to Saurus home">
           <img src="../saurus_style/assets/waveform-stegosaurus.svg" alt="">
-          <span>Saurus Alpha</span>
+          <span>Saurus Studio</span>
         </a>
-        <div class="top-actions" aria-label="Alpha status">
-          <span class="status-pill">Gateway preview</span>
-          <span class="mode-pill">Alpha studio</span>
+        <div class="top-actions" aria-label="Account status">
+          <span class="status-pill" data-session-status>Signed out</span>
+          <span class="mode-pill">Private workspace</span>
         </div>
       </header>
 
       <div class="layout">
-        <aside class="side-panel" aria-label="Alpha navigation">
+        <aside class="side-panel" aria-label="Studio navigation">
           <nav class="nav-list">
             <button class="nav-button is-active" type="button" data-view-target="account">
               <span class="nav-icon">01</span>
-              <span><strong>Account</strong><span>Login lifecycle</span></span>
+              <span><strong>Account</strong><span>Sign in</span></span>
             </button>
             <button class="nav-button" type="button" data-view-target="app">
               <span class="nav-icon">02</span>
-              <span><strong>Workspace</strong><span>Add and verify</span></span>
+              <span><strong>Workspace</strong><span>Protect music</span></span>
+            </button>
+            <button class="nav-button" type="button" data-view-target="settings">
+              <span class="nav-icon">03</span>
+              <span><strong>Settings</strong><span>Profile and data</span></span>
             </button>
           </nav>
           <p class="side-note">
-            A guided web alpha for registering music, preparing exports, and
-            reviewing attribution evidence without hiding the handoffs.
+            Sign in, add a clean track, and prepare protected copies for the
+            people who need to hear it.
           </p>
         </aside>
 
@@ -59,33 +64,46 @@
           <section class="view is-active" id="account" data-view>
             <div class="view-header">
               <div>
-                <p class="eyebrow">Login and account lifecycle</p>
-                <h2>Invite, verify, enroll, and audit before the app can write.</h2>
+                <p class="eyebrow">Your private workspace</p>
+                <h2>Sign in before adding music.</h2>
               </div>
-              <button class="button primary" type="button" data-view-jump="app">Open app shell</button>
+              <button class="button primary" type="button" data-view-jump="app">Sign in to continue</button>
             </div>
             <div class="grid-2">
               <article class="card">
-                <h3>Cognito managed login path</h3>
-                <ol class="timeline" aria-label="Account lifecycle checklist">
-                  <li class="is-ready"><strong>Invite alpha user</strong><span>Tenant and role are created server-side.</span></li>
-                  <li class="is-current"><strong>Verify email</strong><span>Managed login handles sign-up and password reset.</span></li>
-                  <li><strong>Enroll workspace</strong><span>Gateway maps user identity to tenant permissions.</span></li>
-                  <li><strong>Audit actions</strong><span>Song, export, verification, and sign-out events are recorded.</span></li>
-                  <li><strong>Close account</strong><span>Deletion requests follow retention policy before action.</span></li>
-                </ol>
+                <div class="account-tabs" role="tablist" aria-label="Account actions">
+                  <button class="account-tab is-active" type="button" data-account-mode="signin">Sign in</button>
+                  <button class="account-tab" type="button" data-account-mode="create">Create</button>
+                  <button class="account-tab" type="button" data-account-mode="recover">Recover</button>
+                </div>
+                <form class="account-form" data-account-form>
+                  <h3 data-account-title>Welcome back</h3>
+                  <p class="lede" data-account-copy>Use the email connected to your Saurus workspace.</p>
+                  <label>
+                    Email
+                    <input type="email" autocomplete="email" value="jay@lebakken.com" aria-label="Email">
+                  </label>
+                  <label data-name-field hidden>
+                    Display name
+                    <input type="text" autocomplete="name" value="Jay Lebakken" aria-label="Display name">
+                  </label>
+                  <label data-password-field>
+                    Password
+                    <input type="password" autocomplete="current-password" aria-label="Password">
+                  </label>
+                  <button class="button primary" type="submit" data-account-submit>Sign in</button>
+                  <p class="form-status" data-account-status>Account services are being connected for private workspace access.</p>
+                </form>
               </article>
               <article class="card dark">
                 <img class="dark-wave" src="assets/cc0-sound-wave.svg" alt="">
-                <h3>What the browser never gets</h3>
-                <p class="lede">
-                  The registry signing secret, KMS grant material, raw retained
-                  records, and tenant mapping rules stay on the server side.
-                </p>
-                <div class="registry-strip">
-                  <strong>Gateway required</strong>
-                  <span>Cognito JWT in, signed internal registry request out.</span>
-                </div>
+                <h3>Account checklist</h3>
+                <ol class="timeline" aria-label="Account setup checklist">
+                  <li class="is-current"><strong>Sign in</strong><span>Confirm it is really you.</span></li>
+                  <li><strong>Verify email</strong><span>Keep recovery and alerts reachable.</span></li>
+                  <li><strong>Open workspace</strong><span>Your music stays tied to your account.</span></li>
+                  <li><strong>Review activity</strong><span>Track important changes later.</span></li>
+                </ol>
               </article>
             </div>
           </section>
@@ -94,11 +112,11 @@
             <div class="view-header">
               <div>
                 <p class="eyebrow">Studio workspace</p>
-                <h2>Add a track, attach registry context, and prepare exports.</h2>
+                <h2>Add a clean track and prepare protected copies.</h2>
               </div>
               <div class="button-row">
                 <button class="button secondary" type="button" data-reset-file>Reset file</button>
-                <button class="button tape" type="button" data-stage-package>Stage package</button>
+                <button class="button tape" type="button" data-stage-package>Prepare copy</button>
               </div>
             </div>
             <div class="grid-2">
@@ -106,7 +124,7 @@
                 <div class="drop-zone" data-drop-zone>
                   <div>
                     <h3>Drop a clean WAV here</h3>
-                    <p class="lede">or select a file to start the alpha workflow.</p>
+                    <p class="lede">or select a file to begin.</p>
                   </div>
                   <label class="button primary" for="audio-file">Select file</label>
                   <input class="hidden-input" id="audio-file" type="file" accept=".wav,audio/wav,audio/x-wav" data-file-input>
@@ -123,45 +141,89 @@
                   </label>
                   <label>
                     Delivery note
-                    <input type="text" value="Alpha demo export, do not redistribute" aria-label="Delivery note">
+                    <input type="text" value="Review copy, do not redistribute" aria-label="Delivery note">
                   </label>
                 </div>
               </article>
               <article class="card">
-                <h3>Registry package</h3>
+                <h3>Copy checklist</h3>
                 <img class="package-wave" src="assets/cc0-sound-wave.svg" alt="">
-                <ol class="timeline" data-package-steps aria-label="Registry package status">
-                  <li class="is-ready"><strong>Clean source selected</strong><span data-source-status>Waiting for browser file selection.</span></li>
-                  <li><strong>Song record</strong><span>Will be created by authenticated gateway.</span></li>
-                  <li><strong>Export reservation</strong><span>Will receive opaque handle before encode.</span></li>
-                  <li><strong>Encode job</strong><span>Web alpha handoff to local encoder remains open.</span></li>
-                  <li><strong>Verification report</strong><span>Accepted, rejected, or abstained evidence only.</span></li>
+                <ol class="timeline" data-package-steps aria-label="Copy preparation status">
+                  <li class="is-ready"><strong>Clean track</strong><span data-source-status>Waiting for a WAV file.</span></li>
+                  <li><strong>Song page</strong><span>Create the private record.</span></li>
+                  <li><strong>Recipient copy</strong><span>Reserve a copy for this person or list.</span></li>
+                  <li><strong>Protect audio</strong><span>Mark the copy before sharing.</span></li>
+                  <li><strong>Leak check</strong><span>Review matches when a suspicious clip appears.</span></li>
                 </ol>
                 <div class="registry-strip">
-                  <strong data-package-title>Not staged yet</strong>
-                  <span data-package-caption>Choose a WAV file and stage the package when ready.</span>
+                  <strong data-package-title>Not prepared yet</strong>
+                  <span data-package-caption>Choose a WAV file, then prepare the copy.</span>
                 </div>
               </article>
             </div>
             <div class="song-list spaced-grid" aria-label="Example app records">
               <div class="song-row">
-                <div><strong>Night Drive Master.wav</strong><span class="meta">3 exports reserved - last verification accepted with review</span></div>
-                <span class="tag">Demo record</span>
+                <div><strong>Night Drive Master.wav</strong><span class="meta">3 protected copies - one reviewed match</span></div>
+                <span class="tag">Protected</span>
               </div>
               <div class="song-row">
-                <div><strong>Blue Room Rough Mix.wav</strong><span class="meta">1 export finalized - no leak investigation opened</span></div>
-                <span class="tag">Local-only</span>
+                <div><strong>Blue Room Rough Mix.wav</strong><span class="meta">1 protected copy - no leak review opened</span></div>
+                <span class="tag">Draft</span>
               </div>
+            </div>
+          </section>
+
+          <section class="view" id="settings" data-view>
+            <div class="view-header">
+              <div>
+                <p class="eyebrow">Account settings</p>
+                <h2>Manage access, activity, and data requests.</h2>
+              </div>
+              <button class="button secondary" type="button" data-sign-out>Sign out</button>
+            </div>
+            <div class="grid-3">
+              <article class="card">
+                <h3>Profile</h3>
+                <div class="field-grid compact">
+                  <label>
+                    Name
+                    <input type="text" value="Jay Lebakken" aria-label="Name">
+                  </label>
+                  <label>
+                    Email
+                    <input type="email" value="jay@lebakken.com" aria-label="Account email">
+                  </label>
+                </div>
+                <div class="registry-strip">
+                  <strong>Changes saved locally</strong>
+                  <span>Live profile updates connect when sign-in is wired.</span>
+                </div>
+              </article>
+              <article class="card">
+                <h3>Security</h3>
+                <ol class="timeline" aria-label="Security checklist">
+                  <li class="is-ready"><strong>Email verified</strong><span>Recovery address is ready.</span></li>
+                  <li class="is-current"><strong>Password</strong><span>Change password from your account email.</span></li>
+                  <li><strong>Devices</strong><span>Review signed-in browsers.</span></li>
+                </ol>
+                  <button class="button secondary" type="button" data-status-action="Password reset email queued.">Send password reset</button>
+              </article>
+              <article class="card danger-zone">
+                <h3>Data requests</h3>
+                <p class="lede">Export account activity or request workspace closure.</p>
+                <div class="button-row">
+                  <button class="button secondary" type="button" data-status-action="Account export request prepared.">Export data</button>
+                  <button class="button danger" type="button" data-status-action="Closure request prepared.">Request closure</button>
+                </div>
+                <p class="form-status" data-action-status>Requests will be sent after account services are connected.</p>
+              </article>
             </div>
           </section>
         </main>
       </div>
 
       <footer class="footer">
-        Saurus web alpha shell. Live customer data stays blocked until auth,
-        gateway, tenant isolation, image risk, and policy gates clear. Visual
-        assets: Hamilton/NIST public-domain oscilloscope trace and GDJ CC0
-        waveform.
+        Saurus Studio is a private workspace for protected music sharing.
       </footer>
     </div>
   </body>
